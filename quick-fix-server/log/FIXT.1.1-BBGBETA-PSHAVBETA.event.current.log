@@ -1,0 +1,1541 @@
+20250117-15:27:42.000000000 : Created session
+20250117-16:01:14.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250117-16:01:14.000000000 : Received logon request
+20250117-16:01:14.000000000 : Responding to logon request
+20250117-16:01:25.000000000 : Message 7 Rejected: Tag not defined for this message type:1137
+20250117-16:01:28.000000000 : Socket Error: Connection reset by peer.
+20250117-16:01:28.000000000 : Disconnecting
+20250117-16:05:47.000000000 : Received logon request
+20250117-16:05:47.000000000 : Responding to logon request
+20250117-16:05:47.000000000 : MsgSeqNum too high, expecting 1 but received 4
+20250117-16:05:47.000000000 : Sent ResendRequest FROM: 1 TO: 0
+20250117-16:05:48.000000000 : Message 1 Rejected: Tag not defined for this message type:1137
+20250117-16:05:48.000000000 : MsgSeqNum too high, expecting 1 but received 2
+20250117-16:05:48.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:05:48.000000000 : MsgSeqNum too high, expecting 1 but received 3
+20250117-16:05:48.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:05:48.000000000 : Message 4 Rejected: Tag not defined for this message type:1137
+20250117-16:05:48.000000000 : MsgSeqNum too high, expecting 1 but received 5
+20250117-16:05:48.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:05:48.000000000 : MsgSeqNum too high, expecting 1 but received 6
+20250117-16:05:48.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:05:53.000000000 : MsgSeqNum too high, expecting 1 but received 7
+20250117-16:05:53.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:05:53.000000000 : MsgSeqNum too high, expecting 1 but received 8
+20250117-16:05:53.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:05:58.000000000 : MsgSeqNum too high, expecting 1 but received 9
+20250117-16:05:58.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:05:59.000000000 : MsgSeqNum too high, expecting 1 but received 10
+20250117-16:05:59.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:06:04.000000000 : MsgSeqNum too high, expecting 1 but received 11
+20250117-16:06:04.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:06:04.000000000 : MsgSeqNum too high, expecting 1 but received 12
+20250117-16:06:04.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:06:09.000000000 : MsgSeqNum too high, expecting 1 but received 13
+20250117-16:06:09.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:06:09.000000000 : MsgSeqNum too high, expecting 1 but received 14
+20250117-16:06:09.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:06:15.000000000 : MsgSeqNum too high, expecting 1 but received 15
+20250117-16:06:15.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:06:15.000000000 : MsgSeqNum too high, expecting 1 but received 16
+20250117-16:06:15.000000000 : Already sent ResendRequest FROM: 1 TO: 3.  Not sending another.
+20250117-16:06:18.000000000 : Message 17 Rejected: Tag not defined for this message type:1137
+20250117-16:06:20.000000000 : Socket Error: Connection reset by peer.
+20250117-16:06:20.000000000 : Disconnecting
+20250117-16:33:26.000000000 : Created session
+20250117-16:37:36.000000000 : Created session
+20250117-16:53:08.000000000 : Created session
+20250117-17:15:35.000000000 : Created session
+20250123-15:50:18.000000000 : Created session
+20250123-19:36:13.000000000 : Created session
+20250123-19:38:24.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-19:38:24.000000000 : Received logon request
+20250123-19:38:24.000000000 : Responding to logon request
+20250123-19:38:54.000000000 : Socket Error: Connection reset by peer.
+20250123-19:38:54.000000000 : Disconnecting
+20250123-19:38:55.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-19:38:55.000000000 : Received logon request
+20250123-19:38:55.000000000 : Responding to logon request
+20250123-19:39:25.000000000 : Socket Error: Connection reset by peer.
+20250123-19:39:25.000000000 : Disconnecting
+20250123-19:39:26.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-19:39:26.000000000 : Received logon request
+20250123-19:39:26.000000000 : Responding to logon request
+20250123-19:39:56.000000000 : Socket Error: Connection reset by peer.
+20250123-19:39:56.000000000 : Disconnecting
+20250123-19:39:59.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-19:39:59.000000000 : Received logon request
+20250123-19:39:59.000000000 : Responding to logon request
+20250123-19:40:05.000000000 : Socket Error: Connection reset by peer.
+20250123-19:40:05.000000000 : Disconnecting
+20250123-19:40:34.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-19:40:34.000000000 : Received logon request
+20250123-19:40:34.000000000 : Responding to logon request
+20250123-19:41:04.000000000 : Socket Error: Connection reset by peer.
+20250123-19:41:04.000000000 : Disconnecting
+20250123-19:41:06.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-19:41:06.000000000 : Received logon request
+20250123-19:41:06.000000000 : Responding to logon request
+20250123-19:41:07.000000000 : Socket Error: Connection reset by peer.
+20250123-19:41:07.000000000 : Disconnecting
+20250123-19:41:33.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-19:41:33.000000000 : Received logon request
+20250123-19:41:33.000000000 : Responding to logon request
+20250123-19:41:57.000000000 : Socket Error: Connection reset by peer.
+20250123-19:41:57.000000000 : Disconnecting
+20250123-19:44:41.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-19:44:41.000000000 : Received logon request
+20250123-19:44:41.000000000 : Responding to logon request
+20250123-19:50:48.000000000 : Socket Error: Connection reset by peer.
+20250123-19:50:48.000000000 : Disconnecting
+20250123-20:00:22.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-20:00:22.000000000 : Received logon request
+20250123-20:00:22.000000000 : Responding to logon request
+20250123-20:00:53.000000000 : Socket Error: Connection reset by peer.
+20250123-20:00:53.000000000 : Disconnecting
+20250123-20:01:57.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-20:01:57.000000000 : Received logon request
+20250123-20:01:57.000000000 : Responding to logon request
+20250123-20:02:20.000000000 : Socket Error: Connection reset by peer.
+20250123-20:02:20.000000000 : Disconnecting
+20250123-21:00:09.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:00:09.000000000 : Received logon request
+20250123-21:00:09.000000000 : Responding to logon request
+20250123-21:04:00.000000000 : Socket Error: Connection reset by peer.
+20250123-21:04:00.000000000 : Disconnecting
+20250123-21:05:44.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:05:44.000000000 : Received logon request
+20250123-21:05:44.000000000 : Responding to logon request
+20250123-21:05:45.000000000 : Socket Error: Connection reset by peer.
+20250123-21:05:45.000000000 : Disconnecting
+20250123-21:24:16.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:24:16.000000000 : Received logon request
+20250123-21:24:16.000000000 : Responding to logon request
+20250123-21:24:16.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:24:16.000000000 : Received logon request
+20250123-21:24:16.000000000 : Responding to logon request
+20250123-21:24:16.000000000 : MsgSeqNum too low, expecting 2 but received 1
+20250123-21:24:16.000000000 : Disconnecting
+20250123-21:24:45.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:24:45.000000000 : Received logon request
+20250123-21:24:45.000000000 : Responding to logon request
+20250123-21:24:45.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:24:45.000000000 : Received logon request
+20250123-21:24:45.000000000 : Responding to logon request
+20250123-21:24:49.000000000 : MsgSeqNum too low, expecting 2 but received 1
+20250123-21:24:49.000000000 : Disconnecting
+20250123-21:25:16.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:25:16.000000000 : Received logon request
+20250123-21:25:16.000000000 : Responding to logon request
+20250123-21:25:46.000000000 : Socket Error: Connection reset by peer.
+20250123-21:25:46.000000000 : Disconnecting
+20250123-21:25:49.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:25:50.000000000 : Received logon request
+20250123-21:25:50.000000000 : Responding to logon request
+20250123-21:25:50.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:25:50.000000000 : Received logon request
+20250123-21:25:50.000000000 : Responding to logon request
+20250123-21:25:55.000000000 : MsgSeqNum too low, expecting 2 but received 1
+20250123-21:25:55.000000000 : Disconnecting
+20250123-21:26:23.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:26:23.000000000 : Received logon request
+20250123-21:26:23.000000000 : Responding to logon request
+20250123-21:26:23.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:26:23.000000000 : Received logon request
+20250123-21:26:23.000000000 : Responding to logon request
+20250123-21:26:28.000000000 : MsgSeqNum too low, expecting 2 but received 1
+20250123-21:26:28.000000000 : Disconnecting
+20250123-21:29:44.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:29:44.000000000 : Received logon request
+20250123-21:29:44.000000000 : Responding to logon request
+20250123-21:30:06.000000000 : Socket Error: Connection reset by peer.
+20250123-21:30:06.000000000 : Disconnecting
+20250123-21:35:07.000000000 : Created session
+20250123-21:36:39.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:36:39.000000000 : Received logon request
+20250123-21:36:39.000000000 : Responding to logon request
+20250123-21:40:33.000000000 : Socket Error: Connection reset by peer.
+20250123-21:40:33.000000000 : Disconnecting
+20250123-21:41:39.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-21:41:39.000000000 : Received logon request
+20250123-21:41:39.000000000 : Responding to logon request
+20250123-23:21:37.000000000 : Created session
+20250123-23:21:37.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250123-23:21:37.000000000 : Received logon request
+20250123-23:21:37.000000000 : Responding to logon request
+20250123-23:22:02.000000000 : Socket Error: Connection reset by peer.
+20250123-23:22:02.000000000 : Disconnecting
+20250124-00:46:25.000000000 : Created session
+20250124-11:06:40.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-11:06:40.000000000 : Received logon request
+20250124-11:06:40.000000000 : Responding to logon request
+20250124-11:07:23.000000000 : Socket Error: Connection reset by peer.
+20250124-11:07:23.000000000 : Disconnecting
+20250124-11:46:59.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-11:46:59.000000000 : Received logon request
+20250124-11:46:59.000000000 : Responding to logon request
+20250124-11:52:58.000000000 : Socket Error: Connection reset by peer.
+20250124-11:52:58.000000000 : Disconnecting
+20250124-11:53:12.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-11:53:12.000000000 : Received logon request
+20250124-11:53:12.000000000 : Responding to logon request
+20250124-11:54:57.000000000 : Socket Error: Connection reset by peer.
+20250124-11:54:57.000000000 : Disconnecting
+20250124-11:55:25.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-11:55:25.000000000 : Received logon request
+20250124-11:55:25.000000000 : Responding to logon request
+20250124-11:56:47.000000000 : Socket Error: Connection reset by peer.
+20250124-11:56:47.000000000 : Disconnecting
+20250124-11:59:53.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-11:59:53.000000000 : Received logon request
+20250124-11:59:53.000000000 : Responding to logon request
+20250124-12:42:56.000000000 : Created session
+20250124-12:43:04.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:43:04.000000000 : Received logon request
+20250124-12:43:04.000000000 : Responding to logon request
+20250124-12:43:04.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:43:04.000000000 : Received logon request
+20250124-12:43:04.000000000 : Responding to logon request
+20250124-12:43:05.000000000 : MsgSeqNum too low, expecting 2 but received 1
+20250124-12:43:05.000000000 : Disconnecting
+20250124-12:43:34.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:43:34.000000000 : Received logon request
+20250124-12:43:34.000000000 : Responding to logon request
+20250124-12:43:38.000000000 : Socket Error: Connection reset by peer.
+20250124-12:43:38.000000000 : Disconnecting
+20250124-12:43:55.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:43:55.000000000 : Received logon request
+20250124-12:43:55.000000000 : Responding to logon request
+20250124-12:45:24.000000000 : Socket Error: Connection reset by peer.
+20250124-12:45:24.000000000 : Disconnecting
+20250124-12:45:43.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:45:43.000000000 : Received logon request
+20250124-12:45:43.000000000 : Responding to logon request
+20250124-12:45:43.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:45:43.000000000 : Received logon request
+20250124-12:45:43.000000000 : Responding to logon request
+20250124-12:45:43.000000000 : MsgSeqNum too low, expecting 2 but received 1
+20250124-12:45:43.000000000 : Disconnecting
+20250124-12:46:13.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:46:13.000000000 : Received logon request
+20250124-12:46:13.000000000 : Responding to logon request
+20250124-12:46:13.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:46:13.000000000 : Received logon request
+20250124-12:46:13.000000000 : Responding to logon request
+20250124-12:46:16.000000000 : MsgSeqNum too low, expecting 2 but received 1
+20250124-12:46:16.000000000 : Disconnecting
+20250124-12:46:44.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:46:44.000000000 : Received logon request
+20250124-12:46:44.000000000 : Responding to logon request
+20250124-12:46:44.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:46:44.000000000 : Received logon request
+20250124-12:46:44.000000000 : Responding to logon request
+20250124-12:46:49.000000000 : MsgSeqNum too low, expecting 2 but received 1
+20250124-12:46:49.000000000 : Disconnecting
+20250124-12:47:17.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:47:17.000000000 : Received logon request
+20250124-12:47:17.000000000 : Responding to logon request
+20250124-12:47:17.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-12:47:17.000000000 : Received logon request
+20250124-12:47:17.000000000 : Responding to logon request
+20250124-12:47:22.000000000 : MsgSeqNum too low, expecting 2 but received 1
+20250124-12:47:22.000000000 : Disconnecting
+20250124-13:03:57.000000000 : Created session
+20250124-13:05:11.000000000 : Created session
+20250124-13:06:15.000000000 : Created session
+20250124-13:08:46.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-13:08:46.000000000 : Received logon request
+20250124-13:08:46.000000000 : Responding to logon request
+20250124-13:08:46.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-13:08:46.000000000 : Received logon request
+20250124-13:08:46.000000000 : Responding to logon request
+20250124-13:08:46.000000000 : MsgSeqNum too low, expecting 2 but received 1
+20250124-13:08:46.000000000 : Disconnecting
+20250124-13:09:16.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-13:09:16.000000000 : Received logon request
+20250124-13:09:16.000000000 : Responding to logon request
+20250124-13:09:20.000000000 : Socket Error: Connection reset by peer.
+20250124-13:09:20.000000000 : Disconnecting
+20250124-13:09:48.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-13:09:48.000000000 : Received logon request
+20250124-13:09:48.000000000 : Responding to logon request
+20250124-13:10:22.000000000 : Created session
+20250124-13:10:47.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-13:10:47.000000000 : Received logon request
+20250124-13:10:47.000000000 : Responding to logon request
+20250124-13:11:17.000000000 : Message 2 Rejected: Tag not defined for this message type:1137
+20250124-13:11:23.000000000 : Sent test request TEST
+20250124-13:11:23.000000000 : Message 3 Rejected: Tag not defined for this message type:1137
+20250124-14:44:09.000000000 : Created session
+20250124-14:45:23.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-14:45:23.000000000 : Received logon request
+20250124-14:45:23.000000000 : Responding to logon request
+20250124-14:45:42.000000000 : Message 10 Rejected: Tag not defined for this message type:1137
+20250124-14:45:50.000000000 : Created session
+20250124-14:48:17.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-14:48:17.000000000 : Received logon request
+20250124-14:48:17.000000000 : Responding to logon request
+20250124-14:48:26.000000000 : Message 6 Rejected: Tag not defined for this message type:1137
+20250124-14:48:30.000000000 : Socket Error: Connection reset by peer.
+20250124-14:48:30.000000000 : Disconnecting
+20250124-15:04:21.000000000 : Created session
+20250124-15:05:11.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-15:05:11.000000000 : Received logon request
+20250124-15:05:11.000000000 : Responding to logon request
+20250124-15:05:37.000000000 : Message 12 Rejected: Tag not defined for this message type:1137
+20250124-15:05:40.000000000 : Socket Error: Connection reset by peer.
+20250124-15:05:40.000000000 : Disconnecting
+20250124-16:08:11.000000000 : Created session
+20250124-16:08:55.000000000 : Created session
+20250124-16:09:28.000000000 : Created session
+20250124-16:09:33.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-16:09:33.000000000 : Received logon request
+20250124-16:09:33.000000000 : Responding to logon request
+20250124-16:25:21.000000000 : Message 362 Rejected: Tag not defined for this message type:1137
+20250124-16:25:24.000000000 : Socket Error: Connection reset by peer.
+20250124-16:25:24.000000000 : Disconnecting
+20250124-16:25:31.000000000 : Created session
+20250124-16:25:59.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-16:25:59.000000000 : Received logon request
+20250124-16:25:59.000000000 : Responding to logon request
+20250124-19:06:37.000000000 : Created session
+20250124-19:15:27.000000000 : Created session
+20250124-19:16:01.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-19:16:01.000000000 : Received logon request
+20250124-19:16:01.000000000 : Responding to logon request
+20250124-19:20:39.000000000 : Message 108 Rejected: Tag not defined for this message type:1137
+20250124-19:46:30.000000000 : Created session
+20250124-19:47:50.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-19:47:50.000000000 : Received logon request
+20250124-19:47:50.000000000 : Responding to logon request
+20250124-19:48:27.000000000 : Message 16 Rejected: Tag not defined for this message type:1137
+20250124-19:48:31.000000000 : Socket Error: Connection reset by peer.
+20250124-19:48:31.000000000 : Disconnecting
+20250124-19:49:12.000000000 : Created session
+20250124-19:49:38.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-19:49:38.000000000 : Received logon request
+20250124-19:49:38.000000000 : Responding to logon request
+20250124-19:50:23.000000000 : Message 20 Rejected: Tag not defined for this message type:1137
+20250124-20:06:13.000000000 : Created session
+20250124-20:07:09.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-20:07:09.000000000 : Received logon request
+20250124-20:07:09.000000000 : Responding to logon request
+20250124-20:07:24.000000000 : Message 8 Rejected: Tag not defined for this message type:1137
+20250124-21:44:29.000000000 : Created session
+20250124-21:47:42.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250124-21:47:42.000000000 : Received logon request
+20250124-21:47:42.000000000 : Responding to logon request
+20250124-21:49:35.000000000 : Message 46 Rejected: Tag not defined for this message type:1137
+20250130-00:36:24.000000000 : Created session
+20250130-01:01:04.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-01:01:04.000000000 : Received logon request
+20250130-01:01:04.000000000 : Responding to logon request
+20250130-01:09:09.000000000 : Message 186 Rejected: Tag not defined for this message type:1137
+20250130-01:09:32.000000000 : Created session
+20250130-01:09:55.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-01:09:55.000000000 : Received logon request
+20250130-01:09:55.000000000 : Responding to logon request
+20250130-01:22:40.000000000 : Message 292 Rejected: Tag not defined for this message type:1137
+20250130-01:22:44.000000000 : Socket Error: Connection reset by peer.
+20250130-01:22:44.000000000 : Disconnecting
+20250130-01:23:51.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-01:23:51.000000000 : Received logon request
+20250130-01:23:51.000000000 : Responding to logon request
+20250130-01:24:32.000000000 : Message 18 Rejected: Tag not defined for this message type:1137
+20250130-01:24:36.000000000 : Socket Error: Connection reset by peer.
+20250130-01:24:36.000000000 : Disconnecting
+20250130-11:31:48.000000000 : Created session
+20250130-11:35:49.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-11:35:49.000000000 : Received logon request
+20250130-11:35:49.000000000 : Responding to logon request
+20250130-11:35:59.000000000 : Message 2 Rejected: Tag not defined for this message type:1137
+20250130-11:36:01.000000000 : Sent test request TEST
+20250130-11:36:01.000000000 : Message 3 Rejected: Tag not defined for this message type:1137
+20250130-11:36:11.000000000 : Message 4 Rejected: Tag not defined for this message type:1137
+20250130-11:36:13.000000000 : Timed out waiting for heartbeat
+20250130-11:36:13.000000000 : Disconnecting
+20250130-11:37:22.000000000 : Created session
+20250130-11:37:47.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-11:37:47.000000000 : Received logon request
+20250130-11:37:47.000000000 : Responding to logon request
+20250130-11:38:03.000000000 : Socket Error: Connection reset by peer.
+20250130-11:38:03.000000000 : Disconnecting
+20250130-11:44:08.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-11:44:08.000000000 : Received logon request
+20250130-11:44:08.000000000 : Responding to logon request
+20250130-11:45:15.000000000 : Socket Error: Connection reset by peer.
+20250130-11:45:15.000000000 : Disconnecting
+20250130-11:52:47.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-11:52:47.000000000 : Received logon request
+20250130-11:52:47.000000000 : Responding to logon request
+20250130-11:52:58.000000000 : Message 2 Rejected: Tag not defined for this message type:1137
+20250130-11:52:59.000000000 : Sent test request TEST
+20250130-11:52:59.000000000 : Message 3 Rejected: Tag not defined for this message type:1137
+20250130-11:53:09.000000000 : Message 4 Rejected: Tag not defined for this message type:1137
+20250130-11:53:11.000000000 : Timed out waiting for heartbeat
+20250130-11:53:11.000000000 : Disconnecting
+20250130-11:54:17.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-11:54:17.000000000 : Received logon request
+20250130-11:54:17.000000000 : Responding to logon request
+20250130-11:54:27.000000000 : Message 2 Rejected: Tag not defined for this message type:1137
+20250130-11:54:29.000000000 : Sent test request TEST
+20250130-11:54:29.000000000 : Message 3 Rejected: Tag not defined for this message type:1137
+20250130-11:54:39.000000000 : Message 4 Rejected: Tag not defined for this message type:1137
+20250130-11:54:41.000000000 : Timed out waiting for heartbeat
+20250130-11:54:41.000000000 : Disconnecting
+20250130-14:16:24.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:16:24.000000000 : Received logon request
+20250130-14:16:24.000000000 : Responding to logon request
+20250130-14:17:09.000000000 : Socket Error: Connection reset by peer.
+20250130-14:17:09.000000000 : Disconnecting
+20250130-14:18:55.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:18:55.000000000 : Received logon request
+20250130-14:18:55.000000000 : Responding to logon request
+20250130-14:19:11.000000000 : Socket Error: Connection reset by peer.
+20250130-14:19:11.000000000 : Disconnecting
+20250130-14:25:11.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:25:11.000000000 : Received logon request
+20250130-14:25:11.000000000 : Responding to logon request
+20250130-14:25:21.000000000 : Socket Error: Connection reset by peer.
+20250130-14:25:21.000000000 : Disconnecting
+20250130-14:26:42.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:26:42.000000000 : Received logon request
+20250130-14:26:42.000000000 : Responding to logon request
+20250130-14:27:17.000000000 : Socket Error: Connection reset by peer.
+20250130-14:27:17.000000000 : Disconnecting
+20250130-14:31:31.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:31:31.000000000 : Received logon request
+20250130-14:31:31.000000000 : Responding to logon request
+20250130-14:31:38.000000000 : Socket Error: Connection reset by peer.
+20250130-14:31:38.000000000 : Disconnecting
+20250130-14:36:45.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:36:45.000000000 : Received logon request
+20250130-14:36:45.000000000 : Responding to logon request
+20250130-14:36:56.000000000 : Message 2 Rejected: Tag not defined for this message type:1137
+20250130-14:36:57.000000000 : Sent test request TEST
+20250130-14:36:57.000000000 : Message 3 Rejected: Tag not defined for this message type:1137
+20250130-14:37:07.000000000 : Message 4 Rejected: Tag not defined for this message type:1137
+20250130-14:37:09.000000000 : Timed out waiting for heartbeat
+20250130-14:37:09.000000000 : Disconnecting
+20250130-14:40:07.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:40:07.000000000 : Received logon request
+20250130-14:40:07.000000000 : Responding to logon request
+20250130-14:40:34.000000000 : Socket Error: Connection reset by peer.
+20250130-14:40:34.000000000 : Disconnecting
+20250130-14:42:18.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:42:18.000000000 : Received logon request
+20250130-14:42:18.000000000 : Responding to logon request
+20250130-14:42:29.000000000 : Message 2 Rejected: Tag not defined for this message type:1137
+20250130-14:42:30.000000000 : Sent test request TEST
+20250130-14:42:30.000000000 : Message 3 Rejected: Tag not defined for this message type:1137
+20250130-14:42:40.000000000 : Message 4 Rejected: Tag not defined for this message type:1137
+20250130-14:42:42.000000000 : Timed out waiting for heartbeat
+20250130-14:42:42.000000000 : Disconnecting
+20250130-14:48:08.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:48:08.000000000 : Received logon request
+20250130-14:48:08.000000000 : Responding to logon request
+20250130-14:48:48.000000000 : Socket Error: Connection reset by peer.
+20250130-14:48:48.000000000 : Disconnecting
+20250130-14:49:05.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:49:05.000000000 : Received logon request
+20250130-14:49:05.000000000 : Responding to logon request
+20250130-14:49:49.000000000 : Socket Error: Connection reset by peer.
+20250130-14:49:49.000000000 : Disconnecting
+20250130-14:59:52.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-14:59:52.000000000 : Received logon request
+20250130-14:59:52.000000000 : Responding to logon request
+20250130-15:01:45.000000000 : Socket Error: Connection reset by peer.
+20250130-15:01:45.000000000 : Disconnecting
+20250130-15:12:08.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-15:12:08.000000000 : Received logon request
+20250130-15:12:08.000000000 : Responding to logon request
+20250130-15:13:24.000000000 : Socket Error: Connection reset by peer.
+20250130-15:13:24.000000000 : Disconnecting
+20250130-15:16:31.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-15:16:31.000000000 : Received logon request
+20250130-15:16:31.000000000 : Responding to logon request
+20250130-15:16:59.000000000 : Socket Error: Connection reset by peer.
+20250130-15:16:59.000000000 : Disconnecting
+20250130-15:20:47.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-15:20:47.000000000 : Received logon request
+20250130-15:20:47.000000000 : Responding to logon request
+20250130-15:21:41.000000000 : Socket Error: Connection reset by peer.
+20250130-15:21:41.000000000 : Disconnecting
+20250130-15:21:53.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-15:21:53.000000000 : Received logon request
+20250130-15:21:53.000000000 : Responding to logon request
+20250130-15:26:06.000000000 : Socket Error: Connection reset by peer.
+20250130-15:26:06.000000000 : Disconnecting
+20250130-15:30:35.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-15:30:35.000000000 : Received logon request
+20250130-15:30:35.000000000 : Responding to logon request
+20250130-15:31:22.000000000 : Socket Error: Connection reset by peer.
+20250130-15:31:22.000000000 : Disconnecting
+20250130-16:07:18.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-16:07:18.000000000 : Received logon request
+20250130-16:07:18.000000000 : Responding to logon request
+20250130-16:12:24.000000000 : Socket Error: Connection reset by peer.
+20250130-16:12:24.000000000 : Disconnecting
+20250130-16:13:41.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-16:13:41.000000000 : Received logon request
+20250130-16:13:41.000000000 : Responding to logon request
+20250130-16:14:59.000000000 : Socket Error: Connection reset by peer.
+20250130-16:14:59.000000000 : Disconnecting
+20250130-16:21:20.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-16:21:20.000000000 : Received logon request
+20250130-16:21:20.000000000 : Responding to logon request
+20250130-16:25:14.000000000 : Socket Error: Connection reset by peer.
+20250130-16:25:14.000000000 : Disconnecting
+20250130-16:26:35.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-16:26:35.000000000 : Received logon request
+20250130-16:26:35.000000000 : Responding to logon request
+20250130-16:26:57.000000000 : Socket Error: Connection reset by peer.
+20250130-16:26:57.000000000 : Disconnecting
+20250130-16:30:55.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-16:30:55.000000000 : Received logon request
+20250130-16:30:55.000000000 : Responding to logon request
+20250130-16:31:09.000000000 : Socket Error: Connection reset by peer.
+20250130-16:31:09.000000000 : Disconnecting
+20250130-16:32:33.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-16:32:33.000000000 : Received logon request
+20250130-16:32:33.000000000 : Responding to logon request
+20250130-16:37:25.000000000 : Socket Error: Connection reset by peer.
+20250130-16:37:25.000000000 : Disconnecting
+20250130-16:45:55.000000000 : Created session
+20250130-16:47:25.000000000 : Created session
+20250130-16:47:47.000000000 : Created session
+20250130-16:51:19.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-16:51:19.000000000 : Received logon request
+20250130-16:51:19.000000000 : Responding to logon request
+20250130-16:55:53.000000000 : Socket Error: Connection reset by peer.
+20250130-16:55:53.000000000 : Disconnecting
+20250130-16:57:10.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-16:57:10.000000000 : Received logon request
+20250130-16:57:10.000000000 : Responding to logon request
+20250130-16:59:07.000000000 : Socket Error: Connection reset by peer.
+20250130-16:59:07.000000000 : Disconnecting
+20250130-17:04:37.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-17:04:37.000000000 : Received logon request
+20250130-17:04:37.000000000 : Responding to logon request
+20250130-17:08:29.000000000 : Socket Error: Connection reset by peer.
+20250130-17:08:29.000000000 : Disconnecting
+20250130-17:09:26.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-17:09:26.000000000 : Received logon request
+20250130-17:09:26.000000000 : Responding to logon request
+20250130-17:10:33.000000000 : Created session
+20250130-17:10:42.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-17:10:42.000000000 : Received logon request
+20250130-17:10:42.000000000 : Responding to logon request
+20250130-17:11:46.000000000 : Socket Error: Connection reset by peer.
+20250130-17:11:46.000000000 : Disconnecting
+20250130-17:12:34.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-17:12:35.000000000 : Received logon request
+20250130-17:12:35.000000000 : Responding to logon request
+20250130-17:13:18.000000000 : Socket Error: Connection reset by peer.
+20250130-17:13:18.000000000 : Disconnecting
+20250130-17:13:57.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-17:13:57.000000000 : Received logon request
+20250130-17:13:57.000000000 : Responding to logon request
+20250130-17:14:48.000000000 : Socket Error: Connection reset by peer.
+20250130-17:14:48.000000000 : Disconnecting
+20250130-17:36:31.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-17:36:31.000000000 : Received logon request
+20250130-17:36:31.000000000 : Responding to logon request
+20250130-17:37:21.000000000 : Socket Error: Connection reset by peer.
+20250130-17:37:21.000000000 : Disconnecting
+20250130-20:25:11.000000000 : Created session
+20250130-20:25:25.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-20:25:25.000000000 : Received logon request
+20250130-20:25:25.000000000 : Responding to logon request
+20250130-20:26:22.000000000 : Socket Error: Connection reset by peer.
+20250130-20:26:22.000000000 : Disconnecting
+20250130-20:27:15.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-20:27:15.000000000 : Received logon request
+20250130-20:27:15.000000000 : Responding to logon request
+20250130-20:27:49.000000000 : Socket Error: Connection reset by peer.
+20250130-20:27:49.000000000 : Disconnecting
+20250130-20:29:29.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-20:29:29.000000000 : Received logon request
+20250130-20:29:29.000000000 : Responding to logon request
+20250130-20:31:17.000000000 : Socket Error: Connection reset by peer.
+20250130-20:31:17.000000000 : Disconnecting
+20250130-20:34:07.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-20:34:07.000000000 : Received logon request
+20250130-20:34:07.000000000 : Responding to logon request
+20250130-20:34:36.000000000 : Socket Error: Connection reset by peer.
+20250130-20:34:36.000000000 : Disconnecting
+20250130-20:39:15.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-20:39:15.000000000 : Received logon request
+20250130-20:39:15.000000000 : Responding to logon request
+20250130-20:40:18.000000000 : Socket Error: Connection reset by peer.
+20250130-20:40:18.000000000 : Disconnecting
+20250130-20:43:31.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-20:43:31.000000000 : Received logon request
+20250130-20:43:31.000000000 : Responding to logon request
+20250130-20:44:15.000000000 : Socket Error: Connection reset by peer.
+20250130-20:44:15.000000000 : Disconnecting
+20250130-20:50:23.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-20:50:23.000000000 : Received logon request
+20250130-20:50:23.000000000 : Responding to logon request
+20250130-20:51:26.000000000 : Socket Error: Connection reset by peer.
+20250130-20:51:26.000000000 : Disconnecting
+20250130-20:57:43.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-20:57:43.000000000 : Received logon request
+20250130-20:57:43.000000000 : Responding to logon request
+20250130-20:58:07.000000000 : Sent test request TEST
+20250130-20:58:19.000000000 : Timed out waiting for heartbeat
+20250130-20:58:19.000000000 : Disconnecting
+20250130-21:01:18.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-21:01:18.000000000 : Received logon request
+20250130-21:01:18.000000000 : Responding to logon request
+20250130-21:01:31.000000000 : Socket Error: Connection reset by peer.
+20250130-21:01:31.000000000 : Disconnecting
+20250130-21:06:48.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-21:06:48.000000000 : Received logon request
+20250130-21:06:48.000000000 : Responding to logon request
+20250130-21:07:11.000000000 : Socket Error: Connection reset by peer.
+20250130-21:07:11.000000000 : Disconnecting
+20250130-21:17:26.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-21:17:26.000000000 : Received logon request
+20250130-21:17:26.000000000 : Responding to logon request
+20250130-21:18:34.000000000 : Socket Error: Connection reset by peer.
+20250130-21:18:34.000000000 : Disconnecting
+20250130-23:21:06.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-23:21:06.000000000 : Received logon request
+20250130-23:21:06.000000000 : Responding to logon request
+20250130-23:29:22.000000000 : Socket Error: Connection reset by peer.
+20250130-23:29:22.000000000 : Disconnecting
+20250130-23:29:58.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-23:29:58.000000000 : Received logon request
+20250130-23:29:58.000000000 : Responding to logon request
+20250130-23:30:37.000000000 : Socket Error: Connection reset by peer.
+20250130-23:30:37.000000000 : Disconnecting
+20250130-23:39:43.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-23:39:43.000000000 : Received logon request
+20250130-23:39:43.000000000 : Responding to logon request
+20250130-23:47:51.000000000 : Socket Error: Connection reset by peer.
+20250130-23:47:51.000000000 : Disconnecting
+20250130-23:52:13.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250130-23:52:13.000000000 : Received logon request
+20250130-23:52:13.000000000 : Responding to logon request
+20250130-23:53:02.000000000 : Socket Error: Connection reset by peer.
+20250130-23:53:02.000000000 : Disconnecting
+20250131-00:03:47.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-00:03:47.000000000 : Received logon request
+20250131-00:03:47.000000000 : Responding to logon request
+20250131-00:11:40.000000000 : Socket Error: Connection reset by peer.
+20250131-00:11:40.000000000 : Disconnecting
+20250131-00:18:00.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-00:18:00.000000000 : Received logon request
+20250131-00:18:00.000000000 : Responding to logon request
+20250131-00:18:29.000000000 : Socket Error: Connection reset by peer.
+20250131-00:18:29.000000000 : Disconnecting
+20250131-00:39:52.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-00:39:52.000000000 : Received logon request
+20250131-00:39:52.000000000 : Responding to logon request
+20250131-00:40:25.000000000 : Socket Error: Connection reset by peer.
+20250131-00:40:25.000000000 : Disconnecting
+20250131-00:42:03.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-00:42:03.000000000 : Received logon request
+20250131-00:42:03.000000000 : Responding to logon request
+20250131-00:42:57.000000000 : Socket Error: Connection reset by peer.
+20250131-00:42:57.000000000 : Disconnecting
+20250131-01:06:45.000000000 : Created session
+20250131-11:56:45.000000000 : Created session
+20250131-12:15:18.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-12:15:18.000000000 : Received logon request
+20250131-12:15:18.000000000 : Responding to logon request
+20250131-12:15:40.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-12:15:40.000000000 : Disconnecting
+20250131-12:34:24.000000000 : Created session
+20250131-12:34:37.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-12:34:37.000000000 : Received logon request
+20250131-12:34:37.000000000 : Responding to logon request
+20250131-12:35:03.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-12:35:03.000000000 : Disconnecting
+20250131-12:41:46.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-12:41:46.000000000 : Received logon request
+20250131-12:41:46.000000000 : Responding to logon request
+20250131-12:42:24.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-12:42:24.000000000 : Disconnecting
+20250131-12:43:12.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-12:43:12.000000000 : Received logon request
+20250131-12:43:12.000000000 : Responding to logon request
+20250131-12:43:49.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-12:43:49.000000000 : Disconnecting
+20250131-12:52:33.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-12:52:33.000000000 : Received logon request
+20250131-12:52:33.000000000 : Responding to logon request
+20250131-12:52:52.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-12:52:52.000000000 : Disconnecting
+20250131-13:10:43.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-13:10:43.000000000 : Received logon request
+20250131-13:10:43.000000000 : Responding to logon request
+20250131-13:13:08.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-13:13:08.000000000 : Disconnecting
+20250131-13:14:16.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-13:14:16.000000000 : Received logon request
+20250131-13:14:16.000000000 : Responding to logon request
+20250131-13:14:41.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-13:14:41.000000000 : Disconnecting
+20250131-13:14:57.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-13:14:57.000000000 : Received logon request
+20250131-13:14:57.000000000 : Responding to logon request
+20250131-13:39:49.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-13:39:49.000000000 : Disconnecting
+20250131-13:39:58.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-13:39:58.000000000 : Received logon request
+20250131-13:39:58.000000000 : Responding to logon request
+20250131-13:40:15.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-13:40:15.000000000 : Disconnecting
+20250131-13:42:21.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-13:42:21.000000000 : Received logon request
+20250131-13:42:21.000000000 : Responding to logon request
+20250131-13:43:14.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-13:43:14.000000000 : Disconnecting
+20250131-13:43:19.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-13:43:19.000000000 : Received logon request
+20250131-13:43:19.000000000 : Responding to logon request
+20250131-13:43:56.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-13:43:56.000000000 : Disconnecting
+20250131-13:44:12.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-13:44:12.000000000 : Received logon request
+20250131-13:44:12.000000000 : Responding to logon request
+20250131-13:44:58.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-13:44:58.000000000 : Disconnecting
+20250131-13:45:04.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-13:45:04.000000000 : Received logon request
+20250131-13:45:04.000000000 : Responding to logon request
+20250131-13:45:46.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-13:45:46.000000000 : Disconnecting
+20250131-13:47:02.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-13:47:02.000000000 : Received logon request
+20250131-13:47:02.000000000 : Responding to logon request
+20250131-13:48:29.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-13:48:29.000000000 : Disconnecting
+20250131-13:50:40.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-13:50:40.000000000 : Received logon request
+20250131-13:50:40.000000000 : Responding to logon request
+20250131-13:51:18.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-13:51:18.000000000 : Disconnecting
+20250131-14:14:34.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-14:14:34.000000000 : Received logon request
+20250131-14:14:34.000000000 : Responding to logon request
+20250131-14:34:19.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-14:34:19.000000000 : Disconnecting
+20250131-14:34:36.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-14:34:36.000000000 : Received logon request
+20250131-14:34:36.000000000 : Responding to logon request
+20250131-14:36:54.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-14:36:54.000000000 : Disconnecting
+20250131-14:45:51.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-14:45:51.000000000 : Received logon request
+20250131-14:45:51.000000000 : Responding to logon request
+20250131-14:51:46.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-14:51:46.000000000 : Disconnecting
+20250131-14:51:53.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-14:51:53.000000000 : Received logon request
+20250131-14:51:53.000000000 : Responding to logon request
+20250131-14:58:07.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-14:58:07.000000000 : Disconnecting
+20250131-14:58:24.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-14:58:24.000000000 : Received logon request
+20250131-14:58:24.000000000 : Responding to logon request
+20250131-15:05:23.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-15:05:23.000000000 : Disconnecting
+20250131-15:28:26.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-15:28:26.000000000 : Received logon request
+20250131-15:28:26.000000000 : Responding to logon request
+20250131-15:32:02.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-15:32:02.000000000 : Disconnecting
+20250131-15:32:12.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-15:32:12.000000000 : Received logon request
+20250131-15:32:12.000000000 : Responding to logon request
+20250131-15:38:12.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-15:38:12.000000000 : Disconnecting
+20250131-15:43:29.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-15:43:29.000000000 : Received logon request
+20250131-15:43:29.000000000 : Responding to logon request
+20250131-16:11:36.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-16:11:36.000000000 : Disconnecting
+20250131-16:11:57.000000000 : Created session
+20250131-16:12:13.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-16:12:13.000000000 : Received logon request
+20250131-16:12:13.000000000 : Responding to logon request
+20250131-16:21:07.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-16:21:07.000000000 : Disconnecting
+20250131-16:22:54.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-16:22:54.000000000 : Received logon request
+20250131-16:22:54.000000000 : Responding to logon request
+20250131-16:26:48.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-16:26:48.000000000 : Disconnecting
+20250131-16:27:02.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-16:27:02.000000000 : Received logon request
+20250131-16:27:02.000000000 : Responding to logon request
+20250131-16:37:40.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-16:37:40.000000000 : Disconnecting
+20250131-16:52:42.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-16:52:42.000000000 : Received logon request
+20250131-16:52:42.000000000 : Responding to logon request
+20250131-16:54:25.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-16:54:25.000000000 : Disconnecting
+20250131-16:54:31.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-16:54:31.000000000 : Received logon request
+20250131-16:54:31.000000000 : Responding to logon request
+20250131-16:55:56.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-16:55:56.000000000 : Disconnecting
+20250131-17:18:08.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:18:08.000000000 : Received logon request
+20250131-17:18:08.000000000 : Responding to logon request
+20250131-17:20:38.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:20:38.000000000 : Disconnecting
+20250131-17:20:45.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:20:45.000000000 : Received logon request
+20250131-17:20:45.000000000 : Responding to logon request
+20250131-17:22:41.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:22:41.000000000 : Disconnecting
+20250131-17:22:46.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:22:46.000000000 : Received logon request
+20250131-17:22:46.000000000 : Responding to logon request
+20250131-17:22:48.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:22:48.000000000 : Disconnecting
+20250131-17:22:54.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:22:54.000000000 : Received logon request
+20250131-17:22:54.000000000 : Responding to logon request
+20250131-17:24:02.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:24:02.000000000 : Disconnecting
+20250131-17:24:18.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:24:18.000000000 : Received logon request
+20250131-17:24:18.000000000 : Responding to logon request
+20250131-17:26:52.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:26:52.000000000 : Disconnecting
+20250131-17:42:33.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:42:33.000000000 : Received logon request
+20250131-17:42:33.000000000 : Responding to logon request
+20250131-17:43:38.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:43:38.000000000 : Disconnecting
+20250131-17:45:26.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:45:26.000000000 : Received logon request
+20250131-17:45:26.000000000 : Responding to logon request
+20250131-17:45:52.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:45:52.000000000 : Disconnecting
+20250131-17:45:57.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:45:57.000000000 : Received logon request
+20250131-17:45:57.000000000 : Responding to logon request
+20250131-17:49:04.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:49:04.000000000 : Disconnecting
+20250131-17:49:11.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:49:11.000000000 : Received logon request
+20250131-17:49:11.000000000 : Responding to logon request
+20250131-17:49:55.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:49:55.000000000 : Disconnecting
+20250131-17:50:01.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:50:01.000000000 : Received logon request
+20250131-17:50:01.000000000 : Responding to logon request
+20250131-17:51:22.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:51:22.000000000 : Disconnecting
+20250131-17:51:28.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-17:51:28.000000000 : Received logon request
+20250131-17:51:28.000000000 : Responding to logon request
+20250131-17:54:04.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-17:54:04.000000000 : Disconnecting
+20250131-18:07:57.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-18:07:57.000000000 : Received logon request
+20250131-18:07:57.000000000 : Responding to logon request
+20250131-18:08:24.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-18:08:24.000000000 : Disconnecting
+20250131-18:08:29.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-18:08:29.000000000 : Received logon request
+20250131-18:08:29.000000000 : Responding to logon request
+20250131-18:09:18.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-18:09:18.000000000 : Disconnecting
+20250131-18:21:39.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-18:21:39.000000000 : Received logon request
+20250131-18:21:39.000000000 : Responding to logon request
+20250131-18:24:02.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-18:24:02.000000000 : Disconnecting
+20250131-18:24:08.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-18:24:08.000000000 : Received logon request
+20250131-18:24:08.000000000 : Responding to logon request
+20250131-18:24:51.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-18:24:51.000000000 : Disconnecting
+20250131-18:32:50.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-18:32:50.000000000 : Received logon request
+20250131-18:32:50.000000000 : Responding to logon request
+20250131-18:33:08.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-18:33:08.000000000 : Disconnecting
+20250131-18:34:15.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-18:34:15.000000000 : Received logon request
+20250131-18:34:15.000000000 : Responding to logon request
+20250131-18:35:48.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-18:35:48.000000000 : Disconnecting
+20250131-18:38:12.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-18:38:12.000000000 : Received logon request
+20250131-18:38:12.000000000 : Responding to logon request
+20250131-18:39:07.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-18:39:07.000000000 : Disconnecting
+20250131-18:52:54.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-18:52:54.000000000 : Received logon request
+20250131-18:52:54.000000000 : Responding to logon request
+20250131-18:54:07.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-18:54:07.000000000 : Disconnecting
+20250131-18:54:27.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-18:54:27.000000000 : Received logon request
+20250131-18:54:27.000000000 : Responding to logon request
+20250131-18:54:41.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-18:54:41.000000000 : Disconnecting
+20250131-18:54:48.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-18:54:48.000000000 : Received logon request
+20250131-18:54:48.000000000 : Responding to logon request
+20250131-19:51:23.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-19:51:23.000000000 : Disconnecting
+20250131-19:51:27.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-19:51:27.000000000 : Received logon request
+20250131-19:51:27.000000000 : Responding to logon request
+20250131-19:51:27.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-19:51:27.000000000 : Disconnecting
+20250131-19:51:48.000000000 : Received logon request
+20250131-19:51:48.000000000 : Responding to logon request
+20250131-19:51:48.000000000 : MsgSeqNum too high, expecting 1 but received 2
+20250131-19:51:48.000000000 : Sent ResendRequest FROM: 1 TO: 0
+20250131-19:51:48.000000000 : Received logout request
+20250131-19:51:48.000000000 : Sending logout response
+20250131-19:51:48.000000000 : Disconnecting
+20250131-19:52:18.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-19:52:18.000000000 : Received logon request
+20250131-19:52:18.000000000 : Responding to logon request
+20250131-19:52:55.000000000 : Sent test request TEST
+20250131-19:53:30.000000000 : Timed out waiting for heartbeat
+20250131-19:53:30.000000000 : Disconnecting
+20250131-19:56:49.000000000 : Received logon request
+20250131-19:56:49.000000000 : Responding to logon request
+20250131-19:56:49.000000000 : MsgSeqNum too high, expecting 1 but received 2
+20250131-19:56:49.000000000 : Sent ResendRequest FROM: 1 TO: 0
+20250131-19:56:49.000000000 : Received logout request
+20250131-19:56:49.000000000 : Sending logout response
+20250131-19:56:49.000000000 : Disconnecting
+20250131-19:57:03.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-19:57:03.000000000 : Received logon request
+20250131-19:57:03.000000000 : Responding to logon request
+20250131-19:57:39.000000000 : Sent test request TEST
+20250131-19:58:15.000000000 : Timed out waiting for heartbeat
+20250131-19:58:15.000000000 : Disconnecting
+20250131-20:04:17.000000000 : Received logon request
+20250131-20:04:17.000000000 : Responding to logon request
+20250131-20:04:17.000000000 : MsgSeqNum too high, expecting 1 but received 2
+20250131-20:04:17.000000000 : Sent ResendRequest FROM: 1 TO: 0
+20250131-20:04:17.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-20:04:17.000000000 : Disconnecting
+20250131-20:07:49.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-20:07:49.000000000 : Received logon request
+20250131-20:07:49.000000000 : Responding to logon request
+20250131-20:07:49.000000000 : Invalid message: Header fields out of order
+20250131-20:07:54.000000000 : Invalid message: Header fields out of order
+20250131-20:07:59.000000000 : Invalid message: Header fields out of order
+20250131-20:08:04.000000000 : Invalid message: Header fields out of order
+20250131-20:08:09.000000000 : Invalid message: Header fields out of order
+20250131-20:08:14.000000000 : Invalid message: Header fields out of order
+20250131-20:08:19.000000000 : Invalid message: Header fields out of order
+20250131-20:08:24.000000000 : Invalid message: Header fields out of order
+20250131-20:08:25.000000000 : Sent test request TEST
+20250131-20:08:29.000000000 : Invalid message: Header fields out of order
+20250131-20:08:34.000000000 : Invalid message: Header fields out of order
+20250131-20:08:39.000000000 : Invalid message: Header fields out of order
+20250131-20:08:44.000000000 : Invalid message: Header fields out of order
+20250131-20:08:49.000000000 : Invalid message: Header fields out of order
+20250131-20:08:54.000000000 : Invalid message: Header fields out of order
+20250131-20:08:59.000000000 : Invalid message: Header fields out of order
+20250131-20:09:01.000000000 : Timed out waiting for heartbeat
+20250131-20:09:01.000000000 : Disconnecting
+20250131-20:13:45.000000000 : Received logon request
+20250131-20:13:45.000000000 : Responding to logon request
+20250131-20:13:45.000000000 : MsgSeqNum too high, expecting 1 but received 17
+20250131-20:13:45.000000000 : Sent ResendRequest FROM: 1 TO: 0
+20250131-20:13:45.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-20:13:45.000000000 : Disconnecting
+20250131-20:16:19.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-20:16:19.000000000 : Received logon request
+20250131-20:16:19.000000000 : Responding to logon request
+20250131-20:16:55.000000000 : Sent test request TEST
+20250131-20:17:00.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-20:17:00.000000000 : Disconnecting
+20250131-20:17:20.000000000 : Received logon request
+20250131-20:17:20.000000000 : Responding to logon request
+20250131-20:17:20.000000000 : MsgSeqNum too high, expecting 1 but received 2
+20250131-20:17:20.000000000 : Sent ResendRequest FROM: 1 TO: 0
+20250131-20:17:20.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-20:17:20.000000000 : Disconnecting
+20250131-20:18:44.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-20:18:44.000000000 : Received logon request
+20250131-20:18:44.000000000 : Responding to logon request
+20250131-20:18:49.000000000 : Invalid message: Header fields out of order
+20250131-20:18:54.000000000 : Invalid message: Header fields out of order
+20250131-20:18:59.000000000 : Invalid message: Header fields out of order
+20250131-20:19:04.000000000 : Invalid message: Header fields out of order
+20250131-20:19:09.000000000 : Invalid message: Header fields out of order
+20250131-20:19:14.000000000 : Invalid message: Header fields out of order
+20250131-20:19:19.000000000 : Invalid message: Header fields out of order
+20250131-20:19:20.000000000 : Sent test request TEST
+20250131-20:19:20.000000000 : MsgSeqNum too high, expecting 2 but received 9
+20250131-20:19:20.000000000 : Sent ResendRequest FROM: 2 TO: 0
+20250131-20:19:24.000000000 : Invalid message: Header fields out of order
+20250131-20:19:29.000000000 : Invalid message: Header fields out of order
+20250131-20:19:34.000000000 : Invalid message: Header fields out of order
+20250131-20:19:39.000000000 : Invalid message: Header fields out of order
+20250131-20:19:40.000000000 : Received logout request
+20250131-20:19:40.000000000 : Sending logout response
+20250131-20:19:40.000000000 : Disconnecting
+20250131-20:21:27.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-20:21:27.000000000 : Received logon request
+20250131-20:21:27.000000000 : Responding to logon request
+20250131-20:21:42.000000000 : Received logout request
+20250131-20:21:42.000000000 : Sending logout response
+20250131-20:21:42.000000000 : Disconnecting
+20250131-20:27:14.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-20:27:14.000000000 : Received logon request
+20250131-20:27:14.000000000 : Responding to logon request
+20250131-20:27:19.000000000 : Invalid message: Header fields out of order
+20250131-20:27:24.000000000 : Invalid message: Header fields out of order
+20250131-20:27:25.000000000 : Invalid message: Header fields out of order
+20250131-20:27:26.000000000 : Invalid message: Header fields out of order
+20250131-20:27:29.000000000 : Invalid message: Header fields out of order
+20250131-20:27:34.000000000 : Invalid message: Header fields out of order
+20250131-20:27:39.000000000 : Invalid message: Header fields out of order
+20250131-20:27:44.000000000 : Invalid message: Header fields out of order
+20250131-20:27:49.000000000 : Invalid message: Header fields out of order
+20250131-20:27:50.000000000 : Sent test request TEST
+20250131-20:27:50.000000000 : MsgSeqNum too high, expecting 2 but received 11
+20250131-20:27:50.000000000 : Sent ResendRequest FROM: 2 TO: 0
+20250131-20:27:54.000000000 : Invalid message: Header fields out of order
+20250131-20:27:55.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-20:27:55.000000000 : Disconnecting
+20250131-20:32:14.000000000 : Received logon request
+20250131-20:32:14.000000000 : Responding to logon request
+20250131-20:32:14.000000000 : MsgSeqNum too high, expecting 1 but received 13
+20250131-20:32:14.000000000 : Sent ResendRequest FROM: 1 TO: 0
+20250131-20:32:14.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-20:32:14.000000000 : Disconnecting
+20250131-20:32:44.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-20:32:44.000000000 : Received logon request
+20250131-20:32:44.000000000 : Responding to logon request
+20250131-20:33:47.000000000 : Invalid message: Header fields out of order
+20250131-20:34:17.000000000 : MsgSeqNum too high, expecting 4 but received 5
+20250131-20:34:17.000000000 : Sent ResendRequest FROM: 4 TO: 0
+20250131-20:34:20.000000000 : Sent test request TEST
+20250131-20:34:20.000000000 : Received ResendRequest FROM: 5 TO: 0
+20250131-20:34:20.000000000 : Sent SequenceReset TO: 7
+20250131-20:34:24.000000000 : Invalid message: Header fields out of order
+20250131-20:34:26.000000000 : Invalid message: Header fields out of order
+20250131-20:34:33.000000000 : Socket Error: Connection reset by peer.
+20250131-20:34:33.000000000 : Disconnecting
+20250131-20:36:19.000000000 : Received logon request
+20250131-20:36:19.000000000 : Responding to logon request
+20250131-20:36:19.000000000 : MsgSeqNum too high, expecting 1 but received 9
+20250131-20:36:19.000000000 : Sent ResendRequest FROM: 1 TO: 0
+20250131-20:36:19.000000000 : Received logout request
+20250131-20:36:19.000000000 : Sending logout response
+20250131-20:36:19.000000000 : Disconnecting
+20250131-20:36:49.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-20:36:49.000000000 : Received logon request
+20250131-20:36:49.000000000 : Responding to logon request
+20250131-20:36:59.000000000 : Invalid message: Header fields out of order
+20250131-20:37:25.000000000 : Sent test request TEST
+20250131-20:37:25.000000000 : MsgSeqNum too high, expecting 2 but received 3
+20250131-20:37:25.000000000 : Sent ResendRequest FROM: 2 TO: 0
+20250131-20:37:30.000000000 : Socket Error: Connection reset by peer.
+20250131-20:37:30.000000000 : Disconnecting
+20250131-20:37:57.000000000 : Created session
+20250131-20:40:41.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-20:40:41.000000000 : Received logon request
+20250131-20:40:41.000000000 : Responding to logon request
+20250131-20:41:27.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-20:41:27.000000000 : Disconnecting
+20250131-20:41:33.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-20:41:33.000000000 : Received logon request
+20250131-20:41:33.000000000 : Responding to logon request
+20250131-20:41:55.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-20:41:55.000000000 : Disconnecting
+20250131-21:03:28.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:03:28.000000000 : Received logon request
+20250131-21:03:28.000000000 : Responding to logon request
+20250131-21:06:47.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:06:47.000000000 : Disconnecting
+20250131-21:11:46.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:11:46.000000000 : Received logon request
+20250131-21:11:46.000000000 : Responding to logon request
+20250131-21:12:13.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:12:13.000000000 : Disconnecting
+20250131-21:13:58.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:13:58.000000000 : Received logon request
+20250131-21:13:58.000000000 : Responding to logon request
+20250131-21:20:01.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:20:01.000000000 : Disconnecting
+20250131-21:20:12.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:20:12.000000000 : Received logon request
+20250131-21:20:12.000000000 : Responding to logon request
+20250131-21:33:40.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:33:40.000000000 : Disconnecting
+20250131-21:33:48.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:33:48.000000000 : Received logon request
+20250131-21:33:48.000000000 : Responding to logon request
+20250131-21:38:27.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:38:27.000000000 : Disconnecting
+20250131-21:38:33.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:38:33.000000000 : Received logon request
+20250131-21:38:33.000000000 : Responding to logon request
+20250131-21:39:32.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:39:32.000000000 : Disconnecting
+20250131-21:39:38.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:39:38.000000000 : Received logon request
+20250131-21:39:38.000000000 : Responding to logon request
+20250131-21:43:27.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:43:27.000000000 : Disconnecting
+20250131-21:43:32.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:43:32.000000000 : Received logon request
+20250131-21:43:32.000000000 : Responding to logon request
+20250131-21:45:33.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:45:33.000000000 : Disconnecting
+20250131-21:47:45.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:47:45.000000000 : Received logon request
+20250131-21:47:45.000000000 : Responding to logon request
+20250131-21:48:02.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:48:02.000000000 : Disconnecting
+20250131-21:50:10.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:50:10.000000000 : Received logon request
+20250131-21:50:10.000000000 : Responding to logon request
+20250131-21:52:00.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:52:00.000000000 : Disconnecting
+20250131-21:52:05.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:52:05.000000000 : Received logon request
+20250131-21:52:05.000000000 : Responding to logon request
+20250131-21:57:52.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-21:57:52.000000000 : Disconnecting
+20250131-21:57:59.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-21:58:00.000000000 : Received logon request
+20250131-21:58:00.000000000 : Responding to logon request
+20250131-22:08:17.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-22:08:17.000000000 : Disconnecting
+20250131-22:08:42.000000000 : Received logon request
+20250131-22:08:42.000000000 : Responding to logon request
+20250131-22:08:42.000000000 : MsgSeqNum too high, expecting 1 but received 4
+20250131-22:08:42.000000000 : Sent ResendRequest FROM: 1 TO: 0
+20250131-22:08:42.000000000 : Socket Error: An established connection was aborted by the software in your host machine.
+
+20250131-22:08:42.000000000 : Disconnecting
+20250131-22:09:03.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-22:09:03.000000000 : Received logon request
+20250131-22:09:03.000000000 : Responding to logon request
+20250131-22:09:25.000000000 : Socket Error: Connection reset by peer.
+20250131-22:09:25.000000000 : Disconnecting
+20250131-22:09:43.000000000 : Received logon request
+20250131-22:09:43.000000000 : Responding to logon request
+20250131-22:09:43.000000000 : MsgSeqNum too high, expecting 1 but received 2
+20250131-22:09:43.000000000 : Sent ResendRequest FROM: 1 TO: 0
+20250131-22:09:43.000000000 : Received logout request
+20250131-22:09:43.000000000 : Sending logout response
+20250131-22:09:43.000000000 : Disconnecting
+20250131-22:10:13.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-22:10:13.000000000 : Received logon request
+20250131-22:10:13.000000000 : Responding to logon request
+20250131-22:10:19.000000000 : Socket Error: Connection reset by peer.
+20250131-22:10:19.000000000 : Disconnecting
+20250131-22:25:48.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250131-22:25:48.000000000 : Received logon request
+20250131-22:25:48.000000000 : Responding to logon request
+20250131-22:56:09.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250131-22:56:09.000000000 : Disconnecting
+20250201-00:16:21.000000000 : Created session
+20250201-00:17:24.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250201-00:17:24.000000000 : Received logon request
+20250201-00:17:24.000000000 : Responding to logon request
+20250201-00:20:14.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250201-00:20:14.000000000 : Disconnecting
+20250201-00:20:20.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250201-00:20:20.000000000 : Received logon request
+20250201-00:20:20.000000000 : Responding to logon request
+20250201-00:24:37.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250201-00:24:37.000000000 : Disconnecting
+20250201-00:24:46.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250201-00:24:46.000000000 : Received logon request
+20250201-00:24:46.000000000 : Responding to logon request
+20250201-00:26:10.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250201-00:26:10.000000000 : Disconnecting
+20250201-12:57:49.000000000 : Created session
+20250201-13:02:37.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250201-13:02:37.000000000 : Received logon request
+20250201-13:02:37.000000000 : Responding to logon request
+20250201-13:05:00.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250201-13:05:00.000000000 : Disconnecting
+20250201-13:05:11.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250201-13:05:11.000000000 : Received logon request
+20250201-13:05:11.000000000 : Responding to logon request
+20250201-13:06:08.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250201-13:06:08.000000000 : Disconnecting
+20250201-21:09:11.000000000 : Created session
+20250201-21:09:46.000000000 : Created session
+20250201-21:10:38.000000000 : Created session
+20250201-21:49:28.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250201-21:49:28.000000000 : Received logon request
+20250201-21:49:28.000000000 : Responding to logon request
+20250201-21:50:12.000000000 : Received logout request
+20250201-21:50:12.000000000 : Sending logout response
+20250201-21:50:12.000000000 : Disconnecting
+20250201-21:52:53.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250201-21:52:53.000000000 : Received logon request
+20250201-21:52:53.000000000 : Responding to logon request
+20250201-21:53:07.000000000 : Received logout request
+20250201-21:53:07.000000000 : Sending logout response
+20250201-21:53:07.000000000 : Disconnecting
+20250201-21:57:22.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250201-21:57:22.000000000 : Received logon request
+20250201-21:57:22.000000000 : Responding to logon request
+20250201-21:57:42.000000000 : Received logout request
+20250201-21:57:42.000000000 : Sending logout response
+20250201-21:57:42.000000000 : Disconnecting
+20250202-19:53:44.000000000 : Created session
+20250202-20:01:42.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:01:42.000000000 : Received logon request
+20250202-20:01:42.000000000 : Responding to logon request
+20250202-20:01:51.000000000 : Received logout request
+20250202-20:01:51.000000000 : Sending logout response
+20250202-20:01:51.000000000 : Disconnecting
+20250202-20:03:04.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:03:04.000000000 : Received logon request
+20250202-20:03:04.000000000 : Responding to logon request
+20250202-20:03:11.000000000 : Message 2 Rejected: Tag not defined for this message type:963
+20250202-20:03:20.000000000 : Message 3 Rejected: Tag not defined for this message type:963
+20250202-20:03:27.000000000 : Message 4 Rejected: Tag not defined for this message type:963
+20250202-20:03:31.000000000 : Received logout request
+20250202-20:03:31.000000000 : Sending logout response
+20250202-20:03:31.000000000 : Disconnecting
+20250202-20:08:50.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:08:50.000000000 : Received logon request
+20250202-20:08:50.000000000 : Responding to logon request
+20250202-20:09:16.000000000 : Received logout request
+20250202-20:09:16.000000000 : Sending logout response
+20250202-20:09:16.000000000 : Disconnecting
+20250202-20:10:58.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:10:58.000000000 : Received logon request
+20250202-20:10:58.000000000 : Responding to logon request
+20250202-20:11:36.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250202-20:11:36.000000000 : Disconnecting
+20250202-20:12:33.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:12:33.000000000 : Received logon request
+20250202-20:12:33.000000000 : Responding to logon request
+20250202-20:12:50.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250202-20:12:50.000000000 : Disconnecting
+20250202-20:15:51.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:15:51.000000000 : Received logon request
+20250202-20:15:51.000000000 : Responding to logon request
+20250202-20:16:06.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250202-20:16:06.000000000 : Disconnecting
+20250202-20:16:27.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:16:27.000000000 : Received logon request
+20250202-20:16:27.000000000 : Responding to logon request
+20250202-20:16:34.000000000 : Received logout request
+20250202-20:16:34.000000000 : Sending logout response
+20250202-20:16:34.000000000 : Disconnecting
+20250202-20:17:49.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:17:49.000000000 : Received logon request
+20250202-20:17:49.000000000 : Responding to logon request
+20250202-20:17:59.000000000 : Message 2 Rejected: Invalid tag number:11
+20250202-20:18:11.000000000 : Received logout request
+20250202-20:18:11.000000000 : Sending logout response
+20250202-20:18:11.000000000 : Disconnecting
+20250202-20:20:23.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:20:23.000000000 : Received logon request
+20250202-20:20:23.000000000 : Responding to logon request
+20250202-20:20:26.000000000 : Message 2 Rejected: Invalid tag number:38
+20250202-20:20:39.000000000 : Received logout request
+20250202-20:20:39.000000000 : Sending logout response
+20250202-20:20:39.000000000 : Disconnecting
+20250202-20:22:55.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:22:55.000000000 : Received logon request
+20250202-20:22:55.000000000 : Responding to logon request
+20250202-20:22:58.000000000 : Message 2 Rejected: Invalid tag number:11
+20250202-20:23:18.000000000 : Message 3 Rejected: Invalid tag number:11
+20250202-20:23:31.000000000 : Sent test request TEST
+20250202-20:23:36.000000000 : Message 5 Rejected: Invalid tag number:11
+20250202-20:23:40.000000000 : Received logout request
+20250202-20:23:40.000000000 : Sending logout response
+20250202-20:23:40.000000000 : Disconnecting
+20250202-20:23:54.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:23:54.000000000 : Received logon request
+20250202-20:23:54.000000000 : Responding to logon request
+20250202-20:23:56.000000000 : Message 2 Rejected: Required tag missing:60
+20250202-20:24:11.000000000 : Received logout request
+20250202-20:24:11.000000000 : Sending logout response
+20250202-20:24:11.000000000 : Disconnecting
+20250202-20:26:06.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:26:06.000000000 : Received logon request
+20250202-20:26:06.000000000 : Responding to logon request
+20250202-20:26:22.000000000 : Received logout request
+20250202-20:26:22.000000000 : Sending logout response
+20250202-20:26:22.000000000 : Disconnecting
+20250202-20:50:59.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:50:59.000000000 : Received logon request
+20250202-20:50:59.000000000 : Responding to logon request
+20250202-20:52:03.000000000 : Socket Error: An existing connection was forcibly closed by the remote host.
+
+20250202-20:52:03.000000000 : Disconnecting
+20250202-20:53:02.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:53:02.000000000 : Received logon request
+20250202-20:53:02.000000000 : Responding to logon request
+20250202-20:53:10.000000000 : Received logout request
+20250202-20:53:10.000000000 : Sending logout response
+20250202-20:53:10.000000000 : Disconnecting
+20250202-20:53:23.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:53:23.000000000 : Received logon request
+20250202-20:53:23.000000000 : Responding to logon request
+20250202-20:53:36.000000000 : Received logout request
+20250202-20:53:36.000000000 : Sending logout response
+20250202-20:53:36.000000000 : Disconnecting
+20250202-20:53:54.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:53:54.000000000 : Received logon request
+20250202-20:53:54.000000000 : Responding to logon request
+20250202-20:54:03.000000000 : Received logout request
+20250202-20:54:03.000000000 : Sending logout response
+20250202-20:54:03.000000000 : Disconnecting
+20250202-20:54:27.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:54:27.000000000 : Received logon request
+20250202-20:54:27.000000000 : Responding to logon request
+20250202-20:54:37.000000000 : Received logout request
+20250202-20:54:37.000000000 : Sending logout response
+20250202-20:54:37.000000000 : Disconnecting
+20250202-20:54:51.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:54:51.000000000 : Received logon request
+20250202-20:54:51.000000000 : Responding to logon request
+20250202-20:54:57.000000000 : Received logout request
+20250202-20:54:57.000000000 : Sending logout response
+20250202-20:54:57.000000000 : Disconnecting
+20250202-20:55:06.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:55:06.000000000 : Received logon request
+20250202-20:55:06.000000000 : Responding to logon request
+20250202-20:55:15.000000000 : Received logout request
+20250202-20:55:15.000000000 : Sending logout response
+20250202-20:55:15.000000000 : Disconnecting
+20250202-20:55:33.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:55:33.000000000 : Received logon request
+20250202-20:55:33.000000000 : Responding to logon request
+20250202-20:55:47.000000000 : Received logout request
+20250202-20:55:47.000000000 : Sending logout response
+20250202-20:55:47.000000000 : Disconnecting
+20250202-20:55:59.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:55:59.000000000 : Received logon request
+20250202-20:55:59.000000000 : Responding to logon request
+20250202-20:56:17.000000000 : Received logout request
+20250202-20:56:17.000000000 : Sending logout response
+20250202-20:56:17.000000000 : Disconnecting
+20250202-20:59:47.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-20:59:47.000000000 : Received logon request
+20250202-20:59:47.000000000 : Responding to logon request
+20250202-21:04:58.000000000 : Received logout request
+20250202-21:04:58.000000000 : Sending logout response
+20250202-21:04:58.000000000 : Disconnecting
+20250202-21:20:39.000000000 : Created session
+20250202-21:25:26.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-21:25:26.000000000 : Received logon request
+20250202-21:25:26.000000000 : Responding to logon request
+20250202-21:25:56.000000000 : Received logout request
+20250202-21:25:56.000000000 : Sending logout response
+20250202-21:25:56.000000000 : Disconnecting
+20250202-21:27:18.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-21:27:18.000000000 : Received logon request
+20250202-21:27:18.000000000 : Responding to logon request
+20250202-21:27:39.000000000 : Received logout request
+20250202-21:27:39.000000000 : Sending logout response
+20250202-21:27:39.000000000 : Disconnecting
+20250202-21:35:52.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-21:35:52.000000000 : Received logon request
+20250202-21:35:52.000000000 : Responding to logon request
+20250202-21:36:48.000000000 : Received logout request
+20250202-21:36:48.000000000 : Sending logout response
+20250202-21:36:48.000000000 : Disconnecting
+20250202-21:41:04.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-21:41:04.000000000 : Received logon request
+20250202-21:41:04.000000000 : Responding to logon request
+20250202-21:41:07.000000000 : Received logout request
+20250202-21:41:07.000000000 : Sending logout response
+20250202-21:41:07.000000000 : Disconnecting
+20250202-21:41:31.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-21:41:31.000000000 : Received logon request
+20250202-21:41:31.000000000 : Responding to logon request
+20250202-21:41:51.000000000 : Received logout request
+20250202-21:41:51.000000000 : Sending logout response
+20250202-21:41:51.000000000 : Disconnecting
+20250202-21:46:20.000000000 : Created session
+20250202-21:46:27.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-21:47:28.000000000 : Created session
+20250202-21:47:31.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250202-21:47:31.000000000 : Received logon request
+20250202-21:47:31.000000000 : Responding to logon request
+20250202-21:48:11.000000000 : Received logout request
+20250202-21:48:11.000000000 : Sending logout response
+20250202-21:48:11.000000000 : Disconnecting
+20250203-14:07:32.000000000 : Created session
+20250203-14:07:53.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:07:53.000000000 : Received logon request
+20250203-14:07:53.000000000 : Responding to logon request
+20250203-14:09:22.000000000 : Received logout request
+20250203-14:09:22.000000000 : Sending logout response
+20250203-14:09:22.000000000 : Disconnecting
+20250203-14:35:12.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:35:12.000000000 : Received logon request
+20250203-14:35:12.000000000 : Responding to logon request
+20250203-14:35:26.000000000 : Received logout request
+20250203-14:35:26.000000000 : Sending logout response
+20250203-14:35:26.000000000 : Disconnecting
+20250203-14:35:31.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:35:31.000000000 : Received logon request
+20250203-14:35:31.000000000 : Responding to logon request
+20250203-14:35:38.000000000 : Received logout request
+20250203-14:35:38.000000000 : Sending logout response
+20250203-14:35:38.000000000 : Disconnecting
+20250203-14:40:14.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:40:14.000000000 : Received logon request
+20250203-14:40:14.000000000 : Responding to logon request
+20250203-14:41:01.000000000 : Received logout request
+20250203-14:41:01.000000000 : Sending logout response
+20250203-14:41:01.000000000 : Disconnecting
+20250203-14:41:21.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:41:21.000000000 : Received logon request
+20250203-14:41:21.000000000 : Responding to logon request
+20250203-14:42:05.000000000 : Received logout request
+20250203-14:42:05.000000000 : Sending logout response
+20250203-14:42:05.000000000 : Disconnecting
+20250203-14:49:55.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:49:55.000000000 : Received logon request
+20250203-14:49:55.000000000 : Responding to logon request
+20250203-14:51:41.000000000 : Received logout request
+20250203-14:51:41.000000000 : Sending logout response
+20250203-14:51:41.000000000 : Disconnecting
+20250203-14:52:59.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:52:59.000000000 : Received logon request
+20250203-14:52:59.000000000 : Responding to logon request
+20250203-14:53:22.000000000 : Received logout request
+20250203-14:53:22.000000000 : Sending logout response
+20250203-14:53:22.000000000 : Disconnecting
+20250203-14:54:12.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:54:12.000000000 : Received logon request
+20250203-14:54:12.000000000 : Responding to logon request
+20250203-14:54:17.000000000 : Received logout request
+20250203-14:54:17.000000000 : Sending logout response
+20250203-14:54:17.000000000 : Disconnecting
+20250203-14:55:05.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:55:05.000000000 : Received logon request
+20250203-14:55:05.000000000 : Responding to logon request
+20250203-14:55:18.000000000 : Received logout request
+20250203-14:55:18.000000000 : Sending logout response
+20250203-14:55:18.000000000 : Disconnecting
+20250203-14:55:36.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:55:36.000000000 : Received logon request
+20250203-14:55:36.000000000 : Responding to logon request
+20250203-14:56:17.000000000 : Received logout request
+20250203-14:56:17.000000000 : Sending logout response
+20250203-14:56:17.000000000 : Disconnecting
+20250203-14:56:23.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:56:23.000000000 : Received logon request
+20250203-14:56:23.000000000 : Responding to logon request
+20250203-14:56:36.000000000 : Received logout request
+20250203-14:56:36.000000000 : Sending logout response
+20250203-14:56:36.000000000 : Disconnecting
+20250203-14:56:51.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:56:51.000000000 : Received logon request
+20250203-14:56:51.000000000 : Responding to logon request
+20250203-14:57:03.000000000 : Received logout request
+20250203-14:57:03.000000000 : Sending logout response
+20250203-14:57:03.000000000 : Disconnecting
+20250203-14:57:24.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250203-14:57:24.000000000 : Received logon request
+20250203-14:57:24.000000000 : Responding to logon request
+20250203-14:58:38.000000000 : Received logout request
+20250203-14:58:38.000000000 : Sending logout response
+20250203-14:58:38.000000000 : Disconnecting
+20250203-20:24:02.000000000 : Created session
+20250217-13:52:50.000000000 : Created session
+20250217-14:03:19.000000000 : Created session
+20250217-14:03:55.000000000 : Logon contains ResetSeqNumFlag=Y, reseting sequence numbers to 1
+20250217-14:03:55.000000000 : Received logon request
+20250217-14:03:55.000000000 : Responding to logon request
+20250217-14:10:39.000000000 : Received logout request
+20250217-14:10:39.000000000 : Sending logout response
+20250217-14:10:39.000000000 : Disconnecting
