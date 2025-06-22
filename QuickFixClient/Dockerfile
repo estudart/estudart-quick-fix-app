@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy only the .csproj file first to optimize layer caching
-COPY Hdx.Fix.Session.Bbg.csproj ./
+COPY QuickFixClient.csproj ./
 
 # Restore dependencies
 RUN dotnet restore
@@ -14,7 +14,7 @@ RUN dotnet restore
 COPY . . 
 
 # Build and publish the application
-RUN dotnet publish -c Release -o /publish --no-restore
+RUN dotnet publish QuickFixClient.csproj -c Release -o /publish --no-restore
 
 # Use the .NET 8 runtime image to run the application
 FROM mcr.microsoft.com/dotnet/runtime:8.0 AS runtime
@@ -24,6 +24,10 @@ WORKDIR /publish
 
 # Copy the published application from the build container
 COPY --from=build /publish .
+COPY Utils ./Utils
+COPY Docs ./Docs
+COPY Store ./Store
+
 
 # Run the application
-CMD ["dotnet", "Hdx.Fix.Session.Bbg.dll"]
+CMD ["dotnet", "QuickFixClient.dll"]

@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 
 # Copy application files
 COPY fix_server.py /app/fix_server.py
-COPY fix_server.cfg /app/fix_server.cfg
+COPY utils/fix_server.cfg /app/utils/fix_server.cfg
 COPY spec/FIXT11.xml /app/spec/FIXT11.xml
 COPY spec/FIX50SP2.xml /app/spec/FIX50SP2.xml
 
