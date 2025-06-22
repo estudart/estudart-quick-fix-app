@@ -18,6 +18,8 @@ public class App
             // Optionally wait a bit
             await Task.Delay(10000);
 
+            Console.WriteLine("FIX client session started.");
+
             // Correct: Call SendMessage on _fixInstance
             _fixInstance.SendMessage(
                 "PETR4",
@@ -25,8 +27,7 @@ public class App
                 10m,
                 "BUY"
             );
-
-            Console.WriteLine("FIX client session started.");
+            
         }
         catch (Exception ex)
         {
@@ -54,7 +55,7 @@ public class App
 
 class Program
 {
-    static async Task Main()
+    public static void Main()
     {
         var appInstance = new App();
         appInstance.StartApp();

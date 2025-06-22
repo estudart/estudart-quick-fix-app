@@ -8,12 +8,17 @@ namespace QuickFixClient.Utils
         {
             string outputPath = templatePath.Replace(".template", "");
 
-            string hostPort = Environment.GetEnvironmentVariable("HOST_PORT") ?? "8080";
+            string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+
+            string host = Environment.GetEnvironmentVariable("HOST") ?? "host.docker.internal";
 
             string configContent = File.ReadAllText(templatePath);
 
             configContent = configContent
-                .Replace("HOST_PORT", hostPort);
+                .Replace("HOST", host);
+
+            configContent = configContent
+                .Replace("PORT", port);
 
             File.WriteAllText(outputPath, configContent);
 
