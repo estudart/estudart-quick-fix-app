@@ -5,7 +5,7 @@ public class App
     private InitializeFixClient? _fixInstance;
     private readonly CancellationTokenSource _cts = new();
 
-    public async Task StartApp()
+    public void StartApp()
     {
         try
         {
@@ -15,18 +15,15 @@ public class App
             var fixThread = new Thread(() => _fixInstance.StartFixSession());
             fixThread.Start();
 
-            // Optionally wait a bit
-            await Task.Delay(10000);
-
             Console.WriteLine("FIX client session started.");
 
             // Correct: Call SendMessage on _fixInstance
-            _fixInstance.SendMessage(
-                "PETR4",
-                "LMT",
-                10m,
-                "BUY"
-            );
+            //_fixInstance.SendMessage(
+            //    "PETR4",
+            //    "LMT",
+            //    10m,
+            //    "BUY"
+            //);
             
         }
         catch (Exception ex)
@@ -35,7 +32,7 @@ public class App
         }
     }
 
-    public Task StopApp()
+    public void StopApp()
     {
         try
         {
@@ -48,8 +45,6 @@ public class App
         {
             Console.WriteLine($"Error stopping application: {ex.Message}");
         }
-
-        return Task.CompletedTask;
     }
 }
 
