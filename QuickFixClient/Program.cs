@@ -11,20 +11,22 @@ public class App
         {
             _fixInstance = new InitializeFixClient();
 
-            // Start FIX client session
+            // Start FIX client session in a new thread
             var fixThread = new Thread(() => _fixInstance.StartFixSession());
             fixThread.Start();
 
+            // Optionally wait a bit
+            await Task.Delay(10000);
+
+            // Correct: Call SendMessage on _fixInstance
+            _fixInstance.SendMessage(
+                "PETR4",
+                "LMT",
+                10m,
+                "BUY"
+            );
+
             Console.WriteLine("FIX client session started.");
-
-            // UI runs on the main thread
-            var form2 = new MyWinFormsApp.Form2();
-            form2.Show();
-
-            Application.Run(new MyWinFormsApp.Form1(_fixInstance, form2));
-
-            // Wait for UI to close before stopping the app
-            await StopApp();
         }
         catch (Exception ex)
         {
@@ -52,12 +54,9 @@ public class App
 
 class Program
 {
-    [STAThread]  // Required for Windows Forms
     static async Task Main()
     {
-        ApplicationConfiguration.Initialize();  // Must be before UI launch
-
         var appInstance = new App();
-        await appInstance.StartApp();
+        appInstance.StartApp();
     }
 }

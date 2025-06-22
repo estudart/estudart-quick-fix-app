@@ -39,6 +39,6 @@ if __name__ == "__main__":
 
     print("Starting FIX server...")
     acceptor.start()
-    input("Press <ENTER> to quit.\n")
+    stop_command = input("Press <ENTER> to quit.\n")
     acceptor.stop()
     print("FIX server stopped.")

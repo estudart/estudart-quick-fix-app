@@ -18,7 +18,7 @@ namespace FixClientService.Sessions
             _fixClientSession = new FixClientSession();
 
             // Load FIX session settings from the configuration file
-            var settings = new SessionSettings(ConfigProcessor.ProcessConfig("C:\\Users\\erico.studart_hashde\\Desktop\\Personal_projects\\QuickFixApp\\QuickFixClient\\Utils\\config.cfg"));
+            var settings = new SessionSettings(ConfigProcessor.ProcessConfig("Utils/config.cfg"));
 
             // Initialize the required factories
             var storeFactory = new FileStoreFactory(settings);
