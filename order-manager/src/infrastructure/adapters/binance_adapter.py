@@ -7,7 +7,7 @@ from src.infrastructure.adapters import OrderAdapter
 
 load_dotenv()
 
-ENV = os.environ.get("ENV")
+ENV = os.environ.get("ENV", "DEV")
 
 class BinanceAdapter(OrderAdapter):
     def __init__(self,
@@ -20,9 +20,16 @@ class BinanceAdapter(OrderAdapter):
 
         self.client = None
 
+        self._start_client()
+
     def _start_client(self) -> None:
         self.client = Client(self.api_key, self.api_secret)
+        self.client.API_URL = self.endpoint
 
-    def send_order(self, order_data):
-        self.client.create_order()
-        return super().send_order(order_data)
+    def send_order(self, order_data: dict) -> None:
+        order = self.client.create_order(**order_data)
+        print(order)
+
+    def get_open_orders(self):
+        open_orders = self.client.get_open_orders()
+        return open_orders
