@@ -1,6 +1,6 @@
 import os
 
-from binance.client import Client
+from binance.client import Client, BinanceRequestException
 from dotenv import load_dotenv
 
 from src.infrastructure.adapters import OrderAdapter
@@ -37,6 +37,14 @@ class BinanceAdapter(OrderAdapter):
             return order
         except Exception as err:
             self.logger.error(f"Could not send order to Binance, reason: {err}")        
+            raise
+
+    def get_order(self, symbol: str, order_id: str):
+        try:
+            order = self.client.get_order(symbol=symbol, orderId=order_id)
+            return order
+        except BinanceRequestException as err:
+            self.logger.error(f"Could not retrive order from Binance, reason: {err}")
             raise
 
     def get_open_orders(self) -> list[dict]:
