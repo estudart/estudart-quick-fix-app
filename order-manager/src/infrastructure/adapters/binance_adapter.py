@@ -39,7 +39,7 @@ class BinanceAdapter(OrderAdapter):
             self.logger.error(f"Could not send order to Binance, reason: {err}")        
             raise
 
-    def get_order(self, symbol: str, order_id: str):
+    def get_order(self, symbol: str, order_id: str) -> dict:
         try:
             order = self.client.get_order(symbol=symbol, orderId=order_id)
             return order
