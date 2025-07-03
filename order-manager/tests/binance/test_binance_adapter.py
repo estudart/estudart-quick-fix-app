@@ -14,6 +14,10 @@ class TestBinanceAdapter:
             "price": "30000"
         }
         self.binanace_adapter.send_order(order_data)
+
+    def test_get_order(self):
+        order = self.binanace_adapter.get_order("BTCUSDT", "492537")
+        print(order)
     
     def test_get_open_orders(self):
         open_orders = self.binanace_adapter.get_open_orders()
