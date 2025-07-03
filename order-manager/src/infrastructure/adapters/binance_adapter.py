@@ -1,6 +1,6 @@
 import os
 
-from binance.client import Client, BinanceRequestException
+from binance.client import Client, BinanceRequestException, BinanceAPIException
 from dotenv import load_dotenv
 
 from src.infrastructure.adapters import OrderAdapter
@@ -53,4 +53,12 @@ class BinanceAdapter(OrderAdapter):
             return open_orders
         except Exception as err:
             self.logger.error(f"Could not retrive open orders from Binance, reason: {err}")
-            raise 
+            raise
+
+    def cancel_order(self, symbol: str, order_id: str) -> bool:
+        try:
+            self.client.cancel_order(symbol=symbol, orderId=order_id)
+            return True
+        except BinanceRequestException as err:
+            self.logger.error(f"Could not cancel order from Binance, reason: {err}")
+            return False
