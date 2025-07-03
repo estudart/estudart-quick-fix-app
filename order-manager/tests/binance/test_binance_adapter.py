@@ -17,8 +17,12 @@ class TestBinanceAdapter:
 
     def test_get_order(self):
         order = self.binanace_adapter.get_order("BTCUSDT", "492537")
-        print(order)
+        assert isinstance(order, dict)
     
     def test_get_open_orders(self):
         open_orders = self.binanace_adapter.get_open_orders()
-        print(open_orders)
+        assert isinstance(open_orders, list)
+
+    def test_cancel_order(self):
+        delete = self.binanace_adapter.cancel_order("BTCUSDT", "492537")
+        assert delete
