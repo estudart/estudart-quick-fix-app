@@ -42,6 +42,7 @@ class BinanceAdapter(OrderAdapter):
     def get_order(self, symbol: str, order_id: str) -> dict:
         try:
             order = self.client.get_order(symbol=symbol, orderId=order_id)
+            self.logger.info(f"Order retrieved from Binance: {order}")
             return order
         except BinanceRequestException as err:
             self.logger.error(f"Could not retrive order from Binance, reason: {err}")
@@ -50,6 +51,7 @@ class BinanceAdapter(OrderAdapter):
     def get_open_orders(self) -> list[dict]:
         try:
             open_orders = self.client.get_open_orders()
+            self.logger.info(f"Open orders retrieved from Binance: {open_orders}")
             return open_orders
         except Exception as err:
             self.logger.error(f"Could not retrive open orders from Binance, reason: {err}")
