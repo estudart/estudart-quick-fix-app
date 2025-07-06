@@ -60,6 +60,7 @@ class BinanceAdapter(OrderAdapter):
     def cancel_order(self, symbol: str, order_id: str) -> bool:
         try:
             self.client.cancel_order(symbol=symbol, orderId=order_id)
+            self.logger.info(f"Order with id: {order_id} was successfully cancelled on Binance")
             return True
         except BinanceRequestException as err:
             self.logger.error(f"Could not cancel order from Binance, reason: {err}")
