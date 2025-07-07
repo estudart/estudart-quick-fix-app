@@ -15,4 +15,4 @@ class TestOrderService:
             "quantity": 0.001,
             "price": "30000"
         }
-        self.order_service.create_order("binance", order_data)
+        self.order_service.send_order("binance", order_data)
