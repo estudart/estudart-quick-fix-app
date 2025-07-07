@@ -30,9 +30,20 @@ class BinanceAdapter(OrderAdapter):
         self.client = Client(self.api_key, self.api_secret)
         self.client.API_URL = self.endpoint
 
+    def transform_order(self, order_data: str):
+        return {
+            "symbol": order_data["symbol"],
+            "side": order_data["side"],
+            "type": order_data["order_type"],
+            "timeInForce": order_data["time_in_force"],
+            "quantity": order_data["quantity"],
+            "price": str(order_data["price"])
+        }
+
     def send_order(self, order_data: dict) -> dict:
         try:
-            order = self.client.create_order(**order_data)
+            binance_order = self.transform_order(order_data)
+            order = self.client.create_order(**binance_order)
             self.logger.info(f"Order was sent to Binance: {order}")
             return order
         except Exception as err:

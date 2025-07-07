@@ -8,10 +8,10 @@ class TestBinanceAdapter:
         order_data = {
             "symbol": "BTCUSDT",
             "side": "BUY",
-            "type": "LIMIT",
-            "timeInForce": "GTC",
+            "order_type": "LIMIT",
+            "time_in_force": "GTC",
             "quantity": 0.001,
-            "price": "30000"
+            "price": 30000
         }
         order = self.binanace_adapter.send_order(order_data)
         order_id = order["orderId"]

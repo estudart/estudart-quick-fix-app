@@ -10,9 +10,9 @@ class TestOrderService:
         order_data = {
             "symbol": "BTCUSDT",
             "side": "BUY",
-            "type": "LIMIT",
-            "timeInForce": "GTC",
+            "order_type": "LIMIT",
+            "time_in_force": "GTC",
             "quantity": 0.001,
-            "price": "30000"
+            "price": 30000
         }
         self.order_service.send_order("binance", order_data)
