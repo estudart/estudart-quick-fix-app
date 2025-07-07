@@ -2,23 +2,34 @@
 
 
 class Order:
-    def __init__(self, quantity: float, price: float, symbol: str):
+    def __init__(
+            self, 
+            quantity: float, 
+            price: float, 
+            symbol: str,
+            side: str,
+            type: str,
+            timeInForce: str):
+    
         self.quantity = quantity
         self.price = price
         self.symbol = symbol
+        self.side = side
+        self.type = type
+        self.timeInForce = timeInForce
         self._validate()
 
     def _validate(self) -> bool:
         if not (
             isinstance(self.quantity, float) and
-            isinstance(self.price, float) and
+            isinstance(self.price, str) and
             isinstance(self.symbol, str)
         ):
             raise TypeError("Types are incorrect")
         
         if self.quantity <= 0:
             raise ValueError("Quantity should be greater then 0")
-        if self.price <= 0:
+        if float(self.price) <= 0:
             raise ValueError("Price should be greater then 0")
         if not self.symbol:
             raise ValueError("Symbol is required")
@@ -29,5 +40,8 @@ class Order:
         return {
             "quantity": self.quantity,
             "price": self.price,
-            "symbol": self.symbol
+            "symbol": self.symbol,
+            "side": self.side,
+            "type": self.type,
+            "timeInForce": self.timeInForce
         }
