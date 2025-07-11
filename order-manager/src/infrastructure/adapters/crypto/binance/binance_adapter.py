@@ -1,9 +1,10 @@
+import abc
 import os
 
 from binance.client import Client, BinanceRequestException, BinanceAPIException
 from dotenv import load_dotenv
 
-from src.infrastructure.adapters import OrderAdapter
+from src.infrastructure.adapters.order_adapter import OrderAdapter
 from src.infrastructure.adapters import LoggerAdapter
 
 load_dotenv()
@@ -11,15 +12,10 @@ load_dotenv()
 ENV = os.environ.get("ENV", "DEV")
 
 class BinanceAdapter(OrderAdapter):
-    def __init__(self,
-                 endpoint: str = os.environ.get(f"BINANCE_ENDPOINT_{ENV}"),
-                 api_key: str = os.environ.get(f"BINANCE_API_KEY_{ENV}"), 
-                 api_secret: str = os.environ.get(f"BINANCE_API_SECRET_{ENV}"),
-                 logger = LoggerAdapter().get_logger()):
-        
-        self.endpoint = endpoint
-        self.api_key = api_key
-        self.api_secret = api_secret
+    def __init__(self, logger):
+        self.endpoint = os.environ.get(f"BINANCE_ENDPOINT_{ENV}")
+        self.api_key = os.environ.get(f"BINANCE_API_KEY_{ENV}")
+        self.api_secret = os.environ.get(f"BINANCE_API_SECRET_{ENV}")
         self.logger = logger
 
         self.client = None
@@ -30,25 +26,13 @@ class BinanceAdapter(OrderAdapter):
         self.client = Client(self.api_key, self.api_secret)
         self.client.API_URL = self.endpoint
 
+    @abc.abstractmethod
     def transform_order(self, order_data: str):
-        return {
-            "symbol": order_data["symbol"],
-            "side": order_data["side"],
-            "type": order_data["order_type"],
-            "timeInForce": order_data["time_in_force"],
-            "quantity": order_data["quantity"],
-            "price": str(order_data["price"])
-        }
-
+        raise NotImplementedError
+    
+    @abc.abstractmethod
     def send_order(self, order_data: dict) -> dict:
-        try:
-            binance_order = self.transform_order(order_data)
-            order = self.client.create_order(**binance_order)
-            self.logger.info(f"Order was sent to Binance: {order}")
-            return order
-        except Exception as err:
-            self.logger.error(f"Could not send order to Binance, reason: {err}")        
-            raise
+        raise NotImplementedError
 
     def get_order(self, symbol: str, order_id: str) -> dict:
         try:
