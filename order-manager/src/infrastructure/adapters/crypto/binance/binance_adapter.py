@@ -4,13 +4,14 @@ from binance.client import Client, BinanceRequestException, BinanceAPIException
 from dotenv import load_dotenv
 
 from src.infrastructure.adapters.order_adapter import OrderAdapter
+from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 
 load_dotenv()
 
 ENV = os.environ.get("ENV", "DEV")
 
 class BinanceAdapter(OrderAdapter):
-    def __init__(self, logger):
+    def __init__(self, logger = LoggerAdapter().get_logger()):
         self.endpoint = os.environ.get(f"BINANCE_ENDPOINT_{ENV}")
         self.api_key = os.environ.get(f"BINANCE_API_KEY_{ENV}")
         self.api_secret = os.environ.get(f"BINANCE_API_SECRET_{ENV}")
