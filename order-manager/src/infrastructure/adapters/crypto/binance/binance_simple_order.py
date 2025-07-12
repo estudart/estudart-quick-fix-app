@@ -14,3 +14,15 @@ class BinanceSimpleOrderAdapter(BinanceAdapter):
             "quantity": order_data["quantity"],
             "price": str(order_data["price"])
         }
+    
+    def transform_get_order(self, order_data):
+        return {
+            "symbol": order_data["symbol"],
+            "side": order_data["side"],
+            "order_type": order_data["type"],
+            "time_in_force": order_data["timeInForce"],
+            "quantity": order_data["origQty"],
+            "exec_qty": order_data["executedQty"],
+            "price": float(order_data["price"]),
+            "status": order_data["status"]
+        }

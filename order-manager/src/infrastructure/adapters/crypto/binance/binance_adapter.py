@@ -28,6 +28,9 @@ class BinanceAdapter(OrderAdapter):
     def transform_order(self, order_data: str):
         raise NotImplementedError
     
+    def transform_get_order(self, order_data: str):
+        raise NotImplementedError
+
     def send_order(self, order_data: dict) -> dict:
         try:
             binance_order = self.transform_order(order_data)
@@ -41,8 +44,10 @@ class BinanceAdapter(OrderAdapter):
     def get_order(self, symbol: str, order_id: str) -> dict:
         try:
             order = self.client.get_order(symbol=symbol, orderId=order_id)
-            self.logger.info(f"Order retrieved from Binance: {order}")
-            return order
+            self.logger.debug(f"Order retrieved from Binance: {order}")
+            processed_order = self.transform_get_order(order)
+            self.logger.info(f"Order processed from Binance: {order}")
+            return processed_order
         except BinanceRequestException as err:
             self.logger.error(f"Could not retrive order from Binance, reason: {err}")
             raise
