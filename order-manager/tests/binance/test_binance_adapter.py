@@ -1,8 +1,8 @@
-from src.infrastructure import BinanceAdapter
+from src.infrastructure import BinanceSimpleOrderAdapter, LoggerAdapter
 
-class TestBinanceAdapter:
+class TestBinanceSimpleOrderAdapter:
     def setup_method(self):
-        self.binanace_adapter = BinanceAdapter()
+        self.binanace_adapter = BinanceSimpleOrderAdapter(LoggerAdapter().get_logger())
 
     def test_create_manage_order(self):
         order_data = {

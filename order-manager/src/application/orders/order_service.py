@@ -23,9 +23,9 @@ class OrderService:
             self.logger.error("Exchange requested is not valid")
             raise ValueError("Unsupported exchange")
     
-    def send_order(self, exchange_name: str, order_data: dict, strategie: str):
+    def send_order(self, exchange_name: str, strategie: str, order_data: dict):
         try:
-            order = self.order_creation_manager.create_order(order_data)
+            order = self.order_creation_manager.create_order(strategie, order_data)
             order_adapter = self.get_order_adapter(exchange_name, strategie)
             response = order_adapter.send_order(order.to_dict())
             return response

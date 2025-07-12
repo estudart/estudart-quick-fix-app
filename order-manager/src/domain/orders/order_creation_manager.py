@@ -1,5 +1,5 @@
 from src.infrastructure.adapters import LoggerAdapter
-from src.domain.orders import SimpleOrder
+from src.domain.orders.entities import SimpleOrder
 
 
 

@@ -1,11 +1,9 @@
-import abc
 import os
 
 from binance.client import Client, BinanceRequestException, BinanceAPIException
 from dotenv import load_dotenv
 
 from src.infrastructure.adapters.order_adapter import OrderAdapter
-from src.infrastructure.adapters import LoggerAdapter
 
 load_dotenv()
 
@@ -26,11 +24,9 @@ class BinanceAdapter(OrderAdapter):
         self.client = Client(self.api_key, self.api_secret)
         self.client.API_URL = self.endpoint
 
-    @abc.abstractmethod
     def transform_order(self, order_data: str):
         raise NotImplementedError
     
-    @abc.abstractmethod
     def send_order(self, order_data: dict) -> dict:
         raise NotImplementedError
 

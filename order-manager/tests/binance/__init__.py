@@ -1,1 +1,1 @@
-from .test_binance_adapter import TestBinanceAdapter
+from .test_binance_adapter import TestBinanceSimpleOrderAdapter
