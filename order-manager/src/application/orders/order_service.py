@@ -28,7 +28,7 @@ class OrderService:
         try:
             return self.order_adapter_dict[exchange_name][strategie]
         except KeyError as err:
-            self.logger.error("Exchange requested is not valid")
+            self.logger.error(f"Exchange requested is not valid: {exchange_name}")
             raise ValueError("Unsupported exchange")
     
     def send_order(self, exchange_name: str, strategie: str, order_data: dict):
