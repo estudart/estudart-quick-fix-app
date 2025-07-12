@@ -1,18 +1,26 @@
 import logging
 
-from src.infrastructure.adapters import OrderAdapter, BinanceSimpleOrderAdapter, LoggerAdapter
+from src.infrastructure.adapters import (
+    OrderAdapter, 
+    BinanceSimpleOrderAdapter,
+    FlowaSimpleOrderAdapter, 
+    LoggerAdapter
+)
+
 from src.domain.orders import OrderCreationManager
 
 
 
 class OrderService:
-    def __init__(self,
-                 logger: logging.Logger = LoggerAdapter().get_logger()):
+    def __init__(self, logger: logging.Logger = LoggerAdapter().get_logger()):
         self.logger = logger
         self.order_creation_manager = OrderCreationManager(logger=self.logger)
         self.order_adapter_dict = {
             "binance": {
                 "simple-order": BinanceSimpleOrderAdapter(logger=self.logger)
+            },
+            "flowa": {
+                "simple-order": FlowaSimpleOrderAdapter(logger=self.logger)
             }
         }
 
