@@ -1,6 +1,7 @@
 import os
 import requests
 from datetime import datetime, timedelta
+import json
 
 from dotenv import load_dotenv
 
@@ -20,11 +21,9 @@ class FlowaAdapter(OrderAdapter):
         self.token_endpoint = os.environ.get(f"FLOWA_TOKEN_ENDPOINT_{ENV}")
         self.logger = logger
         self.token = None
+        self.suffix = None
         self.provider = "Flowa"
 
-    def send_order(self, order_data: dict) -> dict:
-        raise NotImplementedError
-    
     def get_token(self) -> str:
         token_request = {
             'grant_type': 'client_credentials',  # do not change
@@ -49,3 +48,29 @@ class FlowaAdapter(OrderAdapter):
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + self.get_token()
         }
+
+    def transform_order(self, order_data: str):
+        raise NotImplementedError
+
+    def send_order(self, order_data: dict) -> dict:
+        try:
+            flowa_order = self.transform_order(order_data)
+            order = requests.post(
+                url=f"{self.endpoint}/{self.suffix}",
+                data=json.dumps(**flowa_order),
+                headers=self.mount_request_headers()
+            )
+            self.logger.info(f"Order was sent to {self.provider}: {order}")
+            return order
+        except Exception as err:
+            self.logger.error(f"Could not send order to {self.provider}, reason: {err}")        
+            raise
+    
+    def get_order(self, order_id: str):
+        response = requests.get(
+            f'{self.endpoint}/{self.suffix}/{order_id}',
+            headers=self.mount_request_headers()
+        )
+        response.raise_for_status()
+        order = response.json()
+        return order

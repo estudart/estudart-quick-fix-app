@@ -14,13 +14,3 @@ class BinanceSimpleOrderAdapter(BinanceAdapter):
             "quantity": order_data["quantity"],
             "price": str(order_data["price"])
         }
-
-    def send_order(self, order_data: dict) -> dict:
-        try:
-            binance_order = self.transform_order(order_data)
-            order = self.client.create_order(**binance_order)
-            self.logger.info(f"Order was sent to Binance: {order}")
-            return order
-        except Exception as err:
-            self.logger.error(f"Could not send order to Binance, reason: {err}")        
-            raise
