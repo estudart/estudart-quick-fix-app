@@ -8,6 +8,8 @@ from src.infrastructure.adapters.stocks.flowa.flowa_adapter import FlowaAdapter
 class FlowaSimpleOrderAdapter(FlowaAdapter):
     def transform_order(self, order_data: str):
         return {
+            "Broker": order_data["broker"],
+            "Account": order_data["account"],
             "Symbol": order_data["symbol"],
             "Side": order_data["side"],
             "OrderType": order_data["order_type"],
