@@ -2,7 +2,7 @@
 
 
 
-class Order:
+class SimpleOrder:
     def __init__(
             self, 
             quantity: float, 
