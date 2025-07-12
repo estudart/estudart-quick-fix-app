@@ -30,4 +30,4 @@ class TestSimpleOrder:
         assert stocks_order
 
         print(f"Test for crypto order creation: {crypto_order.to_dict()}")
-        print(f"Test for sotkcs order creation: {stocks_order.to_dict()}")
+        print(f"Test for stocks order creation: {stocks_order.to_dict()}")
