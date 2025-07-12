@@ -29,7 +29,14 @@ class BinanceAdapter(OrderAdapter):
         raise NotImplementedError
     
     def send_order(self, order_data: dict) -> dict:
-        raise NotImplementedError
+        try:
+            binance_order = self.transform_order(order_data)
+            order = self.client.create_order(**binance_order)
+            self.logger.info(f"Order was sent to Binance: {order}")
+            return order
+        except Exception as err:
+            self.logger.error(f"Could not send order to Binance, reason: {err}")        
+            raise
 
     def get_order(self, symbol: str, order_id: str) -> dict:
         try:
