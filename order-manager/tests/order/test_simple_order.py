@@ -23,5 +23,11 @@ class TestSimpleOrder:
             "price": 30000
         }
 
-        assert SimpleOrder(**crypto_order)
-        assert SimpleOrder(**stocks_order)
+        crypto_order = SimpleOrder(**crypto_order)
+        stocks_order = SimpleOrder(**stocks_order)
+
+        assert crypto_order
+        assert stocks_order
+
+        print(f"Test for crypto order creation: {crypto_order.to_dict()}")
+        print(f"Test for sotkcs order creation: {stocks_order.to_dict()}")
