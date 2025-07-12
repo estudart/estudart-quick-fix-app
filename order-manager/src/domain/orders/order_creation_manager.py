@@ -16,7 +16,9 @@ class OrderCreationManager:
             order = order_class(**order_data)
             return order
         except Exception as err:
-            raise OrderCreationError(f"Could not create order, reason: {err}")
+            raise OrderCreationError(
+                f"Could not create order, reason: {err}"
+            )
 
 
 class OrderCreationError(Exception):
