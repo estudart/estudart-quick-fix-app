@@ -8,7 +8,7 @@ class TestFlowaAdapter:
 
     def test_create_manage_order(self):
         order_data = {
-            "broker": "835",
+            "broker": "935",
             "account": "1001",
             "symbol": "BITH11",
             "side": "BUY",
@@ -17,8 +17,7 @@ class TestFlowaAdapter:
             "order_type": "LIMIT",
             "time_in_force": "GTC"
         }
-        order = self.flowa_adapter.send_order(order_data)
-        order_id = order["StrategyId"]
+        order_id = self.flowa_adapter.send_order(order_data)
 
         order = self.flowa_adapter.get_order(order_id)
         assert isinstance(order, dict)
