@@ -19,10 +19,10 @@ class BinanceSimpleOrderAdapter(BinanceAdapter):
         return {
             "symbol": order_data["symbol"],
             "side": order_data["side"],
-            "order_type": order_data["type"],
-            "time_in_force": order_data["timeInForce"],
             "quantity": order_data["origQty"],
-            "exec_qty": order_data["executedQty"],
             "price": float(order_data["price"]),
+            "order_type": order_data["type"],
+            "exec_qty": order_data["executedQty"],
+            "time_in_force": order_data["timeInForce"],
             "status": order_data["status"]
         }
