@@ -15,8 +15,7 @@ class TestBinanceAdapter:
             "order_type": "LIMIT",
             "time_in_force": "GTC",
         }
-        order = self.binanace_adapter.send_order(order_data)
-        order_id = order["orderId"]
+        order_id = self.binanace_adapter.send_order(order_data)
 
         order = self.binanace_adapter.get_order("BTCUSDT", order_id)
         assert isinstance(order, dict)
