@@ -1,1 +1,1 @@
-from .binance import BinanceAdapter, BinanceSimpleOrderAdapter
+from .binance import BinanceAdapter, BinanceSimpleOrderAdapter, BinanceMDAdapter
