@@ -2,7 +2,7 @@
 
 
 
-class Order:
+class SimpleOrder:
     def __init__(
             self, 
             quantity: float, 
@@ -10,7 +10,9 @@ class Order:
             symbol: str,
             side: str,
             order_type: str,
-            time_in_force: str):
+            time_in_force: str,
+            **kwargs
+        ):
     
         self.quantity = quantity
         self.price = price
@@ -18,6 +20,8 @@ class Order:
         self.side = side
         self.order_type = order_type
         self.time_in_force = time_in_force
+        self.broker = kwargs.get("broker", None)
+        self.account = kwargs.get("account", None)
         self._validate()
 
     def _validate(self) -> bool:
@@ -38,7 +42,7 @@ class Order:
         return True
     
     def to_dict(self) -> dict:
-        return {
+        order_data = {
             "quantity": self.quantity,
             "price": self.price,
             "symbol": self.symbol,
@@ -46,3 +50,10 @@ class Order:
             "order_type": self.order_type,
             "time_in_force": self.time_in_force
         }
+        # Logic for sending orders to Flowa
+        if self.broker:
+            order_data.update(
+                broker=self.broker,
+                account=self.account
+            )
+        return order_data

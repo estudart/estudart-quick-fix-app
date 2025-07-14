@@ -1,30 +1,40 @@
 import logging
 
-from src.infrastructure.adapters import OrderAdapter, BinanceAdapter, LoggerAdapter
+from src.infrastructure.adapters import (
+    OrderAdapter, 
+    BinanceSimpleOrderAdapter,
+    FlowaSimpleOrderAdapter, 
+    LoggerAdapter
+)
+
 from src.domain.orders import OrderCreationManager
 
 
 
 class OrderService:
-    def __init__(self,
-                 logger: logging.Logger = LoggerAdapter().get_logger()):
+    def __init__(self, logger: logging.Logger = LoggerAdapter().get_logger()):
         self.logger = logger
         self.order_creation_manager = OrderCreationManager(logger=self.logger)
         self.order_adapter_dict = {
-            "binance": BinanceAdapter(logger=self.logger)
+            "binance": {
+                "simple-order": BinanceSimpleOrderAdapter(logger=self.logger)
+            },
+            "flowa": {
+                "simple-order": FlowaSimpleOrderAdapter(logger=self.logger)
+            }
         }
 
-    def get_order_adapter(self, exchange_name: str) -> OrderAdapter:
+    def get_order_adapter(self, exchange_name: str, strategie: str) -> OrderAdapter:
         try:
-            return self.order_adapter_dict[exchange_name]
+            return self.order_adapter_dict[exchange_name][strategie]
         except KeyError as err:
-            self.logger.error("Exchange requested is not valid")
+            self.logger.error(f"Exchange requested is not valid: {exchange_name}")
             raise ValueError("Unsupported exchange")
     
-    def send_order(self, exchange_name: str, order_data: dict):
+    def send_order(self, exchange_name: str, strategie: str, order_data: dict):
         try:
-            order = self.order_creation_manager.create_order(order_data)
-            order_adapter = self.get_order_adapter(exchange_name)
+            order = self.order_creation_manager.create_order(strategie, order_data)
+            order_adapter = self.get_order_adapter(exchange_name, strategie)
             response = order_adapter.send_order(order.to_dict())
             return response
         except Exception as err:

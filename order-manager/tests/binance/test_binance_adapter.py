@@ -1,20 +1,21 @@
-from src.infrastructure import BinanceAdapter
+from src.infrastructure import BinanceSimpleOrderAdapter
+
+
 
 class TestBinanceAdapter:
     def setup_method(self):
-        self.binanace_adapter = BinanceAdapter()
+        self.binanace_adapter = BinanceSimpleOrderAdapter()
 
     def test_create_manage_order(self):
         order_data = {
             "symbol": "BTCUSDT",
             "side": "BUY",
+            "quantity": 0.001,
+            "price": 30000,
             "order_type": "LIMIT",
             "time_in_force": "GTC",
-            "quantity": 0.001,
-            "price": 30000
         }
-        order = self.binanace_adapter.send_order(order_data)
-        order_id = order["orderId"]
+        order_id = self.binanace_adapter.send_order(order_data)
 
         order = self.binanace_adapter.get_order("BTCUSDT", order_id)
         assert isinstance(order, dict)
