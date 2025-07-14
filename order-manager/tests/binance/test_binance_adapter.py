@@ -1,5 +1,7 @@
 from src.infrastructure import BinanceSimpleOrderAdapter
 
+
+
 class TestBinanceAdapter:
     def setup_method(self):
         self.binanace_adapter = BinanceSimpleOrderAdapter()
