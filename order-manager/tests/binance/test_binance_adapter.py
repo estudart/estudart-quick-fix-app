@@ -1,3 +1,5 @@
+import pytest
+
 from src.infrastructure import BinanceSimpleOrderAdapter
 
 
@@ -17,12 +19,22 @@ class TestBinanceAdapter:
         }
         order_id = self.binanace_adapter.send_order(order_data)
 
-        order = self.binanace_adapter.get_order("BTCUSDT", order_id)
+        order = self.binanace_adapter.get_order(order_id, symbol=order_data["symbol"])
         assert isinstance(order, dict)
 
-        delete = self.binanace_adapter.cancel_order("BTCUSDT", order_id)
+        delete = self.binanace_adapter.cancel_order(order_id, symbol=order_data["symbol"])
         assert delete
     
     def test_get_open_orders(self):
         open_orders = self.binanace_adapter.get_open_orders()
         assert isinstance(open_orders, list)
+
+    def test_get_order_without_symbol_raises_exception(self):
+        order_id = "testing"
+        with pytest.raises(ValueError, match="Missing required argument: 'symbol'"):
+            self.binanace_adapter.get_order(order_id)
+    
+    def test_cancel_order_without_symbol_raises_exception(self):
+        order_id = "testing"
+        with pytest.raises(ValueError, match="Missing required argument: 'symbol'"):
+            self.binanace_adapter.cancel_order(order_id)
