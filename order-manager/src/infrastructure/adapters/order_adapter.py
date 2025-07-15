@@ -12,5 +12,5 @@ class OrderAdapter(ABC):
         pass
 
     @abstractmethod
-    def cancel_order(self):
+    def cancel_order(self) -> bool:
         pass
