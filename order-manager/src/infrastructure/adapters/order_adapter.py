@@ -12,5 +12,9 @@ class OrderAdapter(ABC):
         pass
 
     @abstractmethod
+    def update_order(self, order_id: str, **kwargs):
+        pass
+
+    @abstractmethod
     def cancel_order(self) -> bool:
         pass

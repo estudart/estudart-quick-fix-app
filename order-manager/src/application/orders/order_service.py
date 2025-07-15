@@ -3,6 +3,7 @@ import logging
 from src.infrastructure.adapters import (
     OrderAdapter, 
     BinanceSimpleOrderAdapter,
+    BinanceFuturesOrderAdapter,
     FlowaSimpleOrderAdapter, 
     LoggerAdapter
 )
@@ -17,7 +18,8 @@ class OrderService:
         self.order_creation_manager = OrderCreationManager(logger=self.logger)
         self.order_adapter_dict = {
             "binance": {
-                "simple-order": BinanceSimpleOrderAdapter(logger=self.logger)
+                "simple-order": BinanceSimpleOrderAdapter(logger=self.logger),
+                "futures": BinanceFuturesOrderAdapter(logger=self.logger)
             },
             "flowa": {
                 "simple-order": FlowaSimpleOrderAdapter(logger=self.logger)
@@ -42,6 +44,15 @@ class OrderService:
             raise
     
     def get_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> dict:
+        try:
+            order_adapter = self.get_order_adapter(exchange_name, strategie)
+            order = order_adapter.get_order(order_id, **kwargs)
+            return order
+        except Exception as err:
+            self.logger.error(f"Could not send order, reason: {err}")
+            raise
+
+    def update_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> dict:
         try:
             order_adapter = self.get_order_adapter(exchange_name, strategie)
             order = order_adapter.get_order(order_id, **kwargs)
