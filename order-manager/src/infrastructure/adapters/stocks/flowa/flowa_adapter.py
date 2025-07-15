@@ -81,6 +81,9 @@ class FlowaAdapter(OrderAdapter):
         order = response.json()
         return self.transform_get_order(order)
     
+    def update_order(self, order_id, **kwargs):
+        return super().update_order(order_id, **kwargs)
+    
     def cancel_order(self, order_id: str) -> bool:
         response = requests.delete(
             f'{self.endpoint}/{self.suffix}/{order_id}',
