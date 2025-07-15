@@ -40,3 +40,20 @@ class OrderService:
         except Exception as err:
             self.logger.error(f"Could not send order, reason: {err}")
             raise
+    
+    def get_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> dict:
+        try:
+            order_adapter = self.get_order_adapter(exchange_name, strategie)
+            order = order_adapter.get_order(order_id, **kwargs)
+            return order
+        except Exception as err:
+            self.logger.error(f"Could not send order, reason: {err}")
+            raise
+
+    def cancel_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> bool:
+        try:
+            order_adapter = self.get_order_adapter(exchange_name, strategie)
+            return order_adapter.cancel_order(order_id, **kwargs)
+        except Exception as err:
+            self.logger.error(f"Could not cancel order, reason: {err}")
+            raise
