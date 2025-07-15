@@ -1,0 +1,115 @@
+from abc import ABC, abstractmethod
+
+import uuid
+
+from src.domain.algorithms.enums import AlgoStatus
+
+
+
+class Algorithm(ABC):
+    def __init__(self, algo_data: dict):
+        self.algo_data = algo_data
+        self.status = None
+
+    @abstractmethod
+    def stop(self):
+        pass
+
+    @abstractmethod
+    def should_trade(self, spread: float) -> bool:
+        pass
+
+    @abstractmethod
+    def stock_order_params_to_dict(self, price: float):
+        pass
+
+    @abstractmethod
+    def crypto_order_params_to_dict(self, price: float):
+        pass
+
+
+"""
+ALGO DATA MODEL
+algo_data = {
+    "broker": "935",
+    "account": "1001",
+    "symbol": "BITH11",
+    "side": "BUY",
+    "quantity": 0.001
+}
+"""
+
+
+class SpreadCryptoETF(Algorithm):
+    def __init__(self, algo_data: dict):
+        super().__init__(algo_data)
+        self.id = str(uuid.uuid4())
+        self.status = AlgoStatus.CREATED
+        self.etf_underlying_assets = {
+            "BITH11": {
+                "is_single_asset": True,
+                "underlying_assets": ["BTCUSDT"]
+            },
+            "ETHE11": {
+                "is_single_asset": True,
+                "underlying_assets": ["ETHUSDT"]
+            },
+            "SOLH11": {
+                "is_single_asset": True,
+                "underlying_assets": ["SOLUSDT"]
+            }
+        }
+        self._validate_params()
+    
+    def _validate_params(self):
+        if not self.algo_data.get("broker"):
+            raise ValueError("Missing required argument: 'broker'")
+        if not self.algo_data.get("account"):
+            raise ValueError("Missing required argument: 'account'")
+        if not self.algo_data.get("symbol"):
+            raise ValueError("Missing required argument: 'symbol'")
+        if not self.algo_data.get("side"):
+            raise ValueError("Missing required argument: 'side'")
+        if not self.algo_data.get("quantity"):
+            raise ValueError("Missing required argument: 'quantity'")
+        if not self.algo_data.get("spread_threshold"):
+            raise ValueError("Missing required argument: 'spread_threshold'")
+
+    def should_trade(self, spread: float) -> bool:
+        return spread > self.algo_data["spread_threshold"]
+    
+    def stop(self):
+        self.status = AlgoStatus.STOPPED
+    
+    def to_dict(self):
+        pass
+
+    def get_underlying_assets(self) -> list[str]:
+        etf = self.algo_data["symbol"]
+        underlying_assets = self.etf_underlying_assets.get(etf)
+        if not underlying_assets:
+            available = list(self.etf_underlying_assets.keys())
+            raise ValueError(
+                f"Selected ETF '{etf}' is not tradable by this strategy. "
+                f"Available options: {available}"
+            )
+        return underlying_assets
+
+    def stock_order_params_to_dict(self, price: float) -> dict:
+        return {
+            **self.algo_data,
+            "price": price,
+            "order_type": "LIMIT",
+            "time_in_force": "DAY"
+        }
+
+    def crypto_order_params_to_dict(self, price: float, quantity: float, side: str) -> dict:
+        etf = self.algo_data["stocks_ticker"]
+        return {
+            "symbol": self.get_underlying_assets(etf)[0],
+            "side": side,
+            "quantity": quantity,
+            "price": price,
+            "order_type": "LIMIT",
+            "time_in_force": "GTC"
+        }

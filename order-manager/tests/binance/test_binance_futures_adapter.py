@@ -1,18 +1,18 @@
 import pytest
 
-from src.infrastructure import BinanceSimpleOrderAdapter
+from src.infrastructure import BinanceFuturesOrderAdapter
 
 
 
-class TestBinanceAdapter:
+class TestBinanceFuturesAdapter:
     def setup_method(self):
-        self.binance_adapter = BinanceSimpleOrderAdapter()
+        self.binance_adapter = BinanceFuturesOrderAdapter()
 
     def test_create_manage_order(self):
         order_data = {
             "symbol": "BTCUSDT",
             "side": "BUY",
-            "quantity": 0.001,
+            "quantity": 0.006,
             "price": 30000,
             "order_type": "LIMIT",
             "time_in_force": "GTC",
