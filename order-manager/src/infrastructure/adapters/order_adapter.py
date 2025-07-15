@@ -8,7 +8,7 @@ class OrderAdapter(ABC):
         pass
 
     @abstractmethod
-    def get_order(self):
+    def get_order(self, order_id: str, **kwargs):
         pass
 
     @abstractmethod
