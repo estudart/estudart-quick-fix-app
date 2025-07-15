@@ -37,7 +37,7 @@ class FlowaAdapter(OrderAdapter):
             response.raise_for_status()
             self.token = response.json()['access_token']
             self.logger.debug(f"New refreshed cached {self.provider} token: {self.token}")
-            self.logger.info(f"{self.provider} was refreshed")
+            self.logger.info(f"{self.provider} token was refreshed")
             self.refreshed_token_time = datetime.now()
         else:
             self.logger.info(f"{self.provider} token is refreshed")
