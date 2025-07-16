@@ -9,5 +9,6 @@ from .adapters import (
     BinanceMDAdapter,
     BinanceSimpleOrderAdapter,
     LoggerAdapter,
-    MDAdapter
+    MDAdapter,
+    CoinbaseDollarAdapter
 )

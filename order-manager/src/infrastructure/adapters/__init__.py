@@ -3,7 +3,8 @@ from .crypto import (
     BinanceSimpleOrderAdapter, 
     BinanceMDAdapter, 
     BinanceFuturesOrderAdapter, 
-    BinanceFuturesAdapter
+    BinanceFuturesAdapter,
+    CoinbaseDollarAdapter
 )
 from .stocks import FlowaAdapter, FlowaSimpleOrderAdapter, HashdexMDAdapter
 from .logger_adapter import LoggerAdapter

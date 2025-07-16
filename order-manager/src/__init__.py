@@ -7,7 +7,8 @@ from .infrastructure import (
     BinanceMDAdapter,
     BinanceSimpleOrderAdapter,
     LoggerAdapter,
-    MDAdapter
+    MDAdapter,
+    CoinbaseDollarAdapter
 )
 from .application import (
     OrderService,

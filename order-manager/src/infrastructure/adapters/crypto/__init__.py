@@ -5,3 +5,4 @@ from .binance import (
     BinanceFuturesAdapter,
     BinanceFuturesOrderAdapter
 )
+from .coinbase import CoinbaseDollarAdapter
