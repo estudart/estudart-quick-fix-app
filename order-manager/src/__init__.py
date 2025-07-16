@@ -9,5 +9,11 @@ from .infrastructure import (
     LoggerAdapter,
     MDAdapter
 )
-from .application import OrderService
+from .application import (
+    OrderService,
+    AlgoService,
+    BaseAlgorithm,
+    SpreadCryptoETFAdapter
+)
+
 from .domain import OrderCreationError, OrderCreationManager, SimpleOrder
