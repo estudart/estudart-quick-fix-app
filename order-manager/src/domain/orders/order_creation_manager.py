@@ -1,4 +1,4 @@
-from src.infrastructure.adapters import LoggerAdapter
+from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 from src.domain.orders.entities import SimpleOrder
 
 

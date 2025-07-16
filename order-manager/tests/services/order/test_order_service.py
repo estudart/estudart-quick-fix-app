@@ -1,4 +1,4 @@
-from src.application import OrderService
+from src.application.orders.order_service import OrderService
 
 
 

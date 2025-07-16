@@ -1,14 +1,11 @@
 import logging
 
-from src.infrastructure.adapters import (
-    OrderAdapter, 
-    BinanceSimpleOrderAdapter,
-    BinanceFuturesOrderAdapter,
-    FlowaSimpleOrderAdapter, 
-    LoggerAdapter
-)
+from src.infrastructure.adapters.crypto.binance import BinanceSimpleOrderAdapter, BinanceFuturesOrderAdapter
+from src.infrastructure.adapters.stocks.flowa.flowa_simple_order import FlowaSimpleOrderAdapter
+from src.infrastructure.adapters.logger_adapter import LoggerAdapter
+from src.infrastructure.adapters.order_adapter import OrderAdapter
 
-from src.domain.orders import OrderCreationManager
+from src.domain.orders.order_creation_manager import OrderCreationManager
 
 
 
