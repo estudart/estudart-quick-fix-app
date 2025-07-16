@@ -4,6 +4,7 @@ from .adapters import (
     FlowaAdapter,
     BinanceAdapter,
     BinanceFuturesAdapter,
+    BinanceFuturesOrderAdapter,
     BinanceMDAdapter,
     BinanceSimpleOrderAdapter,
     LoggerAdapter,
