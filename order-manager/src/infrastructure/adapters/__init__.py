@@ -5,7 +5,7 @@ from .crypto import (
     BinanceFuturesOrderAdapter, 
     BinanceFuturesAdapter
 )
-from .stocks import FlowaAdapter, FlowaSimpleOrderAdapter
+from .stocks import FlowaAdapter, FlowaSimpleOrderAdapter, HashdexMDAdapter
 from .logger_adapter import LoggerAdapter
 from .order_adapter import OrderAdapter
 from .md_adapter import MDAdapter
