@@ -104,7 +104,7 @@ class SpreadCryptoETF(Algorithm):
         }
 
     def crypto_order_params_to_dict(self, price: float, quantity: float, side: str) -> dict:
-        etf = self.algo_data["stocks_ticker"]
+        etf = self.algo_data["symbol"]
         return {
             "symbol": self.get_underlying_assets(etf)[0],
             "side": side,
