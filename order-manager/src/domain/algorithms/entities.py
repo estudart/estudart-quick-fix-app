@@ -103,7 +103,7 @@ class SpreadCryptoETF(Algorithm):
             **self.algo_data,
             "price": price,
             "order_type": "LIMIT",
-            "time_in_force": "DAY"
+            "time_in_force": "GTC"
         }
 
     def crypto_order_params_to_dict(self, quantity: float) -> dict:
@@ -112,6 +112,5 @@ class SpreadCryptoETF(Algorithm):
             "symbol": self.get_underlying_assets(etf)[0],
             "side": "BUY" if self.algo_data["side"] == "SELL" else "SELL",
             "quantity": quantity,
-            "order_type": "MARKET",
-            "time_in_force": "FOK"
+            "order_type": "MARKET"
         }

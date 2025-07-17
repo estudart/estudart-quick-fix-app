@@ -9,18 +9,17 @@ class SimpleOrder:
             symbol: str,
             side: str,
             order_type: str,
-            time_in_force: str,
             **kwargs
         ):
     
         self.quantity = quantity
-        self.price = kwargs.get("price", None)
+        self.price = kwargs.get("price")
         self.symbol = symbol
         self.side = side
         self.order_type = order_type
-        self.time_in_force = time_in_force
-        self.broker = kwargs.get("broker", None)
-        self.account = kwargs.get("account", None)
+        self.time_in_force = kwargs.get("time_in_force")
+        self.broker = kwargs.get("broker")
+        self.account = kwargs.get("account")
         self._validate()
 
     def _validate(self) -> bool:
