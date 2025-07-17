@@ -87,9 +87,8 @@ class SpreadCryptoETF(Algorithm):
     def to_dict(self):
         pass
 
-    def get_underlying_assets(self) -> list[str]:
-        etf = self.algo_data["symbol"]
-        underlying_assets = self.etf_underlying_assets.get(etf)
+    def get_underlying_assets(self, etf: str) -> list[str]:
+        underlying_assets = self.etf_underlying_assets[etf]["underlying_assets"]
         if not underlying_assets:
             available = list(self.etf_underlying_assets.keys())
             raise ValueError(
