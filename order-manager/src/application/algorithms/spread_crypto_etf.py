@@ -12,7 +12,7 @@ from src.infrastructure.adapters.md_adapter import MDAdapter
 class SpreadCryptoETFAdapter(BaseAlgorithm):
     def __init__(
             self,
-            logger: logging.getLogger,
+            logger: logging.Logger,
             algo: SpreadCryptoETF,
             order_service: OrderService,
             inav_md_adapter: MDAdapter, 
@@ -46,7 +46,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             )
         )
         quantity_crypto_to_execute = round(quantity_crypto_per_stock_share * stock_order_executed_quantity, 3)
-        print(f"quantity of crypto execute: {quantity_crypto_to_execute}")
+        self.logger.debug(f"quantity of crypto execute: {quantity_crypto_to_execute}")
         order_data = self.algo.crypto_order_params_to_dict(quantity_crypto_to_execute)
         
         return self.order_service.send_order(
