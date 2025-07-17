@@ -55,6 +55,9 @@ class FlowaAdapter(OrderAdapter):
     
     def transform_get_order(self, order_id: str) -> dict:
         raise NotImplementedError
+    
+    def transform_update_order(self, order_dict: dict) -> dict:
+        raise NotImplementedError
 
     def send_order(self, order_data: dict) -> str:
         try:
@@ -81,8 +84,16 @@ class FlowaAdapter(OrderAdapter):
         order = response.json()
         return self.transform_get_order(order)
     
-    def update_order(self, order_id, **kwargs):
-        return super().update_order(order_id, **kwargs)
+    def update_order(self, order_id, **kwargs) -> bool:
+        update_params = self.transform_update_order({**kwargs})
+        response = requests.put(
+            f'{self.endpoint}/{self.suffix}/{order_id}',
+            headers=self.mount_request_headers(),
+            data=json.dumps(update_params)
+        )
+        response.raise_for_status()
+        self.logger.info(f"Order with id: {order_id} was successfully updated on {self.provider}")
+        return True
     
     def cancel_order(self, order_id: str) -> bool:
         response = requests.delete(

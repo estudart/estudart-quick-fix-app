@@ -8,6 +8,16 @@ class FlowaSimpleOrderAdapter(FlowaAdapter):
     def __init__(self, logger = LoggerAdapter().get_logger()):
         super().__init__(logger)
         self.suffix = "simple-order"
+        self.mapping_dict = {
+            "account": "Account",
+            "broker": "Broker",
+            "symbol": "Symbol",
+            "side": "Side",
+            "order_type": "OrderType",
+            "time_in_force": "TimeInForce",
+            "quantity": "Quantity",
+            "price": "Price"
+        }
 
     def transform_order(self, order_data: str) -> dict:
         return {
@@ -33,3 +43,14 @@ class FlowaSimpleOrderAdapter(FlowaAdapter):
             "time_in_force": order_data["TimeInForce"],
             "status": order_data["Status"]
         }
+    
+    def transform_update_order(self, order_dict: dict) -> dict:
+        transformed_dict = {}
+
+        for key, value in order_dict.items():
+            transformed_key = self.mapping_dict[key]
+            if key == "price":
+                value = str(value)
+            transformed_dict[transformed_key] = value
+        
+        return transformed_dict
