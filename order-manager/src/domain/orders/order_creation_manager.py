@@ -7,7 +7,8 @@ class OrderCreationManager:
     def __init__(self, logger = LoggerAdapter().get_logger()):
         self.logger = logger
         self.order_dict = {
-            "simple-order": SimpleOrder
+            "simple-order": SimpleOrder,
+            "futures": SimpleOrder
         }
 
     def create_order(self, strategie: str, order_data: dict):
