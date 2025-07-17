@@ -24,7 +24,7 @@ class Algorithm(ABC):
         pass
 
     @abstractmethod
-    def crypto_order_params_to_dict(self, price: float):
+    def crypto_order_params_to_dict(self, quantity: float, side: str) -> dict:
         pass
 
 
@@ -47,14 +47,17 @@ class SpreadCryptoETF(Algorithm):
         self.status = AlgoStatus.CREATED
         self.etf_underlying_assets = {
             "BITH11": {
+                "offshore_ticker": "HBTC.BH",
                 "is_single_asset": True,
                 "underlying_assets": ["BTCUSDT"]
             },
             "ETHE11": {
+                "offshore_ticker": "HETH.BH",
                 "is_single_asset": True,
                 "underlying_assets": ["ETHUSDT"]
             },
             "SOLH11": {
+                "offshore_ticker": "HSOL.BH",
                 "is_single_asset": True,
                 "underlying_assets": ["SOLUSDT"]
             }
@@ -103,13 +106,12 @@ class SpreadCryptoETF(Algorithm):
             "time_in_force": "DAY"
         }
 
-    def crypto_order_params_to_dict(self, price: float, quantity: float, side: str) -> dict:
+    def crypto_order_params_to_dict(self, quantity: float) -> dict:
         etf = self.algo_data["symbol"]
         return {
             "symbol": self.get_underlying_assets(etf)[0],
-            "side": side,
+            "side": "BUY" if self.algo_data["side"] == "SELL" else "SELL",
             "quantity": quantity,
-            "price": price,
-            "order_type": "LIMIT",
-            "time_in_force": "GTC"
+            "order_type": "MARKET",
+            "time_in_force": "FOK"
         }
