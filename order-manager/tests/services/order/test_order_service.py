@@ -28,6 +28,15 @@ class TestOrderService:
         }
         self.order_service.send_order("binance", "futures", order_data)
 
+    def test_create_binance_futures_market_order(self):
+        order_data = {
+            "symbol": "BTCUSDT",
+            "side": "BUY",
+            "quantity": 0.006,
+            "order_type": "MARKET"
+        }
+        self.order_service.send_order("binance", "futures", order_data)
+
     def test_create_flowa_simple_order(self):
         order_data = {
             "broker": "935",
