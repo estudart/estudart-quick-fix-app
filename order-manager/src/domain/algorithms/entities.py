@@ -88,13 +88,13 @@ class SpreadCryptoETF(Algorithm):
         pass
 
     def get_underlying_assets(self, etf: str) -> list[str]:
-        underlying_assets = self.etf_underlying_assets[etf]["underlying_assets"]
-        if not underlying_assets:
-            available = list(self.etf_underlying_assets.keys())
+        available = list(self.etf_underlying_assets.keys())
+        if not etf in available:
             raise ValueError(
                 f"Selected ETF '{etf}' is not tradable by this strategy. "
                 f"Available options: {available}"
             )
+        underlying_assets = self.etf_underlying_assets[etf]["underlying_assets"]
         return underlying_assets
 
     def stock_order_params_to_dict(self, price: float) -> dict:

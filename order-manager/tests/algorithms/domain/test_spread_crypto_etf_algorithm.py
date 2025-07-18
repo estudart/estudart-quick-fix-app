@@ -61,4 +61,5 @@ class TestSpreadCryptoETF:
     def test_unregistered_etf_raises_exception(self):
         algo = make_algo({"symbol": "TEST"})
         with pytest.raises(ValueError, match="'TEST' is not tradable"):
-            algo.get_underlying_assets()
+            etf = algo.algo_data["symbol"]
+            algo.get_underlying_assets(etf)
