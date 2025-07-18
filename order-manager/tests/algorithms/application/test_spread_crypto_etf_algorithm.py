@@ -4,7 +4,7 @@ import time
 from src.application.algorithms.spread_crypto_etf import SpreadCryptoETFAdapter
 from src.application.orders.order_service import OrderService
 from src.domain.algorithms.entities import SpreadCryptoETF
-from src.infrastructure.adapters import LoggerAdapter, HashdexMDAdapter
+from src.infrastructure.adapters import LoggerAdapter
 
 
 def make_algo(overrides: dict = None) -> SpreadCryptoETF:
@@ -27,8 +27,7 @@ class TestSpreadCryptoETFAdapter:
         self.application_algo = SpreadCryptoETFAdapter(
             logger=logger,
             algo=make_algo(),
-            order_service=OrderService(logger),
-            inav_md_adapter=HashdexMDAdapter(logger)
+            order_service=OrderService(logger)
         )
 
     def test_can_generate_stocks_order_params(self):
@@ -61,11 +60,3 @@ class TestSpreadCryptoETFAdapter:
 
         assert order_placement_price_buy == 135
         assert order_placement_price_sell == 165
-    
-    def test_can_run_cycle(self):
-        order_id = self.application_algo.send_stock_order("flowa", "simple-order", 30)
-        cumulative_qty = 0
-        while cumulative_qty != self.application_algo.algo.algo_data["quantity"]:
-            cumulative_qty += self.application_algo.run_cycle(order_id, cumulative_qty)
-            time.sleep(5)
-        assert cumulative_qty

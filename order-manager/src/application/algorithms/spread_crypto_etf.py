@@ -6,7 +6,6 @@ from src.domain.algorithms.entities import SpreadCryptoETF
 from src.domain.algorithms.enums import AlgoStatus
 from src.application.algorithms.base_algorithm import BaseAlgorithm
 from src.application.orders.order_service import OrderService
-from src.infrastructure.adapters.md_adapter import MDAdapter
 
 
 
@@ -15,16 +14,11 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             self,
             logger: logging.Logger,
             algo: SpreadCryptoETF,
-            order_service: OrderService,
-            inav_md_adapter: MDAdapter
+            order_service: OrderService
         ):
         self.logger = logger
         self.algo = algo
         self.order_service = order_service
-        self.inav_md_adapter = inav_md_adapter
-
-    def fetch_stock_fair_price(self):
-        return self.inav_md_adapter.fetch_price(self.algo.algo_data["symbol"])
 
     def send_crypto_market_order(
             self,
