@@ -6,6 +6,5 @@ from .adapters import (
     BinanceFuturesAdapter,
     BinanceFuturesOrderAdapter,
     BinanceSimpleOrderAdapter,
-    LoggerAdapter,
-    MDAdapter
+    LoggerAdapter
 )

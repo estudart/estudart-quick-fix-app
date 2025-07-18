@@ -47,17 +47,14 @@ class SpreadCryptoETF(Algorithm):
         self.status = AlgoStatus.CREATED
         self.etf_underlying_assets = {
             "BITH11": {
-                "offshore_ticker": "HBTC.BH",
                 "is_single_asset": True,
                 "underlying_assets": ["BTCUSDT"]
             },
             "ETHE11": {
-                "offshore_ticker": "HETH.BH",
                 "is_single_asset": True,
                 "underlying_assets": ["ETHUSDT"]
             },
             "SOLH11": {
-                "offshore_ticker": "HSOL.BH",
                 "is_single_asset": True,
                 "underlying_assets": ["SOLUSDT"]
             }
