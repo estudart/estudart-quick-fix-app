@@ -1,0 +1,1 @@
+from .test_inav_data_collector import TestInavDataCollector

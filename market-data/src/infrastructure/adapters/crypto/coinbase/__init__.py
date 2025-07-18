@@ -1,0 +1,1 @@
+from .coinbase_dollar_adapter import CoinbaseDollarAdapter
