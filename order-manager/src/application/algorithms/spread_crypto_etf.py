@@ -1,6 +1,7 @@
 import time
 import logging
 
+from src.enums import ExchangeEnum, StrategyEnum
 from src.domain.algorithms.entities import SpreadCryptoETF
 from src.domain.algorithms.enums import AlgoStatus
 from src.application.algorithms.base_algorithm import BaseAlgorithm
@@ -15,17 +16,12 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             logger: logging.Logger,
             algo: SpreadCryptoETF,
             order_service: OrderService,
-            inav_md_adapter: MDAdapter, 
-            crypto_md_adapter: MDAdapter
+            inav_md_adapter: MDAdapter
         ):
         self.logger = logger
         self.algo = algo
         self.order_service = order_service
-        self.crypto_md_adapter = crypto_md_adapter
         self.inav_md_adapter = inav_md_adapter
-
-    def fetch_crypto_price(self, ticker: str):
-        return self.crypto_md_adapter.fetch_price(ticker)
 
     def fetch_stock_fair_price(self):
         return self.inav_md_adapter.fetch_price(self.algo.algo_data["symbol"])
@@ -107,10 +103,10 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             self,
             stock_order_id: str,
             accumulated_stock_order_exec_qty: int, 
-            crypto_exchange_name: str = "binance", 
-            stocks_exchange_name: str = "flowa", 
-            crypto_strategy_name: str = "futures", 
-            stocks_strategy_name: str = "simple-order"
+            crypto_exchange_name: str = ExchangeEnum.BINANCE, 
+            stocks_exchange_name: str = ExchangeEnum.FLOWA, 
+            crypto_strategy_name: str = StrategyEnum.FUTURES, 
+            stocks_strategy_name: str = StrategyEnum.SIMPLE_ORDER
         ):
 
         try:
@@ -141,8 +137,9 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                     price=self.fetch_stock_fair_price()
                 )
             return stock_order_executed_quantity
-        except Exception as err:
-            raise SpreadCycleError(f"Could not run spread cycle, reason: {err}")
+        except Exception:
+            self.logger.exception("Failed to run spread cycle")
+            raise SpreadCycleError(f"Could not run spread cycle")
 
     def run_algo(self):
         is_first_order = True
@@ -156,7 +153,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                 spread_threshold = self.algo.algo_data["spread_threshold"]
                 
                 stock_order_id = self.send_stock_order(
-                    exchange_name="flowa",
+                    exchange_name=ExchangeEnum.FLOWA,
                     strategy="simple-order",
                     price=self.get_order_placement_price(
                         stock_fair_price=stock_fair_price,

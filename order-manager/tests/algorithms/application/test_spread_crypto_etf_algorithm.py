@@ -4,7 +4,7 @@ import time
 from src.application.algorithms.spread_crypto_etf import SpreadCryptoETFAdapter
 from src.application.orders.order_service import OrderService
 from src.domain.algorithms.entities import SpreadCryptoETF
-from src.infrastructure.adapters import LoggerAdapter, HashdexMDAdapter, BinanceMDAdapter
+from src.infrastructure.adapters import LoggerAdapter, HashdexMDAdapter
 
 
 def make_algo(overrides: dict = None) -> SpreadCryptoETF:
@@ -28,8 +28,7 @@ class TestSpreadCryptoETFAdapter:
             logger=logger,
             algo=make_algo(),
             order_service=OrderService(logger),
-            inav_md_adapter=HashdexMDAdapter(logger),
-            crypto_md_adapter=BinanceMDAdapter(logger)
+            inav_md_adapter=HashdexMDAdapter(logger)
         )
 
     def test_can_generate_stocks_order_params(self):
