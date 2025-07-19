@@ -35,7 +35,8 @@ algo_data = {
     "account": "1001",
     "symbol": "BITH11",
     "side": "BUY",
-    "quantity": 0.001
+    "quantity": 100,
+    "spread_threshold": 0.01
 }
 """
 
