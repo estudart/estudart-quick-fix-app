@@ -54,5 +54,5 @@ class HashdexMDAdapter(InavMDAdapter):
             / onshore_shares_quantity_per_creation
         )
                 
-        self.logger.info(f"New crypto quantity fetched for {onshore_ticker}: {amount_of_crypto_on_onshore}")
+        self.logger.debug(f"New crypto quantity fetched for {onshore_ticker}: {amount_of_crypto_on_onshore}")
         return amount_of_crypto_on_onshore
