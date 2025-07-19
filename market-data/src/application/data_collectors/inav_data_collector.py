@@ -27,7 +27,7 @@ class InavDataCollector(DataCollector):
 
     def dispatch_price_collected_event(self, channel: str, message_data: dict):
         self.redis_adapter.publish_message(channel, message_data)
-        self.logger.info(f"{channel} | Data collected event was dispatched to channel: {message_data}")
+        self.logger.info(f"{channel} | Data collected event was dispatched to {channel} channel: {message_data}")
 
     def mount_message_data(self, asset: str, inav: float, amount_of_underlying_asset: float):
         return {
@@ -39,6 +39,8 @@ class InavDataCollector(DataCollector):
     async def collect_data(self, asset: str):
         try:
             inav = await asyncio.to_thread(self.collector_adapter.fetch_price, asset)
+            # Set inav price to redis
+            await asyncio.to_thread(self.redis_adapter.set_key, f"inav:{asset}", inav)
             amount_of_underlying_asset = await asyncio.to_thread(
                 self.collector_adapter.get_crypto_quantity_on_onshore_etf,
                 asset,

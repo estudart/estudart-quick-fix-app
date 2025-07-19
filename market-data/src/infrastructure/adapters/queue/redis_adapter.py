@@ -46,7 +46,7 @@ class RedisAdapter:
         if self.redis_db:
             try:
                 self.redis_db.set(query, data)
-                self.logger.info(f"Key: {query}, Value: {data}")
+                self.logger.debug(f"Key: {query}, Value: {data}")
             except Exception as err:
                 self.logger.error(f"Could not add data to query: {err}")
     
