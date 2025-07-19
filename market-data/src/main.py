@@ -13,4 +13,7 @@ if __name__ == '__main__':
         redis_adapter=RedisAdapter(logger),
         assets_list=["BITH11", "ETHE11", "SOLH11"]
     )
-    inav_collector.run()
+    try:
+        inav_collector.run()
+    except KeyboardInterrupt:
+        print("Stopped listening.")

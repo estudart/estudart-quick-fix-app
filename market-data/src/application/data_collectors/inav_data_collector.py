@@ -15,7 +15,6 @@ class InavDataCollector(DataCollector):
         redis_adapter: RedisAdapter,
         assets_list: List[str]
     ):
-        self.data_channel = "inav-prices"
         self.logger = logger
         self.collector_adapter = collector_adapter
         self.redis_adapter = redis_adapter
@@ -32,14 +31,13 @@ class InavDataCollector(DataCollector):
 
     def mount_message_data(self, asset: str, inav: float, amount_of_underlying_asset: float):
         return {
-            "asset": asset,
+            "symbol": asset,
             "inav": inav,
             "amount_of_underlying_asset": amount_of_underlying_asset
         }
 
     async def collect_data(self, asset: str):
         try:
-            # If these methods are blocking, consider wrapping them with asyncio.to_thread()
             inav = await asyncio.to_thread(self.collector_adapter.fetch_price, asset)
             amount_of_underlying_asset = await asyncio.to_thread(
                 self.collector_adapter.get_crypto_quantity_on_onshore_etf,
@@ -47,9 +45,9 @@ class InavDataCollector(DataCollector):
                 self.onshore_offshore_mapping[asset]
             )
 
-            self.logger.info(f"New inav was collected {asset}: {inav}")
+            self.logger.debug(f"New inav was collected {asset}: {inav}")
             message_data = self.mount_message_data(asset, inav, amount_of_underlying_asset)
-            self.dispatch_price_collected_event(self.data_channel, message_data)
+            self.dispatch_price_collected_event(f"inav-{asset}", message_data)
 
         except Exception as err:
             self.logger.error(f"Could not collect inav for {asset}, reason: {err}")
@@ -57,7 +55,6 @@ class InavDataCollector(DataCollector):
     async def start_collecting(self, asset: str):
         while True:
             await self.collect_data(asset)
-            await asyncio.sleep(0.1)
 
     async def run_async(self):
         tasks = [self.start_collecting(asset) for asset in self.assets_list]

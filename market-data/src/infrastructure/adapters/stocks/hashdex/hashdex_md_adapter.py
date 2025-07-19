@@ -25,7 +25,7 @@ class HashdexMDAdapter(InavMDAdapter):
         )
         price_data = response.json()
         price = float(price_data["inavPerShare"])
-        self.logger.info(f"New inav fetched for {ticker}: {price}")
+        self.logger.debug(f"New inav fetched for {ticker}: {price}")
         return price
     
     def get_underlying_asset_quantity(self, price_data: dict) -> float:
