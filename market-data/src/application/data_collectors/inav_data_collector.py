@@ -24,6 +24,11 @@ class InavDataCollector(DataCollector):
             "ETHE11": "HETH.BH",
             "SOLH11": "HSOL.BH"
         }
+        self.latest_inav_dict: dict[str, float] = {}
+    
+    def should_dispatch_event(self, asset: str, inav: float) -> bool:
+        last_inav = self.latest_inav_dict.get(asset)
+        return last_inav is None or round(last_inav, 2) != round(inav, 2)
 
     def dispatch_price_collected_event(self, channel: str, message_data: dict):
         self.redis_adapter.publish_message(channel, message_data)
@@ -32,7 +37,7 @@ class InavDataCollector(DataCollector):
     def mount_message_data(self, asset: str, inav: float, amount_of_underlying_asset: float):
         return {
             "symbol": asset,
-            "inav": inav,
+            "inav": round(inav, 2),
             "amount_of_underlying_asset": amount_of_underlying_asset
         }
 
@@ -49,7 +54,9 @@ class InavDataCollector(DataCollector):
 
             self.logger.debug(f"New inav was collected {asset}: {inav}")
             message_data = self.mount_message_data(asset, inav, amount_of_underlying_asset)
-            self.dispatch_price_collected_event(f"inav-{asset}", message_data)
+            if self.should_dispatch_event(asset, inav):
+                self.latest_inav_dict[asset] = inav
+                self.dispatch_price_collected_event(f"inav-{asset}", message_data)
 
         except Exception as err:
             self.logger.error(f"Could not collect inav for {asset}, reason: {err}")
