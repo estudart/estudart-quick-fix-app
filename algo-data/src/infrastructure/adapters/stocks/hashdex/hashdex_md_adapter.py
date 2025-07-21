@@ -31,7 +31,6 @@ class HashdexMDAdapter(InavMDAdapter):
             return True
         
         return False
-        
     
     def fetch_price(self, ticker: str) -> float:
         suffix = f"inav"

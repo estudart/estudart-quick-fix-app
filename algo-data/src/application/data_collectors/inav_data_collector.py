@@ -32,7 +32,7 @@ class InavDataCollector(DataCollector):
 
     def dispatch_price_collected_event(self, channel: str, message_data: dict):
         self.redis_adapter.publish_message(channel, message_data)
-        self.logger.info(f"{channel} | Data collected event was dispatched to {channel} channel: {message_data}")
+        self.logger.info(f"{channel} | Data collected event was dispatched: {message_data}")
 
     def mount_message_data(self, asset: str, inav: float, amount_of_underlying_asset: float):
         return {
