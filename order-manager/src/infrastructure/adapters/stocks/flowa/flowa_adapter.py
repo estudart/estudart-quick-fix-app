@@ -40,7 +40,7 @@ class FlowaAdapter(OrderAdapter):
             self.logger.info(f"{self.provider} token was refreshed")
             self.refreshed_token_time = datetime.now()
         else:
-            self.logger.info(f"{self.provider} token is refreshed")
+            self.logger.debug(f"{self.provider} token is refreshed")
 
         return self.token
     
