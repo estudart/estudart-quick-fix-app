@@ -1,0 +1,1 @@
+from .hashdex import HashdexMDAdapter
