@@ -22,7 +22,7 @@ def start_trade_reporter_process(logger):
     trade_reporter = TradeDataCollector(
         logger=logger,
         reporter_adapter=FlowaTradeReporter(
-            channel="trades",
+            channel="orders",
             logger=logger
         ),
         redis_adapter=RedisAdapter(logger)
