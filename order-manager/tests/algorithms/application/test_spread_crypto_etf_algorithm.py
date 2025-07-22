@@ -1,5 +1,6 @@
 import pytest
 import time
+from threading import Thread
 
 from src.application.algorithms.spread_crypto_etf import SpreadCryptoETFAdapter
 from src.application.orders.order_service import OrderService
@@ -11,7 +12,7 @@ def make_algo(overrides: dict = None) -> SpreadCryptoETF:
     base_data = {
         "broker": "935",
         "account": "84855",
-        "symbol": "BITH11",
+        "symbol": "ETHE11",
         "side": "BUY",
         "quantity": 100,
         "spread_threshold": 0.02
@@ -31,8 +32,7 @@ class TestSpreadCryptoETFAdapter:
         )
 
     def test_can_generate_stocks_order_params(self):
-        stocks_order_params = self.application_algo.algo.stock_order_params_to_dict(30)
-        print(stocks_order_params)
+        assert self.application_algo.algo.stock_order_params_to_dict(30)
 
     def test_can_send_stock_order(self):
         assert self.application_algo.send_stock_order("flowa", "simple-order", 30)
@@ -42,7 +42,7 @@ class TestSpreadCryptoETFAdapter:
         update = self.application_algo.update_stock_order(order_id, "flowa", "simple-order", price=55)
         assert update
     
-    def test_get_order_placement_price(self):
+    def test_get_order_placement_price_calculates_correctly(self):
         stock_fair_price = 150
         spread_threshold = 0.1
 
@@ -60,3 +60,12 @@ class TestSpreadCryptoETFAdapter:
 
         assert order_placement_price_buy == 135
         assert order_placement_price_sell == 165
+    
+    def test_can_run_algo(self):
+        self.application_algo.run_algo()
+        time.sleep(120)
+    
+    def test_can_listen_to_updates(self):
+        self.application_algo.subscribe_to_inav_updates("ETHE11", "test")
+        self.application_algo.start_listener_thread()
+        time.sleep(40)
