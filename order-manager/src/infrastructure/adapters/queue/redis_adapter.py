@@ -133,6 +133,9 @@ class RedisAdapter:
         self.pubsub.subscribe(channel)
         self.subscriptions[channel] = callback
     
+    def unsubscribe(self, channel: str):
+        self.pubsub.unsubscribe(channel)
+    
     def start_listening(self):
         self.logger.info(f"[RedisAdapter] Listening to channels: {list(self.subscriptions)}")
         try:
