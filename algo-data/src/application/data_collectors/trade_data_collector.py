@@ -17,25 +17,34 @@ class TradeDataCollector(DataCollector):
         self.reporter_adapter = reporter_adapter
         self.redis_adapter = redis_adapter
 
-    def stop(self):
-        self._stop_event.set()
-
     def dispatch_trade_report_event(self, message_data: dict):
         channel = f"trade-{message_data['StrategyID']}"
         self.redis_adapter.publish_message(channel, message_data)
         self.logger.info(f"{channel} | Trade report event was dispatched: {message_data}")
 
-    def mount_message_data(self, asset: str, inav: float, amount_of_underlying_asset: float):
+    def dispatch_order_report_event(self, message_data: dict):
+        channel = f"order-{message_data['StrategyId']}"
+        processed_message_data = self.process_order_message_data(message_data)
+        self.redis_adapter.publish_message(channel, processed_message_data)
+        self.logger.info(f"{channel} | Order report event was dispatched: {processed_message_data}")
+
+    def process_order_message_data(self, message_data: dict):
         return {
-            "symbol": asset,
-            "inav": round(inav, 2),
-            "amount_of_underlying_asset": amount_of_underlying_asset
+            "order_id": message_data["StrategyId"],
+            "symbol": message_data["Symbol"],
+            "side": message_data["Side"],
+            "quantity": message_data["Quantity"],
+            "price": message_data["Price"],
+            "order_type": message_data["OrderType"],
+            "exec_qty": message_data["ExecutedQuantity"],
+            "time_in_force": message_data["TimeInForce"],
+            "status": message_data["Status"]
         }
 
     def start_collecting(self):
         while True:
             try:
-                ws = self.reporter_adapter.get_ws(self.dispatch_trade_report_event)
+                ws = self.reporter_adapter.get_ws(self.dispatch_order_report_event)
                 ws.run_forever()
             except Exception:
                 self.logger.info("WebSocket disconnected. Reconnecting in 5 seconds...")
