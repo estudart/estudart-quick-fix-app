@@ -42,8 +42,10 @@ class FlowaTradeReporter(TradeReporter):
         except Exception as err:
             self.logger.error(f"Error processing message: {err}")
 
-    def on_error(self, ws:websocket.WebSocketApp , error):
+    def on_error(self, ws: websocket.WebSocketApp, error):
         self.logger.error(f"Error: {error}")
+        ws.keep_running = False
+        ws.close()
 
     def get_token(self):
             token_request = {
@@ -56,19 +58,16 @@ class FlowaTradeReporter(TradeReporter):
             response.raise_for_status()
             return response.json()['access_token']
 
-
     def on_open(self, ws: websocket.WebSocketApp):
         self.logger.info(f"{self.provider}-{self.channel}: sending auth token.")
         token = self.get_token()
         ws.send(token)
         self.logger.info(f"{self.provider}-{self.channel}: Connection with websocket established.")
 
-
     def on_close(self, ws: websocket.WebSocketApp, close_status_code, close_msg):
         self.logger.info(f"{self.provider}: Connection was closed with code: {close_status_code}, message: {close_msg}")
 
-
-    def start_reporting(self, callback: Callable):
+    def get_ws(self, callback: Callable) -> websocket.WebSocketApp:
         websocket.enableTrace(False)
         self.on_event = callback
         if self.channel == "orders":
@@ -88,4 +87,4 @@ class FlowaTradeReporter(TradeReporter):
                 on_close=self.on_close
             )
 
-        ws.run_forever()
+        return ws
