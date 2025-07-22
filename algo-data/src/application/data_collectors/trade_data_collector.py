@@ -1,6 +1,5 @@
 import time
 import logging
-from threading import Event
 
 from src.application.data_collectors.data_collector import DataCollector
 from src.infrastructure.adapters.trade_reporter_adapter import TradeReporter
@@ -17,7 +16,6 @@ class TradeDataCollector(DataCollector):
         self.logger = logger
         self.reporter_adapter = reporter_adapter
         self.redis_adapter = redis_adapter
-        self._stop_event = Event()
 
     def stop(self):
         self._stop_event.set()
@@ -35,13 +33,13 @@ class TradeDataCollector(DataCollector):
         }
 
     def start_collecting(self):
-        while not self._stop_event.is_set():
+        while True:
             try:
-                self.logger.info("Starting trade reporting session.")
+                ws = self.reporter_adapter.get_ws(self.dispatch_trade_report_event)
+                ws.run_forever()
+            except Exception:
+                self.logger.info("WebSocket disconnected. Reconnecting in 5 seconds...")
                 time.sleep(5)
-                self.reporter_adapter.start_reporting(self.dispatch_trade_report_event)
-            except Exception as e:
-                self.logger.error(f"WebSocket error occurred: {e}. Restarting in 5 seconds...")
 
     def run(self):
         self.start_collecting()
