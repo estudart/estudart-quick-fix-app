@@ -1,13 +1,11 @@
 import logging
 
-from src.infrastructure.adapters import (
-    OrderAdapter, 
-    BinanceSimpleOrderAdapter,
-    FlowaSimpleOrderAdapter, 
-    LoggerAdapter
-)
+from src.infrastructure.adapters.crypto.binance import BinanceSimpleOrderAdapter, BinanceFuturesOrderAdapter
+from src.infrastructure.adapters.stocks.flowa.flowa_simple_order import FlowaSimpleOrderAdapter
+from src.infrastructure.adapters.logger_adapter import LoggerAdapter
+from src.infrastructure.adapters.order_adapter import OrderAdapter
 
-from src.domain.orders import OrderCreationManager
+from src.domain.orders.order_creation_manager import OrderCreationManager
 
 
 
@@ -17,7 +15,8 @@ class OrderService:
         self.order_creation_manager = OrderCreationManager(logger=self.logger)
         self.order_adapter_dict = {
             "binance": {
-                "simple-order": BinanceSimpleOrderAdapter(logger=self.logger)
+                "simple-order": BinanceSimpleOrderAdapter(logger=self.logger),
+                "futures": BinanceFuturesOrderAdapter(logger=self.logger)
             },
             "flowa": {
                 "simple-order": FlowaSimpleOrderAdapter(logger=self.logger)
@@ -39,4 +38,30 @@ class OrderService:
             return response
         except Exception as err:
             self.logger.error(f"Could not send order, reason: {err}")
+            raise
+    
+    def get_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> dict:
+        try:
+            order_adapter = self.get_order_adapter(exchange_name, strategie)
+            order = order_adapter.get_order(order_id, **kwargs)
+            return order
+        except Exception as err:
+            self.logger.error(f"Could not send order, reason: {err}")
+            raise
+
+    def update_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> dict:
+        try:
+            order_adapter = self.get_order_adapter(exchange_name, strategie)
+            order = order_adapter.update_order(order_id, **kwargs)
+            return order
+        except Exception as err:
+            self.logger.error(f"Could not update order, reason: {err}")
+            raise
+
+    def cancel_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> bool:
+        try:
+            order_adapter = self.get_order_adapter(exchange_name, strategie)
+            return order_adapter.cancel_order(order_id, **kwargs)
+        except Exception as err:
+            self.logger.error(f"Could not cancel order, reason: {err}")
             raise

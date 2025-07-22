@@ -1,4 +1,4 @@
-from src.domain import SimpleOrder
+from src.domain.orders.entities import SimpleOrder
 
 
 

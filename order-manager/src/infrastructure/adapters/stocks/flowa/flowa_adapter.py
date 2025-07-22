@@ -37,10 +37,10 @@ class FlowaAdapter(OrderAdapter):
             response.raise_for_status()
             self.token = response.json()['access_token']
             self.logger.debug(f"New refreshed cached {self.provider} token: {self.token}")
-            self.logger.info(f"{self.provider} was refreshed")
+            self.logger.info(f"{self.provider} token was refreshed")
             self.refreshed_token_time = datetime.now()
         else:
-            self.logger.info(f"{self.provider} token is refreshed")
+            self.logger.debug(f"{self.provider} token is refreshed")
 
         return self.token
     
@@ -54,6 +54,9 @@ class FlowaAdapter(OrderAdapter):
         raise NotImplementedError
     
     def transform_get_order(self, order_id: str) -> dict:
+        raise NotImplementedError
+    
+    def transform_update_order(self, order_dict: dict) -> dict:
         raise NotImplementedError
 
     def send_order(self, order_data: dict) -> str:
@@ -80,6 +83,17 @@ class FlowaAdapter(OrderAdapter):
         response.raise_for_status()
         order = response.json()
         return self.transform_get_order(order)
+    
+    def update_order(self, order_id, **kwargs) -> bool:
+        update_params = self.transform_update_order({**kwargs})
+        response = requests.put(
+            f'{self.endpoint}/{self.suffix}/{order_id}',
+            headers=self.mount_request_headers(),
+            data=json.dumps(update_params)
+        )
+        response.raise_for_status()
+        self.logger.info(f"Order with id: {order_id} was successfully updated on {self.provider}")
+        return True
     
     def cancel_order(self, order_id: str) -> bool:
         response = requests.delete(

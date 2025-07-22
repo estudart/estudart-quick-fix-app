@@ -1,2 +1,2 @@
 from .test_binance_adapter import TestBinanceAdapter
-from .test_binance_md_adapter import TestBinanceMDAdapter
+from .test_binance_futures_adapter import TestBinanceFuturesAdapter

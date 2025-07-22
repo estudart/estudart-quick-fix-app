@@ -1,5 +1,10 @@
-from .crypto import BinanceAdapter, BinanceSimpleOrderAdapter, BinanceMDAdapter
+from .crypto import (
+    BinanceAdapter, 
+    BinanceSimpleOrderAdapter, 
+    BinanceFuturesOrderAdapter, 
+    BinanceFuturesAdapter
+)
 from .stocks import FlowaAdapter, FlowaSimpleOrderAdapter
 from .logger_adapter import LoggerAdapter
 from .order_adapter import OrderAdapter
-from .md_adapter import MDAdapter
+from .queue import RedisAdapter

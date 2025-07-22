@@ -1,0 +1,1 @@
+from .test_spread_crypto_etf_algorithm import TestSpreadCryptoETF

@@ -42,9 +42,12 @@ class BinanceAdapter(OrderAdapter):
             self.logger.error(f"Could not send order to {self.provider}, reason: {err}")        
             raise
 
-    def get_order(self, symbol: str, order_id: str) -> dict:
+    def get_order(self, order_id: str, **kwargs) -> dict:
         try:
-            order = self.client.get_order(symbol=symbol, orderId=order_id)
+            symbol = kwargs.get("symbol")
+            if not symbol:
+                raise ValueError("Missing required argument: 'symbol'")
+            order = self.client.get_order(orderId=order_id, symbol=symbol)
             self.logger.debug(f"Order retrieved from {self.provider}: {order}")
             processed_order = self.transform_get_order(order)
             self.logger.info(f"Order processed from {self.provider}: {order}")
@@ -61,10 +64,16 @@ class BinanceAdapter(OrderAdapter):
         except Exception as err:
             self.logger.error(f"Could not retrive open orders from {self.provider}, reason: {err}")
             raise
+    
+    def update_order(self, order_id, **kwargs):
+        return super().update_order(order_id, **kwargs)
 
-    def cancel_order(self, symbol: str, order_id: str) -> bool:
+    def cancel_order(self, order_id: str, **kwargs) -> bool:
         try:
-            self.client.cancel_order(symbol=symbol, orderId=order_id)
+            symbol = kwargs.get("symbol")
+            if not symbol:
+                raise ValueError("Missing required argument: 'symbol'")
+            self.client.cancel_order(orderId=order_id, symbol=kwargs.get("symbol"))
             self.logger.info(f"Order with id: {order_id} was successfully cancelled on {self.provider}")
             return True
         except BinanceRequestException as err:
