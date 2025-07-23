@@ -18,3 +18,7 @@ class OrderAdapter(ABC):
     @abstractmethod
     def cancel_order(self) -> bool:
         pass
+
+
+class SendOrderError(Exception):
+    pass

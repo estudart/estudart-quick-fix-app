@@ -37,7 +37,7 @@ class OrderService:
             response = order_adapter.send_order(order.to_dict())
             return response
         except Exception as err:
-            self.logger.error(f"Could not send order, reason: {err}")
+            self.logger.error(err)
             raise
     
     def get_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> dict:

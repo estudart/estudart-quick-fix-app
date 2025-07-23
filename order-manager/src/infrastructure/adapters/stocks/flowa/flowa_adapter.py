@@ -5,7 +5,7 @@ import json
 
 from dotenv import load_dotenv
 
-from src.infrastructure.adapters.order_adapter import OrderAdapter
+from src.infrastructure.adapters.order_adapter import OrderAdapter, SendOrderError
 from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 
 
@@ -69,11 +69,14 @@ class FlowaAdapter(OrderAdapter):
             )
             response.raise_for_status()
             order = response.json()
+            if not order["Success"]:
+                raise SendOrderError(f'Failed to send order, reason: {order["Error"]}')
             self.logger.info(f"Order was sent to {self.provider}: {order}")
             return order["StrategyId"]
-        except Exception as err:
-            self.logger.error(f"Could not send order to {self.provider}, reason: {err}")        
-            raise
+        except (requests.RequestException, ValueError, KeyError) as err:
+            msg = f"Could not send order to {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise SendOrderError(msg) from err
     
     def get_order(self, order_id: str) -> dict:
         response = requests.get(

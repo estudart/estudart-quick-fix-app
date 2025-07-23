@@ -1,5 +1,6 @@
 import logging
 from threading import Thread
+import time
 
 from src.enums import ExchangeEnum, StrategyEnum
 from src.domain.algorithms.entities import SpreadCryptoETF
@@ -106,13 +107,19 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                 side=side,
                 spread_threshold=spread_threshold
             )
-
-            self.update_stock_order(
-                order_id=order_id,
-                exchange_name=ExchangeEnum.FLOWA,
-                strategy=StrategyEnum.SIMPLE_ORDER,
-                price=stock_order_placement_price
-            )
+            for attempt in range(1, 4):
+                try:
+                    self.update_stock_order(
+                        order_id=order_id,
+                        exchange_name=ExchangeEnum.FLOWA,
+                        strategy=StrategyEnum.SIMPLE_ORDER,
+                        price=stock_order_placement_price
+                    )
+                    break
+                except Exception as err:
+                    self.logger.exception(f"[Attempt {attempt}/3] Failed to update stock order: {err}")
+                    self.logger.info("Retrying in 5 seconds...")
+                    time.sleep(5)
 
     def handle_trade_update(self, data: dict, order_id: str):
         self.logger.info(f"[{order_id}] Executed a new trade: {data}")
@@ -121,12 +128,19 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         self.logger.info(f"[{order_id}] Executed a new trade: {data}")
         exec_qty = data["exec_qty"] - self.stocks_exec_qty
         if exec_qty > 0:
-            self.send_crypto_market_order(
-                exchange_name=ExchangeEnum.BINANCE,
-                strategy=StrategyEnum.FUTURES,
-                stock_order_executed_quantity=exec_qty,
-                quantity_crypto_per_stock_share=self.quantity_crypto_per_stock_share
-            )
+            for attempt in range(1, 4):
+                try:
+                    self.send_crypto_market_order(
+                        exchange_name=ExchangeEnum.BINANCE,
+                        strategy=StrategyEnum.FUTURES,
+                        stock_order_executed_quantity=exec_qty,
+                        quantity_crypto_per_stock_share=self.quantity_crypto_per_stock_share
+                    )
+                    break
+                except Exception as err:
+                    self.logger.exception(f"[Attempt {attempt}/3] Failed to send crypto order: {err}")
+                    self.logger.info("Retrying in 5 seconds...")
+                    time.sleep(5)
             self.stocks_exec_qty += exec_qty
         
         if self.stocks_exec_qty == self.algo.algo_data["quantity"]:
@@ -166,11 +180,19 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             side=self.algo.algo_data["side"],
             spread_threshold=self.algo.algo_data["spread_threshold"]
         )
-        stock_order_id = self.send_stock_order(
-            exchange_name=ExchangeEnum.FLOWA, 
-            strategy=StrategyEnum.SIMPLE_ORDER,
-            price=stock_order_placement_price
-        )
+
+        for attempt in range(1, 4):
+            try:
+                stock_order_id = self.send_stock_order(
+                    exchange_name=ExchangeEnum.FLOWA, 
+                    strategy=StrategyEnum.SIMPLE_ORDER,
+                    price=stock_order_placement_price
+                )
+                break
+            except Exception as err:
+                self.logger.exception(f"[Attempt {attempt}/3] {err}")
+                self.logger.info("Retrying in 5 seconds...")
+                time.sleep(5)
 
         self.subscribe_to_inav_updates(etf_symbol, stock_order_id)
         self.subscribe_to_order_updates(stock_order_id)

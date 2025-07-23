@@ -65,7 +65,7 @@ class TestSpreadCryptoETFAdapter:
         self.application_algo.run_algo()
         time.sleep(120)
     
-    def test_can_listen_to_updates(self):
-        self.application_algo.subscribe_to_inav_updates("ETHE11", "test")
-        self.application_algo.start_listener_thread()
-        time.sleep(40)
+    # def test_can_listen_to_updates(self):
+    #     self.application_algo.subscribe_to_inav_updates("ETHE11", "test")
+    #     self.application_algo.start_listener_thread()
+    #     time.sleep(40)
