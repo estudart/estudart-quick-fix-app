@@ -1,6 +1,10 @@
 from flask import Blueprint, request as req, jsonify
 
-from src.interface.api.controllers.orders import send_order_request, get_order_request
+from src.interface.api.controllers.orders import (
+    send_order_request, 
+    get_order_request,
+    cancel_order_request
+)
 
 
 
@@ -96,3 +100,52 @@ def get_order_endpoint():
         data = req.args.to_dict()
     
     return jsonify(get_order_request(data))
+
+@bp_orders.route("/cancel-order", methods=["DELETE"])
+def cancel_order_endpoint():
+    """
+    Cancel Order
+    ---
+    tags:
+     - Order
+
+    parameters:
+     - name: exchange_name
+       in: query
+       type: string
+       default: 'binance'
+       required: True
+       description: Name of the exchange
+
+     - name: strategy
+       in: query
+       type: string
+       default: 'futures'
+       required: True
+       description: Name of the strategy
+
+     - name: symbol
+       in: query
+       type: string
+       default: 'BTCUSDT'
+       required: False
+       description: Symbol
+
+     - name: order_id
+       in: query
+       type: string
+       default: 'MTB_2_10_250724115927_00432'
+       required: True
+       description: Parameter of the order
+    
+    responses:
+        200:
+            description: Order was successfully cancelled
+            
+    """
+    try:
+        data = req.json()
+    except:
+        data = req.args.to_dict()
+    
+    return jsonify(cancel_order_request(data))
