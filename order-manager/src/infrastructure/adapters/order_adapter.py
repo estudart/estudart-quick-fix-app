@@ -22,3 +22,6 @@ class OrderAdapter(ABC):
 
 class SendOrderError(Exception):
     pass
+
+class GetOrderError(Exception):
+    pass
