@@ -5,7 +5,7 @@ import json
 
 from dotenv import load_dotenv
 
-from src.infrastructure.adapters.order_adapter import OrderAdapter, SendOrderError
+from src.infrastructure.adapters.order_adapter import OrderAdapter, SendOrderError, GetOrderError
 from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 
 
@@ -79,13 +79,18 @@ class FlowaAdapter(OrderAdapter):
             raise SendOrderError(msg) from err
     
     def get_order(self, order_id: str) -> dict:
-        response = requests.get(
-            f'{self.endpoint}/{self.suffix}/{order_id}',
-            headers=self.mount_request_headers()
-        )
-        response.raise_for_status()
-        order = response.json()
-        return self.transform_get_order(order)
+        try:
+            response = requests.get(
+                f'{self.endpoint}/{self.suffix}/{order_id}',
+                headers=self.mount_request_headers()
+            )
+            response.raise_for_status()
+            order = response.json()
+            return self.transform_get_order(order)
+        except Exception as err:
+            msg = f"Could not get order from {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise GetOrderError(msg) from err
     
     def update_order(self, order_id, **kwargs) -> bool:
         update_params = self.transform_update_order({**kwargs})
