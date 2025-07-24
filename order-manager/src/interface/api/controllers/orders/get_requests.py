@@ -15,3 +15,8 @@ def get_order_request(data: dict, order_service: OrderService = Provide[Containe
             "success": False,
             "message": f"{err}"
         }
+    except Exception as err:
+        return {
+            "success": False,
+            "message": f"Service could compute order, reason: {err}"
+        }
