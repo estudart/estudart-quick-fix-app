@@ -1,4 +1,5 @@
 import logging
+import json
 
 from src.infrastructure.adapters.crypto.binance import BinanceSimpleOrderAdapter, BinanceFuturesOrderAdapter
 from src.infrastructure.adapters.stocks.flowa.flowa_simple_order import FlowaSimpleOrderAdapter
@@ -23,44 +24,44 @@ class OrderService:
             }
         }
 
-    def get_order_adapter(self, exchange_name: str, strategie: str) -> OrderAdapter:
+    def get_order_adapter(self, exchange_name: str, strategy: str) -> OrderAdapter:
         try:
-            return self.order_adapter_dict[exchange_name][strategie]
+            return self.order_adapter_dict[exchange_name][strategy]
         except KeyError as err:
             self.logger.error(f"Exchange requested is not valid: {exchange_name}")
             raise ValueError("Unsupported exchange")
     
-    def send_order(self, exchange_name: str, strategie: str, order_data: dict):
+    def send_order(self, exchange_name: str, strategy: str, order_data: dict):
         try:
-            order = self.order_creation_manager.create_order(strategie, order_data)
-            order_adapter = self.get_order_adapter(exchange_name, strategie)
+            order = self.order_creation_manager.create_order(strategy, json.loads(order_data))
+            order_adapter = self.get_order_adapter(exchange_name, strategy)
             response = order_adapter.send_order(order.to_dict())
             return response
         except Exception as err:
             self.logger.error(err)
             raise
     
-    def get_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> dict:
+    def get_order(self, exchange_name: str, strategy: str, order_id: str, **kwargs) -> dict:
         try:
-            order_adapter = self.get_order_adapter(exchange_name, strategie)
+            order_adapter = self.get_order_adapter(exchange_name, strategy)
             order = order_adapter.get_order(order_id, **kwargs)
             return order
         except Exception as err:
             self.logger.error(f"Could not send order, reason: {err}")
             raise
 
-    def update_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> dict:
+    def update_order(self, exchange_name: str, strategy: str, order_id: str, **kwargs) -> dict:
         try:
-            order_adapter = self.get_order_adapter(exchange_name, strategie)
+            order_adapter = self.get_order_adapter(exchange_name, strategy)
             order = order_adapter.update_order(order_id, **kwargs)
             return order
         except Exception as err:
             self.logger.error(f"Could not update order, reason: {err}")
             raise
 
-    def cancel_order(self, exchange_name: str, strategie: str, order_id: str, **kwargs) -> bool:
+    def cancel_order(self, exchange_name: str, strategy: str, order_id: str, **kwargs) -> bool:
         try:
-            order_adapter = self.get_order_adapter(exchange_name, strategie)
+            order_adapter = self.get_order_adapter(exchange_name, strategy)
             return order_adapter.cancel_order(order_id, **kwargs)
         except Exception as err:
             self.logger.error(f"Could not cancel order, reason: {err}")

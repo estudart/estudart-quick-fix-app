@@ -1,5 +1,3 @@
-from binance.client import BinanceRequestException, BinanceAPIException
-
 from src.infrastructure.adapters.crypto.binance import BinanceAdapter
 
 
