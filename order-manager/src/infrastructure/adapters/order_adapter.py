@@ -25,3 +25,6 @@ class SendOrderError(Exception):
 
 class GetOrderError(Exception):
     pass
+
+class CancelOrderError(Exception):
+    pass

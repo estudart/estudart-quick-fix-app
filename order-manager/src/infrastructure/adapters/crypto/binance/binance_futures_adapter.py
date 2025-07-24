@@ -4,7 +4,12 @@ import requests
 import ccxt
 from dotenv import load_dotenv
 
-from src.infrastructure.adapters.order_adapter import OrderAdapter, SendOrderError, GetOrderError
+from src.infrastructure.adapters.order_adapter import (
+    OrderAdapter, 
+    SendOrderError, 
+    GetOrderError,
+    CancelOrderError
+)
 from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 
 load_dotenv()
@@ -51,6 +56,10 @@ class BinanceFuturesAdapter(OrderAdapter):
             msg = f"Could not send order to {self.provider}, reason: {err}"
             self.logger.exception(msg)
             raise SendOrderError(msg) from err
+        except Exception as err:
+            msg = f"Could not send order to {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise
 
     def get_order(self, order_id: str, **kwargs) -> dict:
         try:
@@ -84,9 +93,10 @@ class BinanceFuturesAdapter(OrderAdapter):
             symbol = kwargs.get("symbol")
             if not symbol:
                 raise ValueError("Missing required argument: 'symbol'")
-            self.client.cancel_order(orderId=order_id, symbol=kwargs.get("symbol"))
+            response = self.client.cancel_order(id=order_id, symbol=kwargs.get("symbol"))
             self.logger.info(f"Order with id: {order_id} was successfully cancelled on {self.provider}")
-            return True
+            return response
         except Exception as err:
-            self.logger.error(f"Could not cancel order from {self.provider}, reason: {err}")
-            return False
+            msg = f"Could not cancel order from {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise CancelOrderError(msg) from err
