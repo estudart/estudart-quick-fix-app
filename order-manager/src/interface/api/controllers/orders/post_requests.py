@@ -1,0 +1,14 @@
+from dependency_injector.wiring import inject, Provide
+
+from src.application.orders.order_service import OrderService
+from src.interface.api.containers import Container
+
+
+
+@inject
+def send_order_request(data: dict, order_service: OrderService = Provide[Container.order_service]):
+    return order_service.send_order(
+        exchange_name=data["exchange_name"],
+        strategy=data["strategy"],
+        order_data=data["order_data"]
+    )
