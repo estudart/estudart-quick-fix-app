@@ -1,9 +1,10 @@
 import os
+import requests
 
 import ccxt
 from dotenv import load_dotenv
 
-from src.infrastructure.adapters.order_adapter import OrderAdapter
+from src.infrastructure.adapters.order_adapter import OrderAdapter, SendOrderError, GetOrderError
 from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 
 load_dotenv()
@@ -46,23 +47,25 @@ class BinanceFuturesAdapter(OrderAdapter):
             order = self.client.create_order(**binance_order)
             self.logger.info(f"Order was sent to {self.provider}: {order}")
             return order["info"]["orderId"]
-        except Exception as err:
-            self.logger.error(f"Could not send order to {self.provider}, reason: {err}")        
-            raise
+        except (requests.RequestException, ValueError, KeyError) as err:
+            msg = f"Could not send order to {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise SendOrderError(msg) from err
 
     def get_order(self, order_id: str, **kwargs) -> dict:
         try:
             symbol = kwargs.get("symbol")
             if not symbol:
                 raise ValueError("Missing required argument: 'symbol'")
-            order = self.client.fetch_order(orderId=order_id, symbol=symbol)
+            order = self.client.fetch_order(id=order_id, symbol=symbol)
             self.logger.debug(f"Order retrieved from {self.provider}: {order}")
-            processed_order = self.transform_get_order(order)
+            processed_order = self.transform_get_order(order["info"])
             self.logger.info(f"Order processed from {self.provider}: {order}")
             return processed_order
         except Exception as err:
-            self.logger.error(f"Could not retrive order from {self.provider}, reason: {err}")
-            raise
+            msg = f"Could not get order from {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise GetOrderError(msg) from err
 
     def get_open_orders(self) -> list[dict]:
         try:
