@@ -23,6 +23,7 @@ class OrderService:
                 "simple-order": FlowaSimpleOrderAdapter(logger=self.logger)
             }
         }
+        self.logger.info(f"Order service has successfully started")
 
     def get_order_adapter(self, exchange_name: str, strategy: str) -> OrderAdapter:
         try:
