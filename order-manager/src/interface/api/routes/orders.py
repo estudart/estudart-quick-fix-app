@@ -21,16 +21,18 @@ def send_order_endpoint():
        default: 'binance'
        required: True
        description: Name of the exchange
+
      - name: strategy
        in: query
        type: string
-       default: 'simple-order'
+       default: 'futures'
        required: True
        description: Name of the strategy
+
      - name: order_data
        in: query
        type: string
-       default: {}
+       default: '{"symbol":"BTCUSDT","side":"BUY","quantity":0.006,"price":30000,"order_type":"LIMIT","time_in_force":"GTC"}'
        required: True
        description: Parameter of the order
     
