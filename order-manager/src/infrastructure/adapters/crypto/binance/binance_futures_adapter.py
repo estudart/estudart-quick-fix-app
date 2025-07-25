@@ -37,6 +37,7 @@ class BinanceFuturesAdapter(OrderAdapter):
                 'defaultType': 'future',  # futures trading
             },
         })
+        self.client.options["warnOnFetchOpenOrdersWithoutSymbol"] = False
         if ENV == "DEV":
             self.client.set_sandbox_mode(True)
 

@@ -32,7 +32,7 @@ class Algorithm(ABC):
 ALGO DATA MODEL
 algo_data = {
     "broker": "935",
-    "account": "1001",
+    "account": "84855",
     "symbol": "BITH11",
     "side": "BUY",
     "quantity": 100,

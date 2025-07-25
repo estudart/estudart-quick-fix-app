@@ -34,6 +34,7 @@ class BinanceAdapter(OrderAdapter):
             'secret': self.api_secret,
             'enableRateLimit': True
         })
+        self.client.options["warnOnFetchOpenOrdersWithoutSymbol"] = False
         if ENV == "DEV":
             self.client.set_sandbox_mode(True)
 

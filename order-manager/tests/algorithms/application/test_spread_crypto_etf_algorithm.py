@@ -1,6 +1,5 @@
 import pytest
 import time
-from threading import Thread
 
 from src.application.algorithms.spread_crypto_etf import SpreadCryptoETFAdapter
 from src.application.orders.order_service import OrderService

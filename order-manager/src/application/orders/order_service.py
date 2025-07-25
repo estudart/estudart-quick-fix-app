@@ -34,7 +34,7 @@ class OrderService:
     
     def send_order(self, exchange_name: str, strategy: str, order_data: dict):
         try:
-            order = self.order_creation_manager.create_order(strategy, json.loads(order_data))
+            order = self.order_creation_manager.create_order(strategy, order_data)
             order_adapter = self.get_order_adapter(exchange_name, strategy)
             response = order_adapter.send_order(order.to_dict())
             return response

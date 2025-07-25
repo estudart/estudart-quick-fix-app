@@ -1,3 +1,5 @@
+import json
+
 from dependency_injector.wiring import inject, Provide
 
 from src.application.orders.order_service import OrderService
@@ -12,7 +14,7 @@ def send_order_request(data: dict, order_service: OrderService = Provide[Contain
         return order_service.send_order(
             exchange_name=data["exchange_name"],
             strategy=data["strategy"],
-            order_data=data["order_data"]
+            order_data=json.loads(data["order_data"])
         )
     except SendOrderError as err:
         return {
