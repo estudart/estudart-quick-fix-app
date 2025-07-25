@@ -3,7 +3,8 @@ from flask import Blueprint, request as req, jsonify
 from src.interface.api.controllers.orders import (
     send_order_request, 
     get_order_request,
-    cancel_order_request
+    cancel_order_request,
+    update_order_request
 )
 
 
@@ -149,3 +150,59 @@ def cancel_order_endpoint():
         data = req.args.to_dict()
     
     return jsonify(cancel_order_request(data))
+
+@bp_orders.route("/update-order", methods=["PUT"])
+def update_order_endpoint():
+    """
+    Update Order
+    ---
+    tags:
+     - Order
+
+    parameters:
+     - name: exchange_name
+       in: query
+       type: string
+       default: 'flowa'
+       required: True
+       description: Name of the exchange
+
+     - name: strategy
+       in: query
+       type: string
+       default: 'simple-order'
+       required: True
+       description: Name of the strategy
+
+     - name: symbol
+       in: query
+       type: string
+       default: 'BTCUSDT'
+       required: False
+       description: Symbol
+
+     - name: order_id
+       in: query
+       type: string
+       default: 'MTB_2_10_250724115927_00432'
+       required: True
+       description: Id of the order
+
+     - name: order_data
+       in: query
+       type: string
+       default: '{"price":75}'
+       required: True
+       description: Parameter of the order
+    
+    responses:
+        200:
+            description: New order was sent
+            
+    """
+    try:
+        data = req.json()
+    except:
+        data = req.args.to_dict()
+    
+    return jsonify(update_order_request(data))

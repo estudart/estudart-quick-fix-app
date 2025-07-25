@@ -10,7 +10,8 @@ class Container(containers.DeclarativeContainer):
         modules=[
             "src.interface.api.controllers.orders.post_requests",
             "src.interface.api.controllers.orders.get_requests",
-            "src.interface.api.controllers.orders.cancel_requests"
+            "src.interface.api.controllers.orders.cancel_requests",
+            "src.interface.api.controllers.orders.update_requests"
         ]
     )  # Adjust this if needed
 

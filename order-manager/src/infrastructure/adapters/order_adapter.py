@@ -28,3 +28,6 @@ class GetOrderError(Exception):
 
 class CancelOrderError(Exception):
     pass
+
+class UpdateOrderError(Exception):
+    pass

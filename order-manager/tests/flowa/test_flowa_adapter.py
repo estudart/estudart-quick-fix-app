@@ -23,7 +23,7 @@ class TestFlowaAdapter:
         assert isinstance(order, dict)
 
         update = self.flowa_adapter.update_order(
-            order_id=order_id, price=34, quantity=3
+            order_id, price=34, quantity=3
         )
         assert update
 
