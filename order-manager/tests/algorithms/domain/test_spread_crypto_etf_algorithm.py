@@ -5,7 +5,7 @@ from src.domain.algorithms.entities import SpreadCryptoETF, AlgoStatus
 def make_algo(overrides: dict = None):
     base_data = {
         "broker": "935",
-        "account": "1001",
+        "account": "84855",
         "symbol": "BITH11",
         "side": "BUY",
         "quantity": 0.001,

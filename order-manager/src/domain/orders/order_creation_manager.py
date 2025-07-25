@@ -11,9 +11,9 @@ class OrderCreationManager:
             "futures": SimpleOrder
         }
 
-    def create_order(self, strategie: str, order_data: dict):
+    def create_order(self, strategy: str, order_data: dict):
         try:
-            order_class = self.order_dict[strategie]
+            order_class = self.order_dict[strategy]
             order = order_class(**order_data)
             return order
         except Exception as err:

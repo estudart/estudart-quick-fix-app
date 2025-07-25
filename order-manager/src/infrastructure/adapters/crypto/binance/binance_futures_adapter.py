@@ -1,9 +1,15 @@
 import os
+import requests
 
-from binance.client import Client, BinanceRequestException, BinanceAPIException
+import ccxt
 from dotenv import load_dotenv
 
-from src.infrastructure.adapters.order_adapter import OrderAdapter
+from src.infrastructure.adapters.order_adapter import (
+    OrderAdapter, 
+    SendOrderError, 
+    GetOrderError,
+    CancelOrderError
+)
 from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 
 load_dotenv()
@@ -16,15 +22,24 @@ class BinanceFuturesAdapter(OrderAdapter):
         self.api_key = os.environ.get(f"BINANCE_FUTURES_API_KEY_{ENV}")
         self.api_secret = os.environ.get(f"BINANCE_FUTURES_API_SECRET_{ENV}")
         self.logger = logger
-        self.provider = "Binance Futures"
+        self.provider = "Binance"
 
         self.client = None
 
         self._start_client()
 
     def _start_client(self) -> None:
-        self.client = Client(self.api_key, self.api_secret)
-        self.client.FUTURES_URL = self.endpoint
+        self.client = ccxt.binance({
+            'apiKey': self.api_key,
+            'secret': self.api_secret,
+            'enableRateLimit': True,
+            'options': {
+                'defaultType': 'future',  # futures trading
+            },
+        })
+        self.client.options["warnOnFetchOpenOrdersWithoutSymbol"] = False
+        if ENV == "DEV":
+            self.client.set_sandbox_mode(True)
 
     def transform_order(self, order_data: str):
         raise NotImplementedError
@@ -35,11 +50,16 @@ class BinanceFuturesAdapter(OrderAdapter):
     def send_order(self, order_data: dict) -> str:
         try:
             binance_order = self.transform_order(order_data)
-            order = self.client.futures_create_order(**binance_order)
+            order = self.client.create_order(**binance_order)
             self.logger.info(f"Order was sent to {self.provider}: {order}")
-            return order["orderId"]
+            return order["info"]["orderId"]
+        except (requests.RequestException, ValueError, KeyError) as err:
+            msg = f"Could not send order to {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise SendOrderError(msg) from err
         except Exception as err:
-            self.logger.error(f"Could not send order to {self.provider}, reason: {err}")        
+            msg = f"Could not send order to {self.provider}, reason: {err}"
+            self.logger.exception(msg)
             raise
 
     def get_order(self, order_id: str, **kwargs) -> dict:
@@ -47,18 +67,19 @@ class BinanceFuturesAdapter(OrderAdapter):
             symbol = kwargs.get("symbol")
             if not symbol:
                 raise ValueError("Missing required argument: 'symbol'")
-            order = self.client.futures_get_order(orderId=order_id, symbol=symbol)
+            order = self.client.fetch_order(id=order_id, symbol=symbol)
             self.logger.debug(f"Order retrieved from {self.provider}: {order}")
-            processed_order = self.transform_get_order(order)
+            processed_order = self.transform_get_order(order["info"])
             self.logger.info(f"Order processed from {self.provider}: {order}")
             return processed_order
-        except BinanceRequestException as err:
-            self.logger.error(f"Could not retrive order from {self.provider}, reason: {err}")
-            raise
+        except Exception as err:
+            msg = f"Could not get order from {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise GetOrderError(msg) from err
 
     def get_open_orders(self) -> list[dict]:
         try:
-            open_orders = self.client.futures_get_open_orders()
+            open_orders = self.client.fetch_open_orders()
             self.logger.info(f"Open orders retrieved from Binance: {open_orders}")
             return open_orders
         except Exception as err:
@@ -73,9 +94,10 @@ class BinanceFuturesAdapter(OrderAdapter):
             symbol = kwargs.get("symbol")
             if not symbol:
                 raise ValueError("Missing required argument: 'symbol'")
-            self.client.futures_cancel_order(orderId=order_id, symbol=kwargs.get("symbol"))
+            response = self.client.cancel_order(id=order_id, symbol=kwargs.get("symbol"))
             self.logger.info(f"Order with id: {order_id} was successfully cancelled on {self.provider}")
-            return True
-        except BinanceRequestException as err:
-            self.logger.error(f"Could not cancel order from {self.provider}, reason: {err}")
-            return False
+            return response
+        except Exception as err:
+            msg = f"Could not cancel order from {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise CancelOrderError(msg) from err

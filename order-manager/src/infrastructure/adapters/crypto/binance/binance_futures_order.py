@@ -1,5 +1,3 @@
-from binance.client import BinanceRequestException, BinanceAPIException
-
 from src.infrastructure.adapters.crypto.binance import BinanceFuturesAdapter
 
 
@@ -10,12 +8,12 @@ class BinanceFuturesOrderAdapter(BinanceFuturesAdapter):
             "symbol": order_data["symbol"],
             "side": order_data["side"],
             "type": order_data["order_type"],
-            "quantity": order_data["quantity"]
+            "amount": order_data["quantity"]
         }
         if transformed["type"] == "LIMIT":
             transformed.update(
                 price=str(order_data["price"]),
-                timeInForce=order_data["time_in_force"],
+                params={"timeInForce": order_data["time_in_force"]}
             )
         return transformed
     

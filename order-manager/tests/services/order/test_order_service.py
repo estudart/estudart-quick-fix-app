@@ -40,7 +40,7 @@ class TestOrderService:
     def test_create_flowa_simple_order(self):
         order_data = {
             "broker": "935",
-            "account": "1001",
+            "account": "84855",
             "symbol": "BITH11",
             "side": "BUY",
             "quantity": 1,

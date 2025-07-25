@@ -1,6 +1,6 @@
 import pytest
 
-from src.infrastructure import BinanceSimpleOrderAdapter
+from src.infrastructure import BinanceSimpleOrderAdapter, CancelOrderError, GetOrderError, SendOrderError
 
 
 
@@ -31,10 +31,10 @@ class TestBinanceAdapter:
 
     def test_get_order_without_symbol_raises_exception(self):
         order_id = "testing"
-        with pytest.raises(ValueError, match="Missing required argument: 'symbol'"):
+        with pytest.raises(GetOrderError, match="Missing required argument: 'symbol'"):
             self.binance_adapter.get_order(order_id)
     
     def test_cancel_order_without_symbol_raises_exception(self):
         order_id = "testing"
-        with pytest.raises(ValueError, match="Missing required argument: 'symbol'"):
+        with pytest.raises(CancelOrderError, match="Missing required argument: 'symbol'"):
             self.binance_adapter.cancel_order(order_id)

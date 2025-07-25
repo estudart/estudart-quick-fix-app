@@ -5,7 +5,12 @@ import json
 
 from dotenv import load_dotenv
 
-from src.infrastructure.adapters.order_adapter import OrderAdapter, SendOrderError
+from src.infrastructure.adapters.order_adapter import (
+    OrderAdapter, 
+    SendOrderError, 
+    GetOrderError,
+    CancelOrderError
+)
 from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 
 
@@ -77,15 +82,24 @@ class FlowaAdapter(OrderAdapter):
             msg = f"Could not send order to {self.provider}, reason: {err}"
             self.logger.exception(msg)
             raise SendOrderError(msg) from err
+        except Exception as err:
+            msg = f"Could not send order to {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise
     
-    def get_order(self, order_id: str) -> dict:
-        response = requests.get(
-            f'{self.endpoint}/{self.suffix}/{order_id}',
-            headers=self.mount_request_headers()
-        )
-        response.raise_for_status()
-        order = response.json()
-        return self.transform_get_order(order)
+    def get_order(self, order_id: str, **kwargs) -> dict:
+        try:
+            response = requests.get(
+                f'{self.endpoint}/{self.suffix}/{order_id}',
+                headers=self.mount_request_headers()
+            )
+            response.raise_for_status()
+            order = response.json()
+            return self.transform_get_order(order)
+        except Exception as err:
+            msg = f"Could not get order from {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise GetOrderError(msg) from err
     
     def update_order(self, order_id, **kwargs) -> bool:
         update_params = self.transform_update_order({**kwargs})
@@ -98,11 +112,16 @@ class FlowaAdapter(OrderAdapter):
         self.logger.info(f"Order with id: {order_id} was successfully updated on {self.provider}")
         return True
     
-    def cancel_order(self, order_id: str) -> bool:
-        response = requests.delete(
-            f'{self.endpoint}/{self.suffix}/{order_id}',
-            headers=self.mount_request_headers()
-        )
-        response.raise_for_status()
-        self.logger.info(f"Order with id: {order_id} was successfully cancelled on {self.provider}")
-        return True
+    def cancel_order(self, order_id: str, **kwargs) -> bool:
+        try:
+            response = requests.delete(
+                f'{self.endpoint}/{self.suffix}/{order_id}',
+                headers=self.mount_request_headers()
+            )
+            response.raise_for_status()
+            self.logger.info(f"Order with id: {order_id} was successfully cancelled on {self.provider}")
+            return response.json()
+        except Exception as err:
+            msg = f"Could not cancel order from {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise CancelOrderError(msg) from err
