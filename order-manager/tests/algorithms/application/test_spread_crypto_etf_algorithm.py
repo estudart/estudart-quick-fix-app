@@ -34,14 +34,19 @@ class TestSpreadCryptoETFAdapter:
         assert self.application_algo.algo.stock_order_params_to_dict(30)
 
     @pytest.mark.asyncio
-    async def test_can_create_crypto_order(self):
-        data = await self.application_algo.send_crypto_market_order(
+    async def test_can_manage_crypto_order(self):
+        id = await self.application_algo.send_crypto_market_order(
             exchange_name="binance",
             strategy="futures",
             stock_order_executed_quantity=10,
             quantity_crypto_per_stock_share=0.02
         )
-        print(data)
+        data = await self.application_algo.get_crypto_order(
+            exchange_name="binance",
+            strategy="futures",
+            order_id=id,
+            symbol="ETHUSDT"
+        )
         assert data
 
     def test_can_send_stock_order(self):

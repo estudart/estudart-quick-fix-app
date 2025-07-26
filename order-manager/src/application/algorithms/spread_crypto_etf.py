@@ -70,7 +70,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             symbol: str
         ) -> dict:
         return self.order_service_client.get_order(
-            exchange_name, strategy, order_id, symbol
+            exchange_name, strategy, order_id, symbol=symbol
         )
 
     def get_stock_order(

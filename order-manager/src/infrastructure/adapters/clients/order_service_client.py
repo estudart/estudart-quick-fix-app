@@ -12,20 +12,32 @@ class OrderServiceClient:
     
     async def send_order(self, exchange_name: str, strategy: str, order_data: dict) -> dict:
         try:
-            json_payload = {
+            params = {
                 "exchange_name": exchange_name,
                 "strategy": strategy,
                 "order_data": json.dumps(order_data)
             }
-            response = await self.client.post(f"{self.base_url}/send-order", params=json_payload)
+            response = await self.client.post(f"{self.base_url}/send-order", params=params)
             response.raise_for_status()
             return response.json()
         except httpx.HTTPError as err:
             self.logger.error(f"[OrderHttpClient] Failed to send order: {err}")
             raise
 
-    def get_order(self):
-        pass
+    async def get_order(self, exchange_name: str, strategy: str, order_id: dict, **kwargs) -> dict:
+        try:
+            params = {
+                "exchange_name": exchange_name,
+                "strategy": strategy,
+                "order_id": order_id,
+                **kwargs
+            }
+            response = await self.client.get(f"{self.base_url}/get-order", params=params)
+            response.raise_for_status()
+            return response.json()
+        except httpx.HTTPError as err:
+            self.logger.error(f"[OrderHttpClient] Failed to send order: {err}")
+            raise
 
     def update_order(self):
         pass
