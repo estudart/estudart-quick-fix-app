@@ -8,6 +8,7 @@ from src.domain.algorithms.enums import AlgoStatus
 
 class Algorithm(ABC):
     def __init__(self, algo_data: dict):
+        self.id = str(uuid.uuid4())
         self.algo_data = algo_data
         self.status = None
 
@@ -44,7 +45,6 @@ algo_data = {
 class SpreadCryptoETF(Algorithm):
     def __init__(self, algo_data: dict):
         super().__init__(algo_data)
-        self.id = str(uuid.uuid4())
         self.status = AlgoStatus.CREATED
         self.etf_underlying_assets = {
             "BITH11": {
