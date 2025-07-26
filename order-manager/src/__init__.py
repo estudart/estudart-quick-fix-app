@@ -5,6 +5,7 @@ from .infrastructure import (
     BinanceAdapter,
     BinanceFuturesAdapter,
     BinanceSimpleOrderAdapter,
+    OrderServiceClient,
     LoggerAdapter
 )
 from .application import (
