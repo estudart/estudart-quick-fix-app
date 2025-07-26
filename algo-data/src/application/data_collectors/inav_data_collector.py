@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from typing import List
+import json
 
 from src.application.data_collectors.data_collector import DataCollector
 from src.infrastructure.adapters.inav_md_adapter import InavMDAdapter
@@ -44,16 +45,17 @@ class InavDataCollector(DataCollector):
     async def collect_data(self, asset: str):
         try:
             inav = await asyncio.to_thread(self.collector_adapter.fetch_price, asset)
-            # Set inav price to redis
-            await asyncio.to_thread(self.redis_adapter.set_key, f"inav:{asset}", inav)
+            
             amount_of_underlying_asset = await asyncio.to_thread(
                 self.collector_adapter.get_crypto_quantity_on_onshore_etf,
                 asset,
                 self.onshore_offshore_mapping[asset]
             )
+            
 
             self.logger.debug(f"New inav was collected {asset}: {inav}")
             message_data = self.mount_message_data(asset, inav, amount_of_underlying_asset)
+            await asyncio.to_thread(self.redis_adapter.set_key, f"inav:{asset}", json.dumps(message_data))
             if self.should_dispatch_event(asset, inav):
                 self.latest_inav_dict[asset] = inav
                 self.dispatch_price_collected_event(f"inav-{asset}", message_data)
