@@ -4,9 +4,8 @@ import time
 
 from src.enums import ExchangeEnum, StrategyEnum
 from src.domain.algorithms.entities import SpreadCryptoETF
-from src.domain.algorithms.enums import AlgoStatus
 from src.application.algorithms.base_algorithm import BaseAlgorithm
-from src.application.orders.order_service import OrderService
+from src.infrastructure.adapters.clients.order_service_client import OrderServiceClient
 from src.infrastructure.adapters.queue.redis_adapter import RedisAdapter
 
 
@@ -16,11 +15,11 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             self,
             logger: logging.Logger,
             algo: SpreadCryptoETF,
-            order_service: OrderService
+            order_service_client: OrderServiceClient
         ):
         self.logger = logger
         self.algo = algo
-        self.order_service = order_service
+        self.order_service_client = order_service_client
         self.message_service = RedisAdapter(logger)
         self.event_threads: list[Thread] = []
         self.stocks_exec_qty: int = 0
@@ -36,10 +35,11 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
 
         quantity_crypto_to_execute = round(quantity_crypto_per_stock_share * stock_order_executed_quantity, 3)
         self.logger.debug(f"stock order executed quantity: {stock_order_executed_quantity}")
+        self.logger.debug(f"quantity_crypto_per_stock_share: {quantity_crypto_per_stock_share}")
         self.logger.debug(f"quantity of crypto execute: {quantity_crypto_to_execute}")
         order_data = self.algo.crypto_order_params_to_dict(quantity_crypto_to_execute)
         
-        return self.order_service.send_order(
+        return self.order_service_client.send_order(
             exchange_name, strategy, order_data
         )
 
@@ -49,7 +49,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             strategy: str,
             price: float
         ):
-        return self.order_service.send_order(
+        return self.order_service_client.send_order(
             exchange_name, strategy, self.algo.stock_order_params_to_dict(price)
         )
     
@@ -60,7 +60,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             strategy: str,
             **kwargs
         ):
-        return self.order_service.update_order(exchange_name, strategy, order_id, **kwargs)
+        return self.order_service_client.update_order(exchange_name, strategy, order_id, **kwargs)
     
     def get_crypto_order(
             self,
@@ -69,7 +69,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             order_id: str, 
             symbol: str
         ) -> dict:
-        return self.order_service.get_order(
+        return self.order_service_client.get_order(
             exchange_name, strategy, order_id, symbol
         )
 
@@ -79,7 +79,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             strategy: str,
             order_id: str
         ) -> dict:
-        return self.order_service.get_order(
+        return self.order_service_client.get_order(
             exchange_name, strategy, order_id
         )
 
@@ -174,7 +174,9 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
 
     def run_algo(self):
         etf_symbol = self.algo.algo_data["symbol"]
-        stock_fair_price = float(self.message_service.get_key(f"inav:{etf_symbol}"))
+        inav_data = self.message_service.get_key(f"inav:{etf_symbol}")
+        stock_fair_price = float(inav_data["inav"])
+        self.quantity_crypto_per_stock_share = float(inav_data["amount_of_underlying_asset"])
         stock_order_placement_price = self.get_order_placement_price(
             stock_fair_price=stock_fair_price,
             side=self.algo.algo_data["side"],
