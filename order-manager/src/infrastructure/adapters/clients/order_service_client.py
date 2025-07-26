@@ -8,23 +8,23 @@ class OrderServiceClient:
     def __init__(self, logger: logging.Logger):
         self.logger = logger
         self.base_url = "http://localhost:5000/api/v1"
-        self.client = httpx.AsyncClient()
+        self.client = httpx.Client()
     
-    async def send_order(self, exchange_name: str, strategy: str, order_data: dict) -> dict:
+    def send_order(self, exchange_name: str, strategy: str, order_data: dict) -> dict:
         try:
             params = {
                 "exchange_name": exchange_name,
                 "strategy": strategy,
                 "order_data": json.dumps(order_data)
             }
-            response = await self.client.post(f"{self.base_url}/send-order", params=params)
+            response = self.client.post(f"{self.base_url}/send-order", params=params)
             response.raise_for_status()
             return response.json()
         except httpx.HTTPError as err:
             self.logger.error(f"[OrderHttpClient] Failed to send order: {err}")
             raise
 
-    async def get_order(self, exchange_name: str, strategy: str, order_id: dict, **kwargs) -> dict:
+    def get_order(self, exchange_name: str, strategy: str, order_id: dict, **kwargs) -> dict:
         try:
             params = {
                 "exchange_name": exchange_name,
@@ -32,7 +32,7 @@ class OrderServiceClient:
                 "order_id": order_id,
                 **kwargs
             }
-            response = await self.client.get(f"{self.base_url}/get-order", params=params)
+            response = self.client.get(f"{self.base_url}/get-order", params=params)
             response.raise_for_status()
             return response.json()
         except httpx.HTTPError as err:
