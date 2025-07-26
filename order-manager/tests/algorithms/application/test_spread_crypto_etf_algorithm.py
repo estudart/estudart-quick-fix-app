@@ -2,8 +2,8 @@ import pytest
 import time
 
 from src.application.algorithms.spread_crypto_etf import SpreadCryptoETFAdapter
-from src.application.orders.order_service import OrderService
 from src.domain.algorithms.entities import SpreadCryptoETF
+from src.infrastructure.adapters.clients.order_service_client import OrderServiceClient
 from src.infrastructure.adapters import LoggerAdapter
 
 
@@ -27,11 +27,22 @@ class TestSpreadCryptoETFAdapter:
         self.application_algo = SpreadCryptoETFAdapter(
             logger=logger,
             algo=make_algo(),
-            order_service=OrderService(logger)
+            order_service_client=OrderServiceClient(logger)
         )
 
     def test_can_generate_stocks_order_params(self):
         assert self.application_algo.algo.stock_order_params_to_dict(30)
+
+    @pytest.mark.asyncio
+    async def test_can_create_crypto_order(self):
+        data = await self.application_algo.send_crypto_market_order(
+            exchange_name="binance",
+            strategy="futures",
+            stock_order_executed_quantity=10,
+            quantity_crypto_per_stock_share=0.02
+        )
+        print(data)
+        assert data
 
     def test_can_send_stock_order(self):
         assert self.application_algo.send_stock_order("flowa", "simple-order", 30)
@@ -64,7 +75,7 @@ class TestSpreadCryptoETFAdapter:
         self.application_algo.run_algo()
         time.sleep(120)
     
-    # def test_can_listen_to_updates(self):
-    #     self.application_algo.subscribe_to_inav_updates("ETHE11", "test")
-    #     self.application_algo.start_listener_thread()
-    #     time.sleep(40)
+    def test_can_listen_to_updates(self):
+        self.application_algo.subscribe_to_inav_updates("ETHE11", "test")
+        self.application_algo.start_listener_thread()
+        time.sleep(40)

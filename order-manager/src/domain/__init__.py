@@ -1,2 +1,8 @@
 from .orders import SimpleOrder,  OrderCreationManager, OrderCreationError
-from .algorithms import *
+from .algorithms import (
+    AlgoFactory, 
+    AlgoCreationError, 
+    SpreadCryptoETF, 
+    Algorithm, 
+    AlgoStatus
+)

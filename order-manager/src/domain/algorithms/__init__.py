@@ -1,2 +1,2 @@
-from .algo_manager import AlgoManager, AlgoCreationError
+from .algo_factory import AlgoFactory, AlgoCreationError
 from .entities import SpreadCryptoETF, Algorithm, AlgoStatus
