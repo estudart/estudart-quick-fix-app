@@ -24,6 +24,35 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         self.stocks_exec_qty: int = 0
         self.quantity_crypto_per_stock_share: float = 0
 
+    def run_algo(self):
+        etf_symbol = self.algo.algo_data["symbol"]
+        inav_data = self.message_service.get_key(f"inav:{etf_symbol}")
+        stock_fair_price = float(inav_data["inav"])
+        self.quantity_crypto_per_stock_share = float(inav_data["amount_of_underlying_asset"])
+        stock_order_placement_price = self.get_order_placement_price(
+            stock_fair_price=stock_fair_price,
+            side=self.algo.algo_data["side"],
+            spread_threshold=self.algo.algo_data["spread_threshold"]
+        )
+
+        for attempt in range(1, 4):
+            try:
+                stock_order_id = self.send_stock_order(
+                    exchange_name=ExchangeEnum.FLOWA, 
+                    strategy=StrategyEnum.SIMPLE_ORDER,
+                    price=stock_order_placement_price
+                )
+                break
+            except Exception as err:
+                self.logger.exception(f"[Attempt {attempt}/3] {err}")
+                self.logger.info("Retrying in 5 seconds...")
+                time.sleep(5)
+
+        self.subscribe_to_inav_updates(etf_symbol, stock_order_id)
+        self.subscribe_to_order_updates(stock_order_id)
+        
+        self.start_listener_thread()
+
     def send_crypto_market_order(
             self,
             exchange_name: str,
@@ -38,49 +67,20 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         self.logger.debug(f"quantity of crypto execute: {quantity_crypto_to_execute}")
         order_data = self.algo.crypto_order_params_to_dict(quantity_crypto_to_execute)
         
-        return self.order_service_client.send_order(
-            exchange_name, strategy, order_data
-        )
+        return self.order_service_client.send_order(exchange_name, strategy, order_data)
 
-    def send_stock_order(
-            self,
-            exchange_name: str,
-            strategy: str,
-            price: float
-        ):
-        return self.order_service_client.send_order(
-            exchange_name, strategy, self.algo.stock_order_params_to_dict(price)
-        )
+    def send_stock_order(self, exchange_name: str, strategy: str, price: float):
+        stock_order_params = self.algo.stock_order_params_to_dict(price)
+        return self.order_service_client.send_order(exchange_name, strategy, stock_order_params)
     
-    def update_stock_order(
-            self, 
-            order_id: str,
-            exchange_name: str,
-            strategy: str,
-            **kwargs
-        ):
+    def update_stock_order(self, order_id: str, exchange_name: str, strategy: str, **kwargs):
         return self.order_service_client.update_order(exchange_name, strategy, order_id, **kwargs)
     
-    def get_crypto_order(
-            self,
-            exchange_name: str,
-            strategy: str,
-            order_id: str, 
-            symbol: str
-        ) -> dict:
-        return self.order_service_client.get_order(
-            exchange_name, strategy, order_id, symbol=symbol
-        )
+    def get_crypto_order(self,exchange_name: str,strategy: str,order_id: str, symbol: str) -> dict:
+        return self.order_service_client.get_order(exchange_name, strategy, order_id, symbol=symbol)
 
-    def get_stock_order(
-            self,
-            exchange_name: str,
-            strategy: str,
-            order_id: str
-        ) -> dict:
-        return self.order_service_client.get_order(
-            exchange_name, strategy, order_id
-        )
+    def get_stock_order(self,exchange_name: str,strategy: str,order_id: str) -> dict:
+        return self.order_service_client.get_order(exchange_name, strategy, order_id)
 
     def get_order_placement_price(self, stock_fair_price: float, side: str, spread_threshold: float) -> float:
         spread = stock_fair_price * spread_threshold
@@ -170,32 +170,3 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             daemon=True
         )
         listener_thread.start()
-
-    def run_algo(self):
-        etf_symbol = self.algo.algo_data["symbol"]
-        inav_data = self.message_service.get_key(f"inav:{etf_symbol}")
-        stock_fair_price = float(inav_data["inav"])
-        self.quantity_crypto_per_stock_share = float(inav_data["amount_of_underlying_asset"])
-        stock_order_placement_price = self.get_order_placement_price(
-            stock_fair_price=stock_fair_price,
-            side=self.algo.algo_data["side"],
-            spread_threshold=self.algo.algo_data["spread_threshold"]
-        )
-
-        for attempt in range(1, 4):
-            try:
-                stock_order_id = self.send_stock_order(
-                    exchange_name=ExchangeEnum.FLOWA, 
-                    strategy=StrategyEnum.SIMPLE_ORDER,
-                    price=stock_order_placement_price
-                )
-                break
-            except Exception as err:
-                self.logger.exception(f"[Attempt {attempt}/3] {err}")
-                self.logger.info("Retrying in 5 seconds...")
-                time.sleep(5)
-
-        self.subscribe_to_inav_updates(etf_symbol, stock_order_id)
-        self.subscribe_to_order_updates(stock_order_id)
-        
-        self.start_listener_thread()
