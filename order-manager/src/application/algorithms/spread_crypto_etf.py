@@ -20,8 +20,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         self.logger = logger
         self.algo = algo
         self.order_service_client = order_service_client
-        self.message_service = RedisAdapter(logger)
-        self.event_threads: list[Thread] = []
+        self.message_service = RedisAdapter(self.logger)
         self.stocks_exec_qty: int = 0
         self.quantity_crypto_per_stock_share: float = 0
 
