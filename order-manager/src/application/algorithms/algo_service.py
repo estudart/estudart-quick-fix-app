@@ -11,6 +11,7 @@ class AlgoService:
         self.logger = logger
         self.algo_factory = AlgoFactory(logger=self.logger)
         self.algo_manager = AlgoManager(logger=self.logger)
+        self.logger.info(f"Algo service has successfully started")
 
     def start_algo(
             self, 
