@@ -1,40 +1,26 @@
 import logging
 from multiprocessing import Process
+import uuid
 
-from src.domain.algorithms.entities import Algorithm
-from src.application.algorithms.base_algorithm import BaseAlgorithm
+from src.domain.algorithms import AlgoFactory
 from src.application.algorithms.spread_crypto_etf import SpreadCryptoETFAdapter
 from src.infrastructure.adapters.clients.order_service_client import OrderServiceClient
+from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 
 
 
 class AlgoManager:
     def __init__(self, logger: logging.Logger):
         self.logger = logger
-        self.algo_adapter_dict = {
-            "spread-crypto-etf": SpreadCryptoETFAdapter
-        }
+        self.algo_factory = AlgoFactory(logger=self.logger)
         self.active_algos: dict[str, Process] = {}
 
-    def get_algo_adapter(
-            self, 
-            algo: Algorithm,
-            algo_name: str
-        ) -> BaseAlgorithm:
-
-        return self.algo_adapter_dict[algo_name](
-            logger=self.logger,
-            algo=algo,
-            order_service_client=OrderServiceClient(self.logger)
-        )
-
-    def run_algorithm(self, algo: Algorithm, algo_name: str):
-        algo_adapter = self.get_algo_adapter(algo, algo_name)
-        algo_adapter.run_algo()
-
-    def start_algo(self, algo: Algorithm, algo_name: str):
-        process = Process(target=self.run_algorithm, args=(algo, algo_name))
-        self.active_algos[algo.id] = process
+    def start_algo(self, algo_data: dict, algo_name: str) -> None:
+        process = Process(target=run_algorithm, args=(algo_data, algo_name))
+        process.start()
+        algo_id = str(uuid.uuid4())
+        self.active_algos[algo_id] = process
+        return algo_id
     
     def stop_algo(self, algo_id: str):
         try:
@@ -46,3 +32,17 @@ class AlgoManager:
         except Exception as err:
             self.logger.error(f"Could not stop algo, reason: {err}")
             return False
+
+
+def run_algorithm(algo_data: dict, algo_name: str) -> None:
+    algo_adapter_dict = {
+        "spread-crypto-etf": SpreadCryptoETFAdapter
+    }
+    algo = AlgoFactory().create_algo(algo_name, algo_data)
+    logger = LoggerAdapter().get_logger()
+    algo_adapter = algo_adapter_dict[algo_name](
+            logger=logger,
+            algo=algo,
+            order_service_client=OrderServiceClient(logger)
+        )
+    algo_adapter.run_algo()

@@ -9,13 +9,11 @@ class AlgoFactory:
         self.algo_dict = {
             "spread-crypto-etf": SpreadCryptoETF
         }
-        self.active_algos = {}
 
     def create_algo(self, algo_name: str, algo_data: dict):
         try:
             algo_class = self.algo_dict[algo_name]
             algo = algo_class(algo_data)
-            self.active_algos[algo.id] = algo
             return algo
         except Exception as err:
             raise AlgoCreationError(
