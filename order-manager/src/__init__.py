@@ -14,5 +14,5 @@ from .application import (
     BaseAlgorithm,
     SpreadCryptoETFAdapter
 )
-
+from .enums import ExchangeEnum, StrategyEnum
 from .domain import OrderCreationError, OrderCreationManager, SimpleOrder
