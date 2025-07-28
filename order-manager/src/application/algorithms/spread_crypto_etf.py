@@ -169,6 +169,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
     def start_listener_thread(self):
         listener_thread = Thread(
             target=self.message_service.start_listening,
-            daemon=True
+            daemon=False
         )
         listener_thread.start()
+        listener_thread.join()
