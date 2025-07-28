@@ -39,5 +39,18 @@ class OrderServiceClient:
             self.logger.error(f"[OrderHttpClient] Failed to send order: {err}")
             raise
 
-    def update_order(self):
-        pass
+    def update_order(self, exchange_name: str, strategy: str, order_id: dict, order_data: dict, **kwargs) -> dict:
+        try:
+            params = {
+                "exchange_name": exchange_name,
+                "strategy": strategy,
+                "order_id": order_id,
+                "order_data": json.dumps(order_data),
+                **kwargs
+            }
+            response = self.client.put(f"{self.base_url}/update-order", params=params)
+            response.raise_for_status()
+            return response.json()
+        except httpx.HTTPError as err:
+            self.logger.error(f"[OrderHttpClient] Failed to send order: {err}")
+            raise
