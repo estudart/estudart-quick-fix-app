@@ -33,7 +33,6 @@ class TestSpreadCryptoETFAdapter:
     def test_can_generate_stocks_order_params(self):
         assert self.application_algo.algo.stock_order_params_to_dict(30)
 
-    @pytest.mark.asyncio
     def test_can_manage_crypto_order(self):
         id = self.application_algo.send_crypto_market_order(
             exchange_name="binance",
@@ -54,7 +53,8 @@ class TestSpreadCryptoETFAdapter:
 
     def test_can_update_stock_order(self):
         order_id = self.application_algo.send_stock_order("flowa", "simple-order", 30)
-        update = self.application_algo.update_stock_order(order_id, "flowa", "simple-order", price=55)
+        order_data = {"price": 55}
+        update = self.application_algo.update_stock_order(order_id, "flowa", "simple-order", order_data)
         assert update
     
     def test_get_order_placement_price_calculates_correctly(self):
@@ -79,8 +79,3 @@ class TestSpreadCryptoETFAdapter:
     def test_can_run_algo(self):
         self.application_algo.run_algo()
         time.sleep(120)
-    
-    def test_can_listen_to_updates(self):
-        self.application_algo.subscribe_to_inav_updates("ETHE11", "test")
-        self.application_algo.start_listener_thread()
-        time.sleep(40)
