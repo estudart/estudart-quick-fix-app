@@ -38,8 +38,8 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         for attempt in range(1, 4):
             try:
                 stock_order_id = self.send_stock_order(
-                    exchange_name=ExchangeEnum.FLOWA, 
-                    strategy=StrategyEnum.SIMPLE_ORDER,
+                    exchange_name=ExchangeEnum.FLOWA.value, 
+                    strategy=StrategyEnum.SIMPLE_ORDER.value,
                     price=stock_order_placement_price
                 )
                 break
@@ -73,8 +73,8 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         stock_order_params = self.algo.stock_order_params_to_dict(price)
         return self.order_service_client.send_order(exchange_name, strategy, stock_order_params)
     
-    def update_stock_order(self, order_id: str, exchange_name: str, strategy: str, **kwargs):
-        return self.order_service_client.update_order(exchange_name, strategy, order_id, **kwargs)
+    def update_stock_order(self, order_id: str, exchange_name: str, strategy: str, order_data: dict):
+        return self.order_service_client.update_order(exchange_name, strategy, order_id, order_data)
     
     def get_crypto_order(self,exchange_name: str,strategy: str,order_id: str, symbol: str) -> dict:
         return self.order_service_client.get_order(exchange_name, strategy, order_id, symbol=symbol)
@@ -110,9 +110,11 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                 try:
                     self.update_stock_order(
                         order_id=order_id,
-                        exchange_name=ExchangeEnum.FLOWA,
-                        strategy=StrategyEnum.SIMPLE_ORDER,
-                        price=stock_order_placement_price
+                        exchange_name=ExchangeEnum.FLOWA.value,
+                        strategy=StrategyEnum.SIMPLE_ORDER.value,
+                        order_data={
+                            "price": stock_order_placement_price
+                        }
                     )
                     break
                 except Exception as err:
@@ -130,8 +132,8 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             for attempt in range(1, 4):
                 try:
                     self.send_crypto_market_order(
-                        exchange_name=ExchangeEnum.BINANCE,
-                        strategy=StrategyEnum.FUTURES,
+                        exchange_name=ExchangeEnum.BINANCE.value,
+                        strategy=StrategyEnum.FUTURES.value,
                         stock_order_executed_quantity=exec_qty,
                         quantity_crypto_per_stock_share=self.quantity_crypto_per_stock_share
                     )
