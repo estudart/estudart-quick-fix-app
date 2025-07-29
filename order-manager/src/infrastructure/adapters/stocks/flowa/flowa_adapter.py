@@ -111,6 +111,9 @@ class FlowaAdapter(OrderAdapter):
                 data=json.dumps(update_params)
             )
             response.raise_for_status()
+            order = response.json()
+            if not order["Success"]:
+                raise UpdateOrderError(f'Failed to update order, reason: {order["Error"]}')
             self.logger.info(f"Order with id: {order_id} was successfully updated on {self.provider}")
         except (requests.RequestException, ValueError, KeyError) as err:
             msg = f"Could not update order to {self.provider}, reason: {err}"
