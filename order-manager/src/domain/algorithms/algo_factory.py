@@ -10,10 +10,10 @@ class AlgoFactory:
             "spread-crypto-etf": SpreadCryptoETF
         }
 
-    def create_algo(self, algo_name: str, algo_data: dict):
+    def create_algo(self, id: str, algo_name: str, algo_data: dict):
         try:
             algo_class = self.algo_dict[algo_name]
-            algo = algo_class(algo_data)
+            algo = algo_class(id, algo_data)
             return algo
         except Exception as err:
             raise AlgoCreationError(
