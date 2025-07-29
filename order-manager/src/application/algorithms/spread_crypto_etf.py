@@ -185,7 +185,6 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         self.logger.info(f"Unsubscribing channels on pubsub...")
         self.message_service.unsubscribe(f"inav-{self.algo.algo_data['symbol']}")
         self.message_service.unsubscribe(f"order-{self.stock_order_id}")
-        cancel_response = None
         self.logger.info(f"Cancelling orders...")
         try:
             cancel_response = self.cancel_stock_order(
@@ -196,7 +195,6 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             self.logger.info(f"Cancel order response: {cancel_response}")
         except Exception as err:
             self.logger.exception(f"Could not cancel order, reason: {err}")
-        self.logger.info(f"Cancel order response: {cancel_response}")
         return
     
     def start_listener_thread(self):
