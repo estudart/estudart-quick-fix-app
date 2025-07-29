@@ -1,7 +1,8 @@
 from flask import Blueprint, request as req
 
 from src.interface.api.controllers.algorithms import (
-    send_algo_request, 
+    send_algo_request,
+    cancel_algo_request 
 )
 
 
@@ -49,3 +50,31 @@ def send_algo_endpoint():
         data = req.args.to_dict()
     
     return send_algo_request(data)
+
+@bp_algos.route("/cancel-algo", methods=["DELETE"])
+def cancel_algo_endpoint():
+    """
+    Cancel Algo
+    ---
+    tags:
+     - Algorithm
+
+    parameters:
+     - name: algo_id
+       in: query
+       type: string
+       default: '9125ff34-d180-4070-9360-d09e0aa2b3af'
+       required: True
+       description: Name of the algo
+    
+    responses:
+        200:
+            description: Algorithm was cancelled
+            
+    """
+    try:
+        data = req.json()
+    except:
+        data = req.args.to_dict()
+    
+    return cancel_algo_request(data)
