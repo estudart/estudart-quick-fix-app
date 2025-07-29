@@ -9,7 +9,8 @@ from src.infrastructure.adapters.order_adapter import (
     OrderAdapter, 
     SendOrderError, 
     GetOrderError,
-    CancelOrderError
+    CancelOrderError,
+    UpdateOrderError
 )
 from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 
@@ -102,15 +103,23 @@ class FlowaAdapter(OrderAdapter):
             raise GetOrderError(msg) from err
     
     def update_order(self, order_id, **kwargs) -> bool:
-        update_params = self.transform_update_order({**kwargs})
-        response = requests.put(
-            f'{self.endpoint}/{self.suffix}/{order_id}',
-            headers=self.mount_request_headers(),
-            data=json.dumps(update_params)
-        )
-        response.raise_for_status()
-        self.logger.info(f"Order with id: {order_id} was successfully updated on {self.provider}")
-        return True
+        try:
+            update_params = self.transform_update_order({**kwargs})
+            response = requests.put(
+                f'{self.endpoint}/{self.suffix}/{order_id}',
+                headers=self.mount_request_headers(),
+                data=json.dumps(update_params)
+            )
+            response.raise_for_status()
+            self.logger.info(f"Order with id: {order_id} was successfully updated on {self.provider}")
+        except (requests.RequestException, ValueError, KeyError) as err:
+            msg = f"Could not update order to {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise UpdateOrderError(msg) from err
+        except Exception as err:
+            msg = f"Could not update order to {self.provider}, reason: {err}"
+            self.logger.exception(msg)
+            raise
     
     def cancel_order(self, order_id: str, **kwargs) -> bool:
         try:
