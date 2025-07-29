@@ -1,5 +1,6 @@
 import logging
 from threading import Thread
+from multiprocessing import Event
 import time
 
 from src.enums import ExchangeEnum, StrategyEnum
@@ -15,14 +16,19 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             self,
             logger: logging.Logger,
             algo: SpreadCryptoETF,
-            order_service_client: OrderServiceClient
+            order_service_client: OrderServiceClient,
+            cancel_event: Event
         ):
         self.logger = logger
         self.algo = algo
         self.order_service_client = order_service_client
         self.message_service = RedisAdapter(self.logger)
+        self.cancel_event = cancel_event
+
         self.stocks_exec_qty: int = 0
         self.quantity_crypto_per_stock_share: float = 0
+        self.retry_time: int = 1
+        self.stock_order_id = None
 
     def run_algo(self):
         etf_symbol = self.algo.algo_data["symbol"]
@@ -37,7 +43,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
 
         for attempt in range(1, 4):
             try:
-                stock_order_id = self.send_stock_order(
+                self.stock_order_id = self.send_stock_order(
                     exchange_name=ExchangeEnum.FLOWA.value, 
                     strategy=StrategyEnum.SIMPLE_ORDER.value,
                     price=stock_order_placement_price
@@ -45,12 +51,13 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                 break
             except Exception as err:
                 self.logger.exception(f"[Attempt {attempt}/3] {err}")
-                self.logger.info("Retrying in 5 seconds...")
-                time.sleep(5)
+                self.logger.info(f"Retrying in {self.retry_time} seconds...")
+                time.sleep(self.retry_time)
 
-        self.subscribe_to_inav_updates(etf_symbol, stock_order_id)
-        self.subscribe_to_order_updates(stock_order_id)
-        
+        self.subscribe_to_inav_updates(etf_symbol, self.stock_order_id)
+        self.subscribe_to_order_updates(self.stock_order_id)
+
+        self.start_cancellation_event_thread()
         self.start_listener_thread()
 
     def send_crypto_market_order(
@@ -75,6 +82,9 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
     
     def update_stock_order(self, order_id: str, exchange_name: str, strategy: str, order_data: dict):
         return self.order_service_client.update_order(exchange_name, strategy, order_id, order_data)
+    
+    def cancel_stock_order(self, order_id: str, exchange_name: str, strategy: str):
+        return self.order_service_client.cancel_order(exchange_name, strategy, order_id)
     
     def get_crypto_order(self,exchange_name: str,strategy: str,order_id: str, symbol: str) -> dict:
         return self.order_service_client.get_order(exchange_name, strategy, order_id, symbol=symbol)
@@ -119,14 +129,14 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                     break
                 except Exception as err:
                     self.logger.exception(f"[Attempt {attempt}/3] Failed to update stock order: {err}")
-                    self.logger.info("Retrying in 5 seconds...")
-                    time.sleep(5)
+                    self.logger.info(f"Retrying in {self.retry_time} seconds...")
+                    time.sleep(self.retry_time)
 
     def handle_trade_update(self, data: dict, order_id: str):
         self.logger.info(f"[{order_id}] Executed a new trade: {data}")
 
     def handle_order_update(self, data: dict, order_id: str):
-        self.logger.info(f"[{order_id}] Executed a new trade: {data}")
+        self.logger.info(f"[{order_id}] Received an order event: {data}")
         exec_qty = data["exec_qty"] - self.stocks_exec_qty
         if exec_qty > 0:
             for attempt in range(1, 4):
@@ -140,8 +150,8 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                     break
                 except Exception as err:
                     self.logger.exception(f"[Attempt {attempt}/3] Failed to send crypto order: {err}")
-                    self.logger.info("Retrying in 5 seconds...")
-                    time.sleep(5)
+                    self.logger.info(f"Retrying in {self.retry_time} seconds...")
+                    time.sleep(self.retry_time)
             self.stocks_exec_qty += exec_qty
         
         if self.stocks_exec_qty == self.algo.algo_data["quantity"]:
@@ -150,7 +160,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             self.message_service.unsubscribe(f"order-{order_id}")
             self.logger.info(f"Algo has been totally executed")
             return
-    
+        
     def subscribe_to_inav_updates(self, symbol: str, order_id: str):
         def inav_callback(data):
             self.handle_inav_price_update(data, order_id)
@@ -165,6 +175,29 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         def order_callback(data):
             self.handle_order_update(data, order_id)
         self.message_service.subscribe(f"order-{order_id}", order_callback)
+
+    def monitor_cancellation(self):
+        self.logger.info(f"Cancellation thread listener started...")
+        while not self.cancel_event.is_set():
+            time.sleep(0.5)
+        self.logger.info(f"Cancellation event was triggered.")
+
+        self.logger.info(f"Unsubscribing channels on pubsub...")
+        self.message_service.unsubscribe(f"inav-{self.algo.algo_data['symbol']}")
+        self.message_service.unsubscribe(f"order-{self.stock_order_id}")
+        cancel_response = None
+        self.logger.info(f"Cancelling orders...")
+        try:
+            cancel_response = self.cancel_stock_order(
+                exchange_name=ExchangeEnum.FLOWA.value,
+                strategy=StrategyEnum.SIMPLE_ORDER.value,
+                order_id=self.stock_order_id
+            )
+            self.logger.info(f"Cancel order response: {cancel_response}")
+        except Exception as err:
+            self.logger.exception(f"Could not cancel order, reason: {err}")
+        self.logger.info(f"Cancel order response: {cancel_response}")
+        return
     
     def start_listener_thread(self):
         listener_thread = Thread(
@@ -173,3 +206,10 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         )
         listener_thread.start()
         listener_thread.join()
+
+    def start_cancellation_event_thread(self):
+        monitor_cancellation_event_thread = Thread(
+            target=self.monitor_cancellation,
+            daemon=False
+        )
+        monitor_cancellation_event_thread.start()
