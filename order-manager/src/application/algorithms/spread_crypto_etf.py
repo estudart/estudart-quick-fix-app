@@ -25,10 +25,11 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         self.message_service = RedisAdapter(self.logger)
         self.cancel_event = cancel_event
 
+        self.stock_order_id = None
         self.stocks_exec_qty: int = 0
+        self.stock_order_price = None
         self.quantity_crypto_per_stock_share: float = 0
         self.retry_time: int = 1
-        self.stock_order_id = None
 
     def run_algo(self):
         etf_symbol = self.algo.algo_data["symbol"]
@@ -40,6 +41,8 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             side=self.algo.algo_data["side"],
             spread_threshold=self.algo.algo_data["spread_threshold"]
         )
+        # Update the current price of the order
+        self.stock_order_price = stock_order_placement_price
 
         for attempt in range(1, 4):
             try:
@@ -101,6 +104,10 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             return stock_fair_price + spread
         else:
             raise ValueError(f"Invalid order side: '{side}'")
+        
+    def should_update_stock_order(self, price_update: float):
+        return round(price_update, 2) != round(self.stock_order_price, 2)
+
     
     def handle_inav_price_update(self, data: dict, order_id: str):
         if data["symbol"] == self.algo.algo_data["symbol"]:
@@ -116,21 +123,23 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                 side=side,
                 spread_threshold=spread_threshold
             )
-            for attempt in range(1, 4):
-                try:
-                    self.update_stock_order(
-                        order_id=order_id,
-                        exchange_name=ExchangeEnum.FLOWA.value,
-                        strategy=StrategyEnum.SIMPLE_ORDER.value,
-                        order_data={
-                            "price": stock_order_placement_price
-                        }
-                    )
-                    break
-                except Exception as err:
-                    self.logger.exception(f"[Attempt {attempt}/3] Failed to update stock order: {err}")
-                    self.logger.info(f"Retrying in {self.retry_time} seconds...")
-                    time.sleep(self.retry_time)
+
+            if self.should_update_stock_order(stock_order_placement_price):
+                for attempt in range(1, 4):
+                    try:
+                        self.update_stock_order(
+                            order_id=order_id,
+                            exchange_name=ExchangeEnum.FLOWA.value,
+                            strategy=StrategyEnum.SIMPLE_ORDER.value,
+                            order_data={
+                                "price": stock_order_placement_price
+                            }
+                        )
+                        break
+                    except Exception as err:
+                        self.logger.exception(f"[Attempt {attempt}/3] Failed to update stock order: {err}")
+                        self.logger.info(f"Retrying in {self.retry_time} seconds...")
+                        time.sleep(self.retry_time)
 
     def handle_trade_update(self, data: dict, order_id: str):
         self.logger.info(f"[{order_id}] Executed a new trade: {data}")
