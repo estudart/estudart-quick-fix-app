@@ -1,13 +1,12 @@
 from abc import ABC, abstractmethod
 
-import uuid
-
 from src.domain.algorithms.enums import AlgoStatus
 
 
 
 class Algorithm(ABC):
-    def __init__(self, algo_data: dict):
+    def __init__(self, id: str, algo_data: dict):
+        self.id = id
         self.algo_data = algo_data
         self.status = None
 
@@ -42,9 +41,8 @@ algo_data = {
 
 
 class SpreadCryptoETF(Algorithm):
-    def __init__(self, algo_data: dict):
-        super().__init__(algo_data)
-        self.id = str(uuid.uuid4())
+    def __init__(self, id: str, algo_data: dict):
+        super().__init__(id, algo_data)
         self.status = AlgoStatus.CREATED
         self.etf_underlying_assets = {
             "BITH11": {

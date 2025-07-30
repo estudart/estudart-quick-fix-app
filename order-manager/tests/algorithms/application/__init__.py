@@ -1,1 +1,2 @@
 from .test_spread_crypto_etf_algorithm import TestSpreadCryptoETFAdapter
+from .test_algo_service import TestAlgoService

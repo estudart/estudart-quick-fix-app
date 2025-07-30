@@ -5,6 +5,7 @@ from .infrastructure import (
     BinanceAdapter,
     BinanceFuturesAdapter,
     BinanceSimpleOrderAdapter,
+    OrderServiceClient,
     LoggerAdapter
 )
 from .application import (
@@ -13,5 +14,5 @@ from .application import (
     BaseAlgorithm,
     SpreadCryptoETFAdapter
 )
-
+from .enums import ExchangeEnum, StrategyEnum
 from .domain import OrderCreationError, OrderCreationManager, SimpleOrder

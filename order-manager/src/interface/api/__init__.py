@@ -2,7 +2,7 @@ from flask import Flask
 from flasgger import Swagger
 from flask_cors import CORS
 
-from src.interface.api.routes import bp_orders
+from src.interface.api.routes import bp_orders, bp_algos
 from src.interface.api.containers import Container
 
 def create_app():
@@ -45,5 +45,6 @@ def create_app():
         return {"message": "Status OK"}, 200
 
     app.register_blueprint(bp_orders, url_prefix="/api/v1")
+    app.register_blueprint(bp_algos, url_prefix="/api/v1")
 
     return app

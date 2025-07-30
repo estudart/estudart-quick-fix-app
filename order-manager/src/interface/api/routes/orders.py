@@ -1,4 +1,4 @@
-from flask import Blueprint, request as req, jsonify
+from flask import Blueprint, request as req
 
 from src.interface.api.controllers.orders import (
     send_order_request, 
@@ -51,7 +51,7 @@ def send_order_endpoint():
     except:
         data = req.args.to_dict()
     
-    return jsonify(send_order_request(data))
+    return send_order_request(data)
 
 @bp_orders.route("/get-order", methods=["GET"])
 def get_order_endpoint():
@@ -100,7 +100,7 @@ def get_order_endpoint():
     except:
         data = req.args.to_dict()
     
-    return jsonify(get_order_request(data))
+    return get_order_request(data)
 
 @bp_orders.route("/cancel-order", methods=["DELETE"])
 def cancel_order_endpoint():
@@ -149,7 +149,7 @@ def cancel_order_endpoint():
     except:
         data = req.args.to_dict()
     
-    return jsonify(cancel_order_request(data))
+    return cancel_order_request(data)
 
 @bp_orders.route("/update-order", methods=["PUT"])
 def update_order_endpoint():
@@ -205,4 +205,4 @@ def update_order_endpoint():
     except:
         data = req.args.to_dict()
     
-    return jsonify(update_order_request(data))
+    return update_order_request(data)

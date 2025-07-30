@@ -2,8 +2,8 @@ import pytest
 import time
 
 from src.application.algorithms.spread_crypto_etf import SpreadCryptoETFAdapter
-from src.application.orders.order_service import OrderService
 from src.domain.algorithms.entities import SpreadCryptoETF
+from src.infrastructure.adapters.clients.order_service_client import OrderServiceClient
 from src.infrastructure.adapters import LoggerAdapter
 
 
@@ -18,7 +18,7 @@ def make_algo(overrides: dict = None) -> SpreadCryptoETF:
     }
     if overrides:
         base_data.update(overrides)
-    return SpreadCryptoETF(algo_data=base_data)
+    return SpreadCryptoETF(id="test", algo_data=base_data)
 
 logger = LoggerAdapter().get_logger()
 
@@ -27,18 +27,38 @@ class TestSpreadCryptoETFAdapter:
         self.application_algo = SpreadCryptoETFAdapter(
             logger=logger,
             algo=make_algo(),
-            order_service=OrderService(logger)
+            order_service_client=OrderServiceClient(logger),
+            cancel_event="test"
         )
 
     def test_can_generate_stocks_order_params(self):
         assert self.application_algo.algo.stock_order_params_to_dict(30)
 
+    def test_can_manage_crypto_order(self):
+        id = self.application_algo.send_crypto_market_order(
+            exchange_name="binance",
+            strategy="futures",
+            stock_order_executed_quantity=10,
+            quantity_crypto_per_stock_share=0.02
+        )
+        data = self.application_algo.get_crypto_order(
+            exchange_name="binance",
+            strategy="futures",
+            order_id=id,
+            symbol="ETHUSDT"
+        )
+        assert data
+
     def test_can_send_stock_order(self):
         assert self.application_algo.send_stock_order("flowa", "simple-order", 30)
+    
+    def test_can_cancel_stock_order(self):
+        assert self.application_algo.order_service_client.cancel_order("flowa", "simple-order", "MTB_0_10_250729174734_00362")
 
     def test_can_update_stock_order(self):
         order_id = self.application_algo.send_stock_order("flowa", "simple-order", 30)
-        update = self.application_algo.update_stock_order(order_id, "flowa", "simple-order", price=55)
+        order_data = {"price": 55}
+        update = self.application_algo.update_stock_order(order_id, "flowa", "simple-order", order_data)
         assert update
     
     def test_get_order_placement_price_calculates_correctly(self):
@@ -63,8 +83,3 @@ class TestSpreadCryptoETFAdapter:
     def test_can_run_algo(self):
         self.application_algo.run_algo()
         time.sleep(120)
-    
-    # def test_can_listen_to_updates(self):
-    #     self.application_algo.subscribe_to_inav_updates("ETHE11", "test")
-    #     self.application_algo.start_listener_thread()
-    #     time.sleep(40)
