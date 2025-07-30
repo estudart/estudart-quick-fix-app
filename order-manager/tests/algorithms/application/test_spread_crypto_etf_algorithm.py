@@ -18,7 +18,7 @@ def make_algo(overrides: dict = None) -> SpreadCryptoETF:
     }
     if overrides:
         base_data.update(overrides)
-    return SpreadCryptoETF(algo_data=base_data)
+    return SpreadCryptoETF(id="test", algo_data=base_data)
 
 logger = LoggerAdapter().get_logger()
 
@@ -27,7 +27,8 @@ class TestSpreadCryptoETFAdapter:
         self.application_algo = SpreadCryptoETFAdapter(
             logger=logger,
             algo=make_algo(),
-            order_service_client=OrderServiceClient(logger)
+            order_service_client=OrderServiceClient(logger),
+            cancel_event="test"
         )
 
     def test_can_generate_stocks_order_params(self):
@@ -50,6 +51,9 @@ class TestSpreadCryptoETFAdapter:
 
     def test_can_send_stock_order(self):
         assert self.application_algo.send_stock_order("flowa", "simple-order", 30)
+    
+    def test_can_cancel_stock_order(self):
+        assert self.application_algo.order_service_client.cancel_order("flowa", "simple-order", "MTB_0_10_250729174734_00362")
 
     def test_can_update_stock_order(self):
         order_id = self.application_algo.send_stock_order("flowa", "simple-order", 30)
