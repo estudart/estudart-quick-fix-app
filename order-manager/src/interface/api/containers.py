@@ -16,7 +16,7 @@ class Container(containers.DeclarativeContainer):
             "src.interface.api.controllers.algorithms.post_requests",
             "src.interface.api.controllers.algorithms.cancel_requests"
         ]
-    )  # Adjust this if needed
+    )
 
     logger = providers.Singleton(LoggerAdapter().get_logger)
 
