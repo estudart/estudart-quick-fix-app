@@ -190,19 +190,19 @@ def update_order_endpoint():
        required: True
        description: Name of the strategy
 
-     - name: symbol
-       in: query
-       type: string
-       default: 'BTCUSDT'
-       required: False
-       description: Symbol
-
      - name: order_id
        in: query
        type: string
        default: 'MTB_2_10_250724115927_00432'
        required: True
        description: Id of the order
+
+     - name: symbol
+       in: query
+       type: string
+       default: 'BTCUSDT'
+       required: False
+       description: Symbol
 
      - in: body
        name: body
