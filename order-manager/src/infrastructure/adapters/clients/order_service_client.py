@@ -1,13 +1,19 @@
+import os
 import logging
+
+from dotenv import load_dotenv
 import httpx
-import json
 
 
+
+load_dotenv()
+
+ENV = os.environ.get("ENV", "DEV")
 
 class OrderServiceClient:
     def __init__(self, logger: logging.Logger):
         self.logger = logger
-        self.base_url = "http://localhost:5000/api/v1"
+        self.base_url = os.environ.get(f"ORDER_SERVICE_URL_{ENV}")
         self.client = httpx.Client()
     
     def send_order(self, exchange_name: str, strategy: str, order_data: dict) -> dict:
