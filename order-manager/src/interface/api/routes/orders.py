@@ -34,24 +34,48 @@ def send_order_endpoint():
        required: True
        description: Name of the strategy
 
-     - name: order_data
-       in: query
-       type: string
-       default: '{"symbol":"BTCUSDT","side":"BUY","quantity":0.006,"price":30000,"order_type":"LIMIT","time_in_force":"GTC"}'
+     - in: body
+       name: body
        required: True
-       description: Parameter of the order
+       schema:
+        type: object
+        properties:
+          symbol:
+            type: string
+            example: "BTCUSDT"
+          side:
+            type: string
+            example: "BUY"
+          quantity:
+            type: number
+            example: 0.006
+          price:
+            type: number
+            example: 30000
+          order_type:
+            type: string
+            example: LIMIT
+          time_in_force:
+            type: string
+            example: GTC
+        required:
+          - symbol
+          - side
+          - quantity
+          - price
+          - order_type
+          - time_in_force
     
     responses:
         200:
             description: New order was sent
             
     """
-    try:
-        data = req.json()
-    except:
-        data = req.args.to_dict()
     
-    return send_order_request(data)
+    return send_order_request({
+        **req.args.to_dict(),
+        "order_data": req.get_json()
+    })
 
 @bp_orders.route("/get-order", methods=["GET"])
 def get_order_endpoint():
@@ -95,12 +119,8 @@ def get_order_endpoint():
             description: New order was sent
             
     """
-    try:
-        data = req.json()
-    except:
-        data = req.args.to_dict()
     
-    return get_order_request(data)
+    return get_order_request(req.args.to_dict())
 
 @bp_orders.route("/cancel-order", methods=["DELETE"])
 def cancel_order_endpoint():
@@ -144,12 +164,8 @@ def cancel_order_endpoint():
             description: Order was successfully cancelled
             
     """
-    try:
-        data = req.json()
-    except:
-        data = req.args.to_dict()
-    
-    return cancel_order_request(data)
+
+    return cancel_order_request(req.args.to_dict())
 
 @bp_orders.route("/update-order", methods=["PUT"])
 def update_order_endpoint():
@@ -188,21 +204,23 @@ def update_order_endpoint():
        required: True
        description: Id of the order
 
-     - name: order_data
-       in: query
-       type: string
-       default: '{"price":75}'
+     - in: body
+       name: body
        required: True
-       description: Parameter of the order
+       schema:
+        type: object
+        properties:
+          price:
+            type: number
+            example: 75
     
     responses:
         200:
-            description: New order was sent
+            description: New order was updated
             
     """
-    try:
-        data = req.json()
-    except:
-        data = req.args.to_dict()
-    
-    return update_order_request(data)
+
+    return update_order_request({
+        **req.args.to_dict(),
+        "order_data": req.get_json()
+    })

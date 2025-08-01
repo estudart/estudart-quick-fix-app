@@ -15,41 +15,54 @@ def send_algo_endpoint():
     Send Algo
     ---
     tags:
-     - Algorithm
-
+      - Algorithm
     parameters:
-     - name: algo_name
-       in: query
-       type: string
-       default: 'spread-crypto-etf'
-       required: True
-       description: Name of the algo
-
-     - name: algo_data
-       in: query
-       type: string
-       default: '{
-            "broker": "935",
-            "account": "84855",
-            "symbol": "ETHE11",
-            "side": "BUY",
-            "quantity": 100,
-            "spread_threshold": 0.02
-        }'
-       required: True
-       description: Parameter of the algorithm
-    
+      - name: algo_name
+        in: query
+        type: string
+        default: 'spread-crypto-etf'
+        required: true
+        description: Name of the algo
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            broker:
+              type: string
+              example: "935"
+            account:
+              type: string
+              example: "1001"
+            symbol:
+              type: string
+              example: "ETHE11"
+            side:
+              type: string
+              example: "BUY"
+            quantity:
+              type: integer
+              example: 100
+            spread_threshold:
+              type: number
+              example: 0.02
+          required:
+            - broker
+            - account
+            - symbol
+            - side
+            - quantity
+            - spread_threshold
     responses:
-        200:
-            description: New algorithm was sent
-            
+      200:
+        description: New algorithm was sent
     """
-    try:
-        data = req.json()
-    except:
-        data = req.args.to_dict()
-    
-    return send_algo_request(data)
+
+    return send_algo_request({
+        **req.args.to_dict(),
+        "algo_data": req.get_json()
+    })
 
 @bp_algos.route("/cancel-algo", methods=["DELETE"])
 def cancel_algo_endpoint():
@@ -72,9 +85,5 @@ def cancel_algo_endpoint():
             description: Algorithm was cancelled
             
     """
-    try:
-        data = req.json()
-    except:
-        data = req.args.to_dict()
     
-    return cancel_algo_request(data)
+    return cancel_algo_request(req.args.to_dict())
