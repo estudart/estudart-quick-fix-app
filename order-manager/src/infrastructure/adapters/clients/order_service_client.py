@@ -14,10 +14,9 @@ class OrderServiceClient:
         try:
             params = {
                 "exchange_name": exchange_name,
-                "strategy": strategy,
-                "order_data": json.dumps(order_data)
+                "strategy": strategy
             }
-            response = self.client.post(f"{self.base_url}/send-order", params=params)
+            response = self.client.post(f"{self.base_url}/send-order", params=params, json=order_data)
             response.raise_for_status()
             return response.json()
         except (httpx.HTTPError, httpx.HTTPStatusError) as err:
@@ -26,7 +25,6 @@ class OrderServiceClient:
         except Exception as err:
             self.logger.exception(f"[OrderHttpClient] Failed to send order with unkown exception: {err}")
             raise
-        
 
     def get_order(self, exchange_name: str, strategy: str, order_id: dict, **kwargs) -> dict:
         try:
@@ -52,10 +50,9 @@ class OrderServiceClient:
                 "exchange_name": exchange_name,
                 "strategy": strategy,
                 "order_id": order_id,
-                "order_data": json.dumps(order_data),
                 **kwargs
             }
-            response = self.client.put(f"{self.base_url}/update-order", params=params)
+            response = self.client.put(f"{self.base_url}/update-order", params=params, json=order_data)
             response.raise_for_status()
             return response.json()
         except (httpx.HTTPError, httpx.HTTPStatusError) as err:

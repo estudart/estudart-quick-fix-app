@@ -1,5 +1,3 @@
-import json
-
 from dependency_injector.wiring import inject, Provide
 from flask import jsonify
 

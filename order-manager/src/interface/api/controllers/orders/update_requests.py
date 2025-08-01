@@ -1,5 +1,3 @@
-import json
-
 from dependency_injector.wiring import inject, Provide
 from flask import jsonify
 
@@ -16,7 +14,7 @@ def update_order_request(data: dict, order_service: OrderService = Provide[Conta
             exchange_name=data["exchange_name"],
             strategy=data["strategy"],
             order_id=data["order_id"],
-            **json.loads(data["order_data"])
+            **data["order_data"]
         )
         return jsonify(data), 200
     except UpdateOrderError as err:
