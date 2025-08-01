@@ -12,9 +12,12 @@ from src.infrastructure.adapters.order_adapter import (
 )
 from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 
+
+
 load_dotenv()
 
 ENV = os.environ.get("ENV", "DEV")
+
 
 class BinanceAdapter(OrderAdapter):
     def __init__(self, logger = LoggerAdapter().get_logger()):
