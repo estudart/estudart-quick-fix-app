@@ -98,7 +98,7 @@ class SpreadCryptoETF(Algorithm):
             **self.algo_data,
             "price": price,
             "order_type": "LIMIT",
-            "time_in_force": "GTC"
+            "time_in_force": "DAY"
         }
 
     def crypto_order_params_to_dict(self, quantity: float) -> dict:

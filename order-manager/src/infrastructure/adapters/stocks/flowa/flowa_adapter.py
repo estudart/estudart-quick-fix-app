@@ -1,7 +1,6 @@
 import os
 import requests
 from datetime import datetime, timedelta
-import json
 
 from dotenv import load_dotenv
 
@@ -70,7 +69,7 @@ class FlowaAdapter(OrderAdapter):
             flowa_order = self.transform_order(order_data)
             response = requests.post(
                 url=f"{self.endpoint}/{self.suffix}",
-                data=json.dumps(flowa_order),
+                json=flowa_order,
                 headers=self.mount_request_headers()
             )
             response.raise_for_status()
@@ -108,7 +107,7 @@ class FlowaAdapter(OrderAdapter):
             response = requests.put(
                 f'{self.endpoint}/{self.suffix}/{order_id}',
                 headers=self.mount_request_headers(),
-                data=json.dumps(update_params)
+                json=update_params
             )
             response.raise_for_status()
             order = response.json()
