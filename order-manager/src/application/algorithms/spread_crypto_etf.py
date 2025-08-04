@@ -74,8 +74,14 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             return stock_fair_price + spread
         else:
             raise ValueError(f"Invalid order side: '{side}'")
+
+    def is_finished(self):
+        return self.stocks_exec_qty == self.algo.algo_data["quantity"]
     
     def handle_inav_price_update(self, data: dict, order_id: str):
+        if self.is_finished():
+            return
+        
         if data["symbol"] == self.algo.algo_data["symbol"]:
             self.logger.info(f"[{data['symbol']}] Received INAV update: {data}")
 
@@ -126,11 +132,12 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                     time.sleep(self.retry_time)
             self.stocks_exec_qty += exec_qty
         
-        if self.stocks_exec_qty == self.algo.algo_data["quantity"]:
+        if self.is_finished():
             ## Finish the algo here....
-            self.message_service.unsubscribe(f"inav-{self.algo.algo_data['symbol']}")
-            self.message_service.unsubscribe(f"order-{order_id}")
             self.logger.info(f"Algo has been totally executed")
+            self.message_service.unsubscribe(f"inav-{self.algo.algo_data['symbol']}")
+            self.message_service.unsubscribe(f"order-{self.stock_order_id}")
+            self.cancel_event.set()
             return
         
     def subscribe_to_inav_updates(self, symbol: str, order_id: str):
