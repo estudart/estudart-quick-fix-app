@@ -34,7 +34,7 @@ class TestSpreadCryptoETFAdapter:
     def test_can_generate_stocks_order_params(self):
         assert self.application_algo.algo.stock_order_params_to_dict(30)
 
-    def test_can_manage_crypto_order(self):
+    def test_can_send_crypto_order(self):
         assert self.application_algo.send_crypto_order(30, 0.001)
 
     def test_can_send_stock_order(self):
