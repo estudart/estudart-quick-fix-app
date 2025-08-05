@@ -149,7 +149,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             self.stocks_exec_qty += exec_qty
         
         if self.is_finished():
-            ## Finish the algo here....
+            # Finish the algo here....
             self.logger.info(f"Algo has been totally executed")
             # Stop all listeners to update channels.
             self.stop_listeners()
