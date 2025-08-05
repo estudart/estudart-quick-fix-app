@@ -100,11 +100,11 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         return True
     
     @retry_decorator(max_retries=4, delay=1)
-    def cancel_stock_order(self):
+    def cancel_stock_order(self, stock_order_id: str):
         return self.order_service_client.cancel_order(
             exchange_name=ExchangeEnum.FLOWA.value,
             strategy=StrategyEnum.SIMPLE_ORDER.value,
-            order_id=self.stock_order_id
+            order_id=stock_order_id
         )
 
     def is_finished(self):
@@ -179,7 +179,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         self.stop_listeners()
         # Cancel stock order
         self.logger.info(f"Cancelling stock order...")
-        self.cancel_stock_order()
+        self.cancel_stock_order(self.stock_order_id)
         return
     
     def start_listener_thread(self):

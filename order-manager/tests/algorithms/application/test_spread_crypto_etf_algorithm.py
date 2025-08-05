@@ -42,7 +42,8 @@ class TestSpreadCryptoETFAdapter:
         assert isinstance(order_id, str)
     
     def test_can_cancel_stock_order(self):
-        assert self.application_algo.order_service_client.cancel_order("flowa", "simple-order", "MTB_0_10_250729174734_00362")
+        order_id = self.application_algo.send_stock_order(30)
+        assert self.application_algo.cancel_stock_order(order_id)
 
     def test_can_update_stock_order(self):
         order_id = self.application_algo.send_stock_order(30)
