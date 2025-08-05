@@ -32,6 +32,7 @@ class BinanceFuturesAdapter(OrderAdapter):
         self.client = ccxt.binance({
             'apiKey': self.api_key,
             'secret': self.api_secret,
+            'timeout': 5000,
             'enableRateLimit': True,
             'options': {
                 'defaultType': 'future',  # futures trading

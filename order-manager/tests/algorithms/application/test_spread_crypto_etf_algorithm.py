@@ -34,32 +34,25 @@ class TestSpreadCryptoETFAdapter:
     def test_can_generate_stocks_order_params(self):
         assert self.application_algo.algo.stock_order_params_to_dict(30)
 
-    def test_can_manage_crypto_order(self):
-        id = self.application_algo.send_crypto_market_order(
-            exchange_name="binance",
-            strategy="futures",
-            stock_order_executed_quantity=10,
-            quantity_crypto_per_stock_share=0.02
-        )
-        data = self.application_algo.get_crypto_order(
-            exchange_name="binance",
-            strategy="futures",
-            order_id=id,
-            symbol="ETHUSDT"
-        )
-        assert data
+    def test_can_send_crypto_order(self):
+        assert self.application_algo.send_crypto_order(30, 0.001)
 
     def test_can_send_stock_order(self):
-        assert self.application_algo.send_stock_order("flowa", "simple-order", 30)
+        order_id = self.application_algo.send_stock_order(30.05)
+        assert isinstance(order_id, str)
     
     def test_can_cancel_stock_order(self):
-        assert self.application_algo.order_service_client.cancel_order("flowa", "simple-order", "MTB_0_10_250729174734_00362")
+        order_id = self.application_algo.send_stock_order(30)
+        assert self.application_algo.cancel_stock_order(order_id)
 
     def test_can_update_stock_order(self):
-        order_id = self.application_algo.send_stock_order("flowa", "simple-order", 30)
-        order_data = {"price": 55}
-        update = self.application_algo.update_stock_order(order_id, "flowa", "simple-order", order_data)
-        assert update
+        order_id = self.application_algo.send_stock_order(30)
+        assert self.application_algo.update_stock_order(order_id, 35)
+
+    def test_update_to_same_price_raises_exception(self):
+        order_id = self.application_algo.send_stock_order(30)
+        with pytest.raises(Exception):
+            self.application_algo.update_stock_order(order_id, 30)
     
     def test_get_order_placement_price_calculates_correctly(self):
         stock_fair_price = 150

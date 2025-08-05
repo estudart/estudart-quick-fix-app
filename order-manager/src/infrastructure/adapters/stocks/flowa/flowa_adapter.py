@@ -1,7 +1,7 @@
 import os
-import requests
 from datetime import datetime, timedelta
 
+import httpx
 from dotenv import load_dotenv
 
 from src.infrastructure.adapters.order_adapter import (
@@ -25,10 +25,12 @@ class FlowaAdapter(OrderAdapter):
         self.endpoint = os.environ.get(f"FLOWA_ENDPOINT_{ENV}")
         self.token_endpoint = os.environ.get(f"FLOWA_TOKEN_ENDPOINT_{ENV}")
         self.logger = logger
+        self.client = httpx.Client(timeout=10.0)
+        self.provider = "Flowa"
+
         self.token = None
         self.refreshed_token_time = None
         self.suffix = None
-        self.provider = "Flowa"
 
     def get_token(self) -> str:
         token_request = {
@@ -38,7 +40,7 @@ class FlowaAdapter(OrderAdapter):
             'client_secret': self.api_secret
         }
         if self.token is None or datetime.now() - self.refreshed_token_time > timedelta(hours=8):
-            response = requests.post(self.token_endpoint, data=token_request)
+            response = self.client.post(self.token_endpoint, data=token_request)
             response.raise_for_status()
             self.token = response.json()['access_token']
             self.logger.debug(f"New refreshed cached {self.provider} token: {self.token}")
@@ -67,7 +69,7 @@ class FlowaAdapter(OrderAdapter):
     def send_order(self, order_data: dict) -> str:
         try:
             flowa_order = self.transform_order(order_data)
-            response = requests.post(
+            response = self.client.post(
                 url=f"{self.endpoint}/{self.suffix}",
                 json=flowa_order,
                 headers=self.mount_request_headers()
@@ -78,7 +80,7 @@ class FlowaAdapter(OrderAdapter):
                 raise SendOrderError(f'Failed to send order, reason: {order["Error"]}')
             self.logger.info(f"Order was sent to {self.provider}: {order}")
             return order["StrategyId"]
-        except (requests.RequestException, ValueError, KeyError) as err:
+        except (httpx.HTTPError, httpx.HTTPStatusError, ValueError, KeyError) as err:
             msg = f"Could not send order to {self.provider}, reason: {err}"
             self.logger.exception(msg)
             raise SendOrderError(msg) from err
@@ -89,7 +91,7 @@ class FlowaAdapter(OrderAdapter):
     
     def get_order(self, order_id: str, **kwargs) -> dict:
         try:
-            response = requests.get(
+            response = self.client.get(
                 f'{self.endpoint}/{self.suffix}/{order_id}',
                 headers=self.mount_request_headers()
             )
@@ -104,7 +106,7 @@ class FlowaAdapter(OrderAdapter):
     def update_order(self, order_id, **kwargs) -> bool:
         try:
             update_params = self.transform_update_order({**kwargs})
-            response = requests.put(
+            response = self.client.put(
                 f'{self.endpoint}/{self.suffix}/{order_id}',
                 headers=self.mount_request_headers(),
                 json=update_params
@@ -114,7 +116,7 @@ class FlowaAdapter(OrderAdapter):
             if not order["Success"]:
                 raise UpdateOrderError(f'Failed to update order, reason: {order["Error"]}')
             self.logger.info(f"Order with id: {order_id} was successfully updated on {self.provider}")
-        except (requests.RequestException, ValueError, KeyError) as err:
+        except (httpx.HTTPError, httpx.HTTPStatusError, ValueError, KeyError) as err:
             msg = f"Could not update order to {self.provider}, reason: {err}"
             self.logger.exception(msg)
             raise UpdateOrderError(msg) from err
@@ -125,7 +127,7 @@ class FlowaAdapter(OrderAdapter):
     
     def cancel_order(self, order_id: str, **kwargs) -> bool:
         try:
-            response = requests.delete(
+            response = self.client.delete(
                 f'{self.endpoint}/{self.suffix}/{order_id}',
                 headers=self.mount_request_headers()
             )

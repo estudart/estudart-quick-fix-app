@@ -3,6 +3,7 @@ import threading
 import multiprocessing
 import time
 
+from src.decorators import retry_decorator
 from src.enums import ExchangeEnum, StrategyEnum
 from src.domain.algorithms.entities import SpreadCryptoETF
 from src.application.algorithms.base_algorithm import BaseAlgorithm
@@ -44,25 +45,16 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         )
         # Update the current price of the order
         self.stock_order_price = stock_order_placement_price
-
-        for attempt in range(1, 4):
-            try:
-                self.stock_order_id = self.order_service_client.send_order(
-                    ExchangeEnum.FLOWA.value, 
-                    StrategyEnum.SIMPLE_ORDER.value, 
-                    order_data=self.algo.stock_order_params_to_dict(
-                        stock_order_placement_price
-                    )
-                )
-                break
-            except Exception as err:
-                self.logger.exception(f"[Attempt {attempt}/3] {err}")
-                self.logger.info(f"Retrying in {self.retry_time} seconds...")
-                time.sleep(self.retry_time)
-
+        # Send first order to start the algo
+        try:
+            self.stock_order_id = self.send_stock_order(stock_order_placement_price)
+        except Exception as err:
+            self.logger.error(f"Could not send stock order after multiple retries, reason: {err}")
+            self.cancel_event.set()
+        # Subscribe update events
         self.subscribe_to_inav_updates(etf_symbol, self.stock_order_id)
         self.subscribe_to_order_updates(self.stock_order_id)
-
+        # Start threads
         self.start_cancellation_event_thread()
         self.start_listener_thread()
 
@@ -75,6 +67,45 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             return stock_fair_price + spread
         else:
             raise ValueError(f"Invalid order side: '{side}'")
+    
+    @retry_decorator(max_retries=4, delay=1)
+    def send_stock_order(self, stock_order_placement_price: float) -> str:
+        return self.order_service_client.send_order(
+            ExchangeEnum.FLOWA.value, 
+            StrategyEnum.SIMPLE_ORDER.value, 
+            order_data=self.algo.stock_order_params_to_dict(
+                stock_order_placement_price
+            )
+        )
+    
+    @retry_decorator(max_retries=4, delay=1)
+    def send_crypto_order(self, exec_qty, quantity_crypto_per_stock_share):
+        quantity_crypto_to_execute = round(quantity_crypto_per_stock_share * exec_qty, 3)
+        return self.order_service_client.send_order(
+            exchange_name=ExchangeEnum.BINANCE.value, 
+            strategy=StrategyEnum.FUTURES.value, 
+            order_data=self.algo.crypto_order_params_to_dict(quantity_crypto_to_execute)
+        )
+
+    @retry_decorator(max_retries=4, delay=1)
+    def update_stock_order(self, stock_order_id: str, stock_order_placement_price):
+        self.order_service_client.update_order(
+            order_id=stock_order_id,
+            exchange_name=ExchangeEnum.FLOWA.value,
+            strategy=StrategyEnum.SIMPLE_ORDER.value,
+            order_data={
+                "price": stock_order_placement_price
+            }
+        )
+        return True
+    
+    @retry_decorator(max_retries=4, delay=1)
+    def cancel_stock_order(self, stock_order_id: str):
+        return self.order_service_client.cancel_order(
+            exchange_name=ExchangeEnum.FLOWA.value,
+            strategy=StrategyEnum.SIMPLE_ORDER.value,
+            order_id=stock_order_id
+        )
 
     def is_finished(self):
         return self.stocks_exec_qty == self.algo.algo_data["quantity"]
@@ -98,43 +129,27 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             )
 
             if round(stock_order_placement_price, 2) != round(self.stock_order_price, 2):
-                for attempt in range(1, 4):
-                    try:
-                        self.order_service_client.update_order(
-                            order_id=order_id,
-                            exchange_name=ExchangeEnum.FLOWA.value,
-                            strategy=StrategyEnum.SIMPLE_ORDER.value,
-                            order_data={
-                                "price": stock_order_placement_price
-                            }
-                        )
-                        break
-                    except Exception as err:
-                        self.logger.exception(f"[Attempt {attempt}/3] Failed to update stock order: {err}")
-                        self.logger.info(f"Retrying in {self.retry_time} seconds...")
-                        time.sleep(self.retry_time)
+                try:
+                    self.update_stock_order(self.stock_order_id, stock_order_placement_price)
+                    # Update the current price of the order
+                    self.stock_order_price = stock_order_placement_price
+                except Exception as err:
+                    self.logger.error(f"Could not update stock order after multiple retries, reason: {err}")
+                    self.cancel_event.set()
 
     def handle_order_update(self, data: dict, order_id: str):
         self.logger.info(f"[{order_id}] Received an order event: {data}")
         exec_qty = data["exec_qty"] - self.stocks_exec_qty
         if exec_qty > 0:
-            for attempt in range(1, 4):
-                try:
-                    quantity_crypto_to_execute = round(self.quantity_crypto_per_stock_share * exec_qty, 3)
-                    self.order_service_client.send_order(
-                        exchange_name=ExchangeEnum.BINANCE.value, 
-                        strategy=StrategyEnum.FUTURES.value, 
-                        order_data=self.algo.crypto_order_params_to_dict(quantity_crypto_to_execute)
-                    )
-                    break
-                except Exception as err:
-                    self.logger.exception(f"[Attempt {attempt}/3] Failed to send crypto order: {err}")
-                    self.logger.info(f"Retrying in {self.retry_time} seconds...")
-                    time.sleep(self.retry_time)
+            try:
+                self.send_crypto_order(exec_qty, self.quantity_crypto_per_stock_share)
+            except Exception as err:
+                self.logger.error(f"Could not send crypto order after multiple retries, reason: {err}")
+                self.cancel_event.set()
             self.stocks_exec_qty += exec_qty
         
         if self.is_finished():
-            ## Finish the algo here....
+            # Finish the algo here....
             self.logger.info(f"Algo has been totally executed")
             # Stop all listeners to update channels.
             self.stop_listeners()
@@ -160,21 +175,11 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                 return
             time.sleep(0.5)
         self.logger.info(f"Cancellation event was triggered.")
-
         # Stop all listeners to update channels.
         self.stop_listeners()
-
         # Cancel stock order
         self.logger.info(f"Cancelling stock order...")
-        try:
-            cancel_response = self.order_service_client.cancel_order(
-                exchange_name=ExchangeEnum.FLOWA.value,
-                strategy=StrategyEnum.SIMPLE_ORDER.value,
-                order_id=self.stock_order_id
-            )
-            self.logger.info(f"Cancel order response: {cancel_response}")
-        except Exception as err:
-            self.logger.exception(f"Could not cancel order, reason: {err}")
+        self.cancel_stock_order(self.stock_order_id)
         return
     
     def start_listener_thread(self):
