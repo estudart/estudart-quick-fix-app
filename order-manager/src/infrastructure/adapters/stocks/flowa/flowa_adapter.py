@@ -80,7 +80,7 @@ class FlowaAdapter(OrderAdapter):
                 raise SendOrderError(f'Failed to send order, reason: {order["Error"]}')
             self.logger.info(f"Order was sent to {self.provider}: {order}")
             return order["StrategyId"]
-        except (self.client.RequestException, ValueError, KeyError) as err:
+        except (httpx.HTTPError, httpx.HTTPStatusError, ValueError, KeyError) as err:
             msg = f"Could not send order to {self.provider}, reason: {err}"
             self.logger.exception(msg)
             raise SendOrderError(msg) from err
@@ -116,7 +116,7 @@ class FlowaAdapter(OrderAdapter):
             if not order["Success"]:
                 raise UpdateOrderError(f'Failed to update order, reason: {order["Error"]}')
             self.logger.info(f"Order with id: {order_id} was successfully updated on {self.provider}")
-        except (self.client.RequestException, ValueError, KeyError) as err:
+        except (httpx.HTTPError, httpx.HTTPStatusError, ValueError, KeyError) as err:
             msg = f"Could not update order to {self.provider}, reason: {err}"
             self.logger.exception(msg)
             raise UpdateOrderError(msg) from err
