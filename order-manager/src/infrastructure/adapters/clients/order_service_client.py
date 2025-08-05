@@ -14,7 +14,7 @@ class OrderServiceClient:
     def __init__(self, logger: logging.Logger):
         self.logger = logger
         self.base_url = os.environ.get(f"ORDER_SERVICE_URL_{ENV}")
-        self.client = httpx.Client()
+        self.client = httpx.Client(timeout=30.0)
     
     def send_order(self, exchange_name: str, strategy: str, order_data: dict) -> dict:
         try:
