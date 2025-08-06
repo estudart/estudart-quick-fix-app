@@ -12,7 +12,6 @@ from src.infrastructure.adapters.logger_adapter import LoggerAdapter
 class AlgoManager:
     def __init__(self, logger: logging.Logger):
         self.logger = logger
-        self.algo_factory = AlgoFactory(logger=self.logger)
         self.active_algos: dict[str, tuple[Process, Event]] = {}
 
     def start_algo(self, algo_data: dict, algo_name: str) -> None:
