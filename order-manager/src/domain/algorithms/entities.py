@@ -61,12 +61,16 @@ class SpreadCryptoETF(Algorithm):
         self._validate_params()
     
     def _validate_params(self):
+        available_etfs = list(self.etf_underlying_assets.keys())
+
         if not self.algo_data.get("broker"):
             raise ValueError("Missing required argument: 'broker'")
         if not self.algo_data.get("account"):
             raise ValueError("Missing required argument: 'account'")
         if not self.algo_data.get("symbol"):
             raise ValueError("Missing required argument: 'symbol'")
+        if not self.algo_data.get("symbol") in available_etfs:
+            raise ValueError(f"ETF is not tradeble by this strategy, allowed symbols are: {', '.join(available_etfs)}")
         if not self.algo_data.get("side"):
             raise ValueError("Missing required argument: 'side'")
         if not self.algo_data.get("quantity"):
@@ -84,12 +88,6 @@ class SpreadCryptoETF(Algorithm):
         pass
 
     def get_underlying_assets(self, etf: str) -> list[str]:
-        available = list(self.etf_underlying_assets.keys())
-        if not etf in available:
-            raise ValueError(
-                f"Selected ETF '{etf}' is not tradable by this strategy. "
-                f"Available options: {available}"
-            )
         underlying_assets = self.etf_underlying_assets[etf]["underlying_assets"]
         return underlying_assets
 
