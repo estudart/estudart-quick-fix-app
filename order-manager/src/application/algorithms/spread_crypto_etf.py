@@ -62,9 +62,9 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         spread = stock_fair_price * spread_threshold
 
         if side == "BUY":
-            return stock_fair_price - spread
+            return round(stock_fair_price - spread, 2)
         elif side == "SELL":
-            return stock_fair_price + spread
+            return round(stock_fair_price + spread, 2)
         else:
             raise ValueError(f"Invalid order side: '{side}'")
     
@@ -127,8 +127,8 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                 side=side,
                 spread_threshold=spread_threshold
             )
-
-            if round(stock_order_placement_price, 2) != round(self.stock_order_price, 2):
+            self.logger.debug(f"Evaluating order update: new={stock_order_placement_price}, current={self.stock_order_price}")
+            if stock_order_placement_price != self.stock_order_price:
                 try:
                     self.update_stock_order(self.stock_order_id, stock_order_placement_price)
                     # Update the current price of the order
