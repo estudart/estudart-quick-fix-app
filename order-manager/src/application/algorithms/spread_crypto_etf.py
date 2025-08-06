@@ -32,6 +32,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         self.stock_order_price = None
         self.quantity_crypto_per_stock_share: float = 0
         self.retry_time: int = 1
+        self.price_dif_threshold: float = 0.0015
 
     def run_algo(self):
         etf_symbol = self.algo.algo_data["symbol"]
@@ -127,11 +128,12 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                 side=side,
                 spread_threshold=spread_threshold
             )
-            self.logger.debug(
+            self.logger.info(
                 f"Evaluating order update: new={stock_order_placement_price}"
                 f", current={self.stock_order_price}"
             )
-            if stock_order_placement_price != self.stock_order_price:
+            price_dif_range = self.stock_order_price * self.price_dif_threshold
+            if abs(stock_order_placement_price - self.stock_order_price) > price_dif_range:
                 try:
                     self.update_stock_order(self.stock_order_id, stock_order_placement_price)
                     # Update the current price of the order
@@ -142,14 +144,14 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
 
     def handle_order_update(self, data: dict, order_id: str):
         self.logger.info(f"[{order_id}] Received an order event: {data}")
-        exec_qty = data["exec_qty"] - self.stocks_exec_qty
-        if exec_qty > 0:
+        newly_exec_qty = data["exec_qty"] - self.stocks_exec_qty
+        if newly_exec_qty > 0:
             try:
-                self.send_crypto_order(exec_qty, self.quantity_crypto_per_stock_share)
+                self.send_crypto_order(newly_exec_qty, self.quantity_crypto_per_stock_share)
             except Exception as err:
                 self.logger.error(f"Could not send crypto order after multiple retries, reason: {err}")
                 self.cancel_event.set()
-            self.stocks_exec_qty += exec_qty
+            self.stocks_exec_qty += newly_exec_qty
         
         if self.is_finished():
             # Finish the algo here....
