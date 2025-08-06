@@ -83,7 +83,7 @@ class RedisAdapter:
         except Exception as err:
             self.logger.error(f"Could not insert data into Redis queue, reason: {err}")
 
-    def publish_message(self, channel: str, message_data: dict) -> bool:
+    def publish_message(self, channel: str, message_data: dict = None) -> bool:
         message = json.dumps(message_data)
         self.redis_db.publish(channel, message)
     

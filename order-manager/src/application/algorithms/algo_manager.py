@@ -1,36 +1,38 @@
 import logging
-from multiprocessing import Process, Event
+from multiprocessing import Process
 import uuid
 
 from src.domain.algorithms import AlgoFactory
 from src.application.algorithms.spread_crypto_etf import SpreadCryptoETFAdapter
 from src.infrastructure.adapters.clients.order_service_client import OrderServiceClient
 from src.infrastructure.adapters.logger_adapter import LoggerAdapter
+from src.infrastructure.adapters.queue.redis_adapter import RedisAdapter
 
 
 
 class AlgoManager:
     def __init__(self, logger: logging.Logger):
         self.logger = logger
-        self.active_algos: dict[str, tuple[Process, Event]] = {}
+        self.active_algos: dict[str, Process] = {}
+        self.redis_adapter = RedisAdapter(self.logger)
 
     def start_algo(self, algo_data: dict, algo_name: str) -> None:
         algo_id = str(uuid.uuid4())
-        cancel_event = Event()
 
-        process = Process(target=run_algorithm, args=(algo_id, algo_data, algo_name, cancel_event))
+        process = Process(target=run_algorithm, args=(algo_id, algo_data, algo_name))
         process.start()
 
-        self.active_algos[algo_id] = (process, cancel_event)
+        self.active_algos[algo_id] = process
         return algo_id
     
     def stop_algo(self, algo_id: str) -> bool:
         try:
-            process, cancel_event = self.active_algos[algo_id]
+            process = self.active_algos[algo_id]
+
+            self.redis_adapter.publish_message(f"cancel-{algo_id}")
             
             if process.is_alive():
                 self.logger.info(f"Signaling Algo process {algo_id} to stop gracefully...")
-                cancel_event.set()
                 process.join(timeout=10)
                 
                 if process.is_alive():
@@ -56,7 +58,7 @@ class AlgoManager:
             return False
 
 
-def run_algorithm(id: str, algo_data: dict, algo_name: str, cancel_event: Event) -> None:
+def run_algorithm(id: str, algo_data: dict, algo_name: str) -> None:
     algo_adapter_dict = {
         "spread-crypto-etf": SpreadCryptoETFAdapter
     }
@@ -65,7 +67,6 @@ def run_algorithm(id: str, algo_data: dict, algo_name: str, cancel_event: Event)
     algo_adapter = algo_adapter_dict[algo_name](
             logger=logger,
             algo=algo,
-            order_service_client=OrderServiceClient(logger),
-            cancel_event=cancel_event
+            order_service_client=OrderServiceClient(logger)
         )
     algo_adapter.run_algo()

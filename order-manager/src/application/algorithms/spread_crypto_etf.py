@@ -1,7 +1,5 @@
 import logging
 import threading
-import multiprocessing
-import time
 
 from src.decorators import retry_decorator
 from src.enums import ExchangeEnum, StrategyEnum
@@ -17,14 +15,12 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             self,
             logger: logging.Logger,
             algo: SpreadCryptoETF,
-            order_service_client: OrderServiceClient,
-            cancel_event: multiprocessing.Event # type: ignore
+            order_service_client: OrderServiceClient
         ):
         self.logger = logger
         self.algo = algo
         self.order_service_client = order_service_client
         self.message_service = RedisAdapter(self.logger)
-        self.cancel_event = cancel_event
         self.stop_cancellation_event_thread = threading.Event()
 
         self.stock_order_id = None
@@ -51,12 +47,11 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
             self.stock_order_id = self.send_stock_order(stock_order_placement_price)
         except Exception as err:
             self.logger.error(f"Could not send stock order after multiple retries, reason: {err}")
-            self.cancel_event.set()
         # Subscribe update events
         self.subscribe_to_inav_updates(etf_symbol, self.stock_order_id)
         self.subscribe_to_order_updates(self.stock_order_id)
+        self.subscribe_to_cancel_updates(self.algo.id, self.stock_order_id)
         # Start threads
-        self.start_cancellation_event_thread()
         self.start_listener_thread()
 
     def get_order_placement_price(self, stock_fair_price: float, side: str, spread_threshold: float) -> float:
@@ -140,7 +135,6 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                     self.stock_order_price = stock_order_placement_price
                 except Exception as err:
                     self.logger.error(f"Could not update stock order after multiple retries, reason: {err}")
-                    self.cancel_event.set()
 
     def handle_order_update(self, data: dict, order_id: str):
         self.logger.info(f"[{order_id}] Received an order event: {data}")
@@ -150,17 +144,23 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                 self.send_crypto_order(newly_exec_qty, self.quantity_crypto_per_stock_share)
             except Exception as err:
                 self.logger.error(f"Could not send crypto order after multiple retries, reason: {err}")
-                self.cancel_event.set()
             self.stocks_exec_qty += newly_exec_qty
         
         if self.is_finished():
             # Finish the algo here....
             self.logger.info(f"Algo has been totally executed")
             # Stop all listeners to update channels.
-            self.stop_listeners()
-            # Stop cancellation thread, as the algo is finished, there is no way it can be cancelled any longer.
-            self.stop_cancellation_event_thread.set()
+            self.stop_listeners(self.algo.algo_data['symbol'], self.algo.id, self.stock_order_id)
             return
+    
+    def handle_cancellation(self, order_id: str):
+        self.logger.info(f"Cancellation event was triggered.")
+        # Stop all listeners to update channels.
+        self.stop_listeners(self.algo.algo_data['symbol'], self.algo.id, self.stock_order_id)
+        # Cancel stock order
+        self.logger.info(f"Cancelling stock order...")
+        self.cancel_stock_order(order_id)
+        return
         
     def subscribe_to_inav_updates(self, symbol: str, order_id: str):
         def inav_callback(data):
@@ -171,21 +171,11 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         def order_callback(data):
             self.handle_order_update(data, order_id)
         self.message_service.subscribe(f"order-{order_id}", order_callback)
-
-    def monitor_cancellation(self):
-        # Start periodically checking for cancel requests
-        self.logger.info(f"Cancellation thread listener started...")
-        while not self.cancel_event.is_set():
-            if self.stop_cancellation_event_thread.is_set():
-                return
-            time.sleep(0.5)
-        self.logger.info(f"Cancellation event was triggered.")
-        # Stop all listeners to update channels.
-        self.stop_listeners()
-        # Cancel stock order
-        self.logger.info(f"Cancelling stock order...")
-        self.cancel_stock_order(self.stock_order_id)
-        return
+    
+    def subscribe_to_cancel_updates(self, algo_id: str, order_id: str):
+        def cancel_callback(data):
+            self.handle_cancellation(order_id)
+        self.message_service.subscribe(f"cancel-{algo_id}", cancel_callback)
     
     def start_listener_thread(self):
         listener_thread = threading.Thread(
@@ -195,14 +185,8 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         listener_thread.start()
         listener_thread.join()
 
-    def stop_listeners(self):
+    def stop_listeners(self, symbol: str, algo_id: str, order_id: str):
         self.logger.info(f"Unsubscribing channels on pubsub...")
-        self.message_service.unsubscribe(f"inav-{self.algo.algo_data['symbol']}")
-        self.message_service.unsubscribe(f"order-{self.stock_order_id}")
-
-    def start_cancellation_event_thread(self):
-        monitor_cancellation_event_thread = threading.Thread(
-            target=self.monitor_cancellation,
-            daemon=False
-        )
-        monitor_cancellation_event_thread.start()
+        self.message_service.unsubscribe(f"inav-{symbol}")
+        self.message_service.unsubscribe(f"order-{order_id}")
+        self.message_service.unsubscribe(f"cancel-{algo_id}")
