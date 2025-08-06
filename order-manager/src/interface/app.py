@@ -13,4 +13,4 @@ ENV = os.environ.get("ENV", "DEV")
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True if ENV == "DEV" else False)
+    app.run(debug=False)
