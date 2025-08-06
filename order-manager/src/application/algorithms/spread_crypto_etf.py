@@ -128,7 +128,7 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
                 side=side,
                 spread_threshold=spread_threshold
             )
-            self.logger.info(
+            self.logger.debug(
                 f"Evaluating order update: new={stock_order_placement_price}"
                 f", current={self.stock_order_price}"
             )
