@@ -21,7 +21,6 @@ class SpreadCryptoETFAdapter(BaseAlgorithm):
         self.algo = algo
         self.order_service_client = order_service_client
         self.message_service = RedisAdapter(self.logger)
-        self.stop_cancellation_event_thread = threading.Event()
 
         self.stock_order_id = None
         self.stocks_exec_qty: int = 0
